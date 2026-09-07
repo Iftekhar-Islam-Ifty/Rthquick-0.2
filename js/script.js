@@ -117,6 +117,20 @@ function initNavbar() {
       }
     });
   }
+
+  // Dropdown toggle handling (for mobile accordion & accessible keyboard navigation)
+  const dropdownToggles = document.querySelectorAll(".eq-dropdown-toggle-btn");
+  dropdownToggles.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const parentDropdown = btn.closest(".eq-nav-item--has-dropdown");
+      if (parentDropdown) {
+        const isExpanded = parentDropdown.classList.toggle("is-expanded");
+        btn.setAttribute("aria-expanded", String(isExpanded));
+      }
+    });
+  });
 }
 
 

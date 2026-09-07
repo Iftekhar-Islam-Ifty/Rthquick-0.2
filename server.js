@@ -11,22 +11,36 @@ const app = express();
 const PORT = 3000;
 const HOST = '0.0.0.0';
 
-const staticDir = path.join(__dirname, 'earthquick');
+// 1. Disable browser caching in development so preview updates instantly
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  next();
+});
 
-// 1. Primary static asset hosting for /earthquick directory
-app.use(express.static(staticDir));
+// 2. Primary static asset hosting directly from root project directory
+app.use(express.static(__dirname, {
+  etag: false,
+  lastModified: false,
+  maxAge: 0
+}));
 
-// 2. Prefix alias for /earthquick path requests
-app.use('/earthquick', express.static(staticDir));
+// 3. Prefix alias for /earthquick path requests (mirroring root)
+app.use('/earthquick', express.static(__dirname, {
+  etag: false,
+  lastModified: false,
+  maxAge: 0
+}));
 
-// 3. Fallback routing for relative asset paths from subpages (e.g. /pages)
-app.use('/pages/css', express.static(path.join(staticDir, 'css')));
-app.use('/pages/js', express.static(path.join(staticDir, 'js')));
-app.use('/pages/images', express.static(path.join(staticDir, 'images')));
+// 4. Asset paths routing for subpages
+app.use('/pages/css', express.static(path.join(__dirname, 'css')));
+app.use('/pages/js', express.static(path.join(__dirname, 'js')));
+app.use('/pages/images', express.static(path.join(__dirname, 'images')));
 
-// 4. Default fallback: serve index.html for undefined SPA routes
+// 5. Default fallback: serve root index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(staticDir, 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, HOST, () => {

@@ -18,7 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Earthquick Custom Stylesheet -->
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=9.0" />
 
   <!-- Resilient Image Fallback for GitHub Pages & static hosting -->
   <script>
@@ -58,10 +58,107 @@
       <nav id="eq-nav-menu" aria-label="Primary Navigation">
         <ul class="eq-navbar__links" id="eq-nav-links">
           <li><a href="index.html" class="is-active" id="nav-link-home">Home</a></li>
-          <li><a href="pages/saree.html" id="nav-link-saree">Saree</a></li>
-          <li><a href="pages/three-piece.html" id="nav-link-three-piece">Three Piece</a></li>
-          <li><a href="pages/two-piece.html" id="nav-link-two-piece">Two Piece</a></li>
+          <li><a href="pages/men.html" id="nav-link-men">Men</a></li>
+          
+          <!-- Women Category with Mega-Dropdown -->
+          <li class="eq-nav-item eq-nav-item--has-dropdown" id="nav-item-women">
+            <div class="eq-nav-link-wrapper">
+              <a href="pages/women.html" id="nav-link-women">Women</a>
+              <button type="button" class="eq-dropdown-toggle-btn" id="btn-toggle-women-sub" aria-expanded="false" aria-label="Toggle Women subcategories">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Women Dropdown Mega-Panel -->
+            <div class="eq-megamenu" id="megamenu-women" role="region" aria-label="Women Subcategories">
+              <div class="eq-megamenu__grid">
+                <!-- Column 1: Saree Atelier -->
+                <div class="eq-megamenu__col">
+                  <div class="eq-megamenu__heading">Saree Atelier</div>
+                  <ul class="eq-megamenu__list">
+                    <li><a href="pages/saree-jamdani.html">Jamdani Weaves</a></li>
+                    <li><a href="pages/saree-tantuj.html">Tantuj &amp; Tangail</a></li>
+                    <li><a href="pages/saree-half-silk.html">Half Silk</a></li>
+                    <li><a href="pages/saree-full-silk.html">Pure Silk</a></li>
+                    <li><a href="pages/saree.html" class="eq-megamenu__view-all">All Sarees &rarr;</a></li>
+                  </ul>
+                </div>
+
+                <!-- Column 2: Ready to Wear -->
+                <div class="eq-megamenu__col">
+                  <div class="eq-megamenu__heading">Ready to Wear</div>
+                  <ul class="eq-megamenu__list">
+                    <li><a href="pages/three-piece.html">Three Piece Sets</a></li>
+                    <li><a href="pages/two-piece.html">Two Piece Co-ords</a></li>
+                    <li><a href="pages/women.html" class="eq-megamenu__view-all">Explore Women's Hub &rarr;</a></li>
+                  </ul>
+                </div>
+
+                <!-- Column 3: Visual Spotlight Card -->
+                <div class="eq-megamenu__feature">
+                  <a href="pages/women.html" class="eq-megamenu__feature-card">
+                    <div class="eq-megamenu__feature-media">
+                      <img src="images/hero/hero-main-saree-2.jpg?v=3" alt="Heritage Women Collection" />
+                    </div>
+                    <div class="eq-megamenu__feature-content">
+                      <span class="eq-megamenu__tag">NOUS TELOS</span>
+                      <strong class="eq-megamenu__feature-title">Heritage Weaves</strong>
+                      <span class="eq-megamenu__feature-link">Explore Hub &rarr;</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li><a href="pages/kids.html" id="nav-link-kids">Kids</a></li>
+          <li><a href="pages/ornaments.html" id="nav-link-ornaments">Ornaments</a></li>
           <li><a href="pages/bags.html" id="nav-link-bags">Bags</a></li>
+          
+          <!-- Home Decor Category with Dropdown (Subcategories: Kantha, Bedsheet, Cushion Cover) -->
+          <li class="eq-nav-item eq-nav-item--has-dropdown" id="nav-item-home-decor">
+            <div class="eq-nav-link-wrapper">
+              <a href="pages/home-decor.html" id="nav-link-home-decor">Home Decor</a>
+              <button type="button" class="eq-dropdown-toggle-btn" id="btn-toggle-decor-sub" aria-expanded="false" aria-label="Toggle Home Decor subcategories">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Home Decor Dropdown Panel -->
+            <div class="eq-megamenu eq-megamenu--compact" id="megamenu-home-decor" role="region" aria-label="Home Decor Subcategories">
+              <div class="eq-megamenu__grid eq-megamenu__grid--2col">
+                <!-- Column 1: Subcategories -->
+                <div class="eq-megamenu__col">
+                  <div class="eq-megamenu__heading">Home Sanctuary</div>
+                  <ul class="eq-megamenu__list">
+                    <li><a href="pages/home-decor-kantha.html">Kantha (Nakshi Quilt)</a></li>
+                    <li><a href="pages/home-decor-bedsheet.html">Bedsheet Sets</a></li>
+                    <li><a href="pages/home-decor-cushion.html">Cushion Cover</a></li>
+                    <li><a href="pages/home-decor.html" class="eq-megamenu__view-all">All Home Decor &rarr;</a></li>
+                  </ul>
+                </div>
+
+                <!-- Column 2: Visual Spotlight Card -->
+                <div class="eq-megamenu__feature">
+                  <a href="pages/home-decor.html" class="eq-megamenu__feature-card">
+                    <div class="eq-megamenu__feature-media">
+                      <img src="images/categories/decor-kantha.svg" alt="Artisanal Nakshi Kantha Quilt" />
+                    </div>
+                    <div class="eq-megamenu__feature-content">
+                      <span class="eq-megamenu__tag">NOUS TELOS LIVING</span>
+                      <strong class="eq-megamenu__feature-title">Nakshi Kantha</strong>
+                      <span class="eq-megamenu__feature-link">Explore Living &rarr;</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+
           <li><a href="#story" id="nav-link-story">Our Story</a></li>
         </ul>
       </nav>
@@ -191,6 +288,101 @@
 
 
     <!-- =================================================================
+         SECTION 2.5: HOMEPAGE CATEGORY DISCOVERY STRIP
+         Visual discovery showcasing the 6 main customer-facing categories:
+         Women, Men, Kids, Ornaments, Bags, Home Decor.
+         ================================================================= -->
+    <section class="eq-category-strip" id="eq-categories" aria-label="Explore Collections by Category">
+      <div class="eq-container">
+        <!-- Section Header (Compact) -->
+        <div class="eq-category-strip__header eq-reveal">
+          <div class="eq-category-strip__title-wrap">
+            <h2 class="eq-category-strip__title">Shop by Category</h2>
+          </div>
+          <p class="eq-category-strip__desc">Select a category to explore handcrafted collections</p>
+        </div>
+
+        <!-- 6 Main Categories Grid -->
+        <div class="eq-category-strip__grid eq-reveal">
+
+          <!-- 1. WOMEN -->
+          <a href="pages/women.html" class="eq-category-card" id="cat-card-women">
+            <div class="eq-category-card__media">
+              <img src="images/categories/women.jpg?v=3" alt="Women fashion collection — Sarees, Three Piece and Co-ords" />
+              <div class="eq-category-card__overlay"></div>
+            </div>
+            <div class="eq-category-card__info">
+              <h3 class="eq-category-card__name">Women</h3>
+              <span class="eq-category-card__meta">Saree &amp; Sets</span>
+            </div>
+          </a>
+
+          <!-- 2. MEN -->
+          <a href="pages/men.html" class="eq-category-card" id="cat-card-men">
+            <div class="eq-category-card__media">
+              <img src="images/hero/hero-main.jpg?v=3" alt="Men's collection — Panjabi and festive wear" />
+              <div class="eq-category-card__overlay"></div>
+            </div>
+            <div class="eq-category-card__info">
+              <h3 class="eq-category-card__name">Men</h3>
+              <span class="eq-category-card__meta">Panjabi &amp; Sets</span>
+            </div>
+          </a>
+
+          <!-- 3. KIDS -->
+          <a href="pages/kids.html" class="eq-category-card" id="cat-card-kids">
+            <div class="eq-category-card__media">
+              <img src="images/saree/saree-5.jpg?v=3" alt="Kids collection — Festive wear and celebrations" />
+              <div class="eq-category-card__overlay"></div>
+            </div>
+            <div class="eq-category-card__info">
+              <h3 class="eq-category-card__name">Kids</h3>
+              <span class="eq-category-card__meta">Festive Wear</span>
+            </div>
+          </a>
+
+          <!-- 4. ORNAMENTS -->
+          <a href="pages/ornaments.html" class="eq-category-card" id="cat-card-ornaments">
+            <div class="eq-category-card__media">
+              <img src="images/saree/saree-03-detail.jpg?v=3" alt="Artisan ornaments and handcrafted jewellery" />
+              <div class="eq-category-card__overlay"></div>
+            </div>
+            <div class="eq-category-card__info">
+              <h3 class="eq-category-card__name">Ornaments</h3>
+              <span class="eq-category-card__meta">Handcrafted Jewellery</span>
+            </div>
+          </a>
+
+          <!-- 5. BAGS -->
+          <a href="pages/bags.html" class="eq-category-card" id="cat-card-bags">
+            <div class="eq-category-card__media">
+              <img src="images/categories/bags.jpg?v=3" alt="Artisanal handcrafted leather and everyday bags" />
+              <div class="eq-category-card__overlay"></div>
+            </div>
+            <div class="eq-category-card__info">
+              <h3 class="eq-category-card__name">Bags</h3>
+              <span class="eq-category-card__meta">Everyday Totes</span>
+            </div>
+          </a>
+
+          <!-- 6. HOME DECOR -->
+          <a href="pages/home-decor.html" class="eq-category-card" id="cat-card-home-decor">
+            <div class="eq-category-card__media">
+              <img src="images/hero/story-craft.jpg?v=3" alt="Home Decor — Handloom Living and Artisanal Accents" />
+              <div class="eq-category-card__overlay"></div>
+            </div>
+            <div class="eq-category-card__info">
+              <h3 class="eq-category-card__name">Home Decor</h3>
+              <span class="eq-category-card__meta">Living &amp; Accents</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =================================================================
          TRUST & SERVICE PROPOSITION STRIP
          Authentic handlooms, nationwide delivery, easy exchange, and complimentary
          fall & pico service for discerning patrons.
@@ -235,22 +427,6 @@
             <div class="eq-trust-content">
               <h3 class="eq-trust-title">Easy 7-Day Exchange</h3>
               <p class="eq-trust-desc">Hassle-free size and product exchange at your convenience</p>
-            </div>
-          </div>
-
-          <div class="eq-trust-card" id="trust-item-tailoring">
-            <div class="eq-trust-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="6" cy="6" r="3"/>
-                <circle cx="6" cy="18" r="3"/>
-                <line x1="20" y1="4" x2="8.12" y2="15.88"/>
-                <line x1="14.47" y1="14.48" x2="20" y2="20"/>
-                <line x1="8.12" y1="8.12" x2="12" y2="12"/>
-              </svg>
-            </div>
-            <div class="eq-trust-content">
-              <h3 class="eq-trust-title">Complimentary Fall &amp; Pico</h3>
-              <p class="eq-trust-desc">Ready-to-drape saree finishing &amp; bespoke sizing upon request</p>
             </div>
           </div>
 
@@ -1160,6 +1336,7 @@
             <li><a href="pages/three-piece.html" id="footer-link-three-piece">Three Piece</a></li>
             <li><a href="pages/two-piece.html" id="footer-link-two-piece">Two Piece</a></li>
             <li><a href="pages/bags.html" id="footer-link-bags">Bags</a></li>
+            <li><a href="pages/home-decor.html" id="footer-link-decor">Home Decor</a></li>
           </ul>
         </div>
 
@@ -1236,6 +1413,6 @@
   <div class="eq-toast-container" id="eq-toast-container" role="status" aria-live="polite"></div>
 
   <!-- Earthquick Core Script -->
-  <script src="js/script.js"></script>
+  <script src="js/script.js?v=9.0"></script>
 </body>
 </html>
