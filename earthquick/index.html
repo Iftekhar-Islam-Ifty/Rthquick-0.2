@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Earthquick — Crafted for the Modern You</title>
+  <meta name="description" content="Earthquick is a premium fashion and lifestyle brand featuring Saree, Three Piece, Two Piece and Bags from Nous Telos." />
+
+  <!-- Google Fonts: Fraunces (display/serif) + Jost (body/sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap 5 (used for grid/utility helpers only — visual identity is custom) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
+
+  <!-- Earthquick custom styles -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ================================
+       NAVBAR
+  ================================= -->
+  <header class="eq-navbar">
+    <div class="eq-navbar__inner">
+      <a href="index.html" class="eq-navbar__logo">
+        <img src="images/logo/earthquick-logo.png" alt="Earthquick" />
+      </a>
+
+      <nav>
+        <ul class="eq-navbar__links">
+          <li><a href="index.html" class="is-active">Home</a></li>
+          <li><a href="pages/saree.html">Saree</a></li>
+          <li><a href="pages/three-piece.html">Three Piece</a></li>
+          <li><a href="pages/two-piece.html">Two Piece</a></li>
+          <li><a href="pages/bags.html">Bags</a></li>
+          <li><a href="index.html#story">Our Story</a></li>
+        </ul>
+      </nav>
+
+      <div class="eq-navbar__icons">
+        <button type="button" aria-label="Search" data-action="open-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+        <button type="button" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </button>
+        <button type="button" aria-label="Cart" data-action="open-cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="eq-cart-count">0</span>
+        </button>
+      </div>
+
+      <button type="button" class="eq-navbar__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+
+  <!-- ================================
+       HERO SECTION
+       Large campaign-style cover image with minimal copy + CTA
+  ================================= -->
+  <section class="eq-hero">
+    <div class="eq-hero__media">
+      <img src="images/hero/hero-main-saree.jpg" alt="Earthquick new collection campaign" />
+    </div>
+    <div class="eq-hero__content">
+      <span class="eq-eyebrow">THE NEW COLLECTION</span>
+      <h1>Crafted for the Modern You</h1>
+      <p>Handloom sarees, tailored sets and considered accessories — Earthquick brings Nous Telos craftsmanship to a wardrobe built for daily life.</p>
+      <div class="eq-hero__actions">
+        <a href="pages/saree.html" class="eq-btn eq-btn--light">Explore Collection</a>
+        <a href="index.html#story" class="eq-btn eq-btn--outline" style="border-color:rgba(255,253,249,.5); color:#fffdf9;">Our Story</a>
+      </div>
+    </div>
+    <div class="eq-hero__scroll-cue" aria-hidden="true">
+      <span>SCROLL</span>
+      <span class="eq-scroll-line"></span>
+    </div>
+  </section>
+
+
+  <!-- ================================
+       NEW ARRIVALS SECTION
+       Carousel-driven product row
+  ================================= -->
+  <section class="eq-section" id="new-arrivals">
+    <div class="eq-container">
+      <div class="eq-section-head eq-reveal">
+        <div class="eq-section-head__text">
+          <span class="eq-eyebrow">JUST LANDED</span>
+          <h2 class="eq-heading-lg">New Arrivals</h2>
+        </div>
+        <div class="eq-carousel__controls">
+          <button type="button" class="eq-arrow-btn" data-action="prev" aria-label="Previous products">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+          </button>
+          <button type="button" class="eq-arrow-btn" data-action="next" aria-label="Next products">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="eq-carousel eq-reveal">
+        <div class="eq-carousel__viewport">
+          <div class="eq-carousel__track">
+
+            <article class="eq-product-card">
+              <a href="pages/product.html?id=saree-01" class="eq-product-card__link">
+                <div class="eq-product-card__frame">
+                  <span class="eq-badge">New</span>
+                  <img src="images/saree/saree-01.jpg" alt="Muslin Jamdani Saree" loading="lazy" />
+                  <img class="eq-product-card__img--alt" src="images/saree/saree-01-alt.jpg" alt="" loading="lazy" />
+                  <span class="eq-product-card__quick-add">View product</span>
+                </div>
+                <div class="eq-product-card__body">
+                  <span class="eq-product-card__category">Saree</span>
+                  <h3 class="eq-product-card__name">Muslin Jamdani Saree</h3>
+                  <p class="eq-product-card__price">৳8,500</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="eq-product-card">
+              <a href="pages/product.html?id=three-piece-04" class="eq-product-card__link">
+                <div class="eq-product-card__frame">
+                  <span class="eq-badge">New</span>
+                  <img src="images/three-piece/three-piece-04.jpg" alt="Meher Cotton Three Piece" loading="lazy" />
+                  <img class="eq-product-card__img--alt" src="images/three-piece/three-piece-04-alt.jpg" alt="" loading="lazy" />
+                  <span class="eq-product-card__quick-add">View product</span>
+                </div>
+                <div class="eq-product-card__body">
+                  <span class="eq-product-card__category">Three Piece</span>
+                  <h3 class="eq-product-card__name">Meher Cotton Three Piece</h3>
+                  <p class="eq-product-card__price">৳2,800</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="eq-product-card">
+              <a href="pages/product.html?id=bag-02" class="eq-product-card__link">
+                <div class="eq-product-card__frame">
+                  <span class="eq-badge">New</span>
+                  <img src="images/bags/bag-02.jpg" alt="Nomad Leather Sling" loading="lazy" />
+                  <img class="eq-product-card__img--alt" src="images/bags/bag-02-alt.jpg" alt="" loading="lazy" />
+                  <span class="eq-product-card__quick-add">View product</span>
+                </div>
+                <div class="eq-product-card__body">
+                  <span class="eq-product-card__category">Bags</span>
+                  <h3 class="eq-product-card__name">Nomad Leather Sling</h3>
+                  <p class="eq-product-card__price">৳4,500</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="eq-product-card">
+              <a href="pages/product.html?id=two-piece-01" class="eq-product-card__link">
+                <div class="eq-product-card__frame">
+                  <span class="eq-badge">New</span>
+                  <img src="images/two-piece/two-piece-01.jpg" alt="Aria Linen Two Piece" loading="lazy" />
+                  <img class="eq-product-card__img--alt" src="images/two-piece/two-piece-01-alt.jpg" alt="" loading="lazy" />
+                  <span class="eq-product-card__quick-add">View product</span>
+                </div>
+                <div class="eq-product-card__body">
+                  <span class="eq-product-card__category">Two Piece</span>
+                  <h3 class="eq-product-card__name">Aria Linen Two Piece</h3>
+                  <p class="eq-product-card__price">৳2,600</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="eq-product-card">
+              <a href="pages/product.html?id=saree-03" class="eq-product-card__link">
+                <div class="eq-product-card__frame">
+                  <img src="images/saree/saree-03.jpg" alt="Handloom Tangail Saree" loading="lazy" />
+                  <img class="eq-product-card__img--alt" src="images/saree/saree-03-alt.jpg" alt="" loading="lazy" />
+                  <span class="eq-product-card__quick-add">View product</span>
+                </div>
+                <div class="eq-product-card__body">
+                  <span class="eq-product-card__category">Saree</span>
+                  <h3 class="eq-product-card__name">Handloom Tangail Saree</h3>
+                  <p class="eq-product-card__price">৳4,200</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="eq-product-card">
+              <a href="pages/product.html?id=bag-04" class="eq-product-card__link">
+                <div class="eq-product-card__frame">
+                  <img src="images/bags/bag-04.jpg" alt="Wicker Weekend Bag" loading="lazy" />
+                  <img class="eq-product-card__img--alt" src="images/bags/bag-04-alt.jpg" alt="" loading="lazy" />
+                  <span class="eq-product-card__quick-add">View product</span>
+                </div>
+                <div class="eq-product-card__body">
+                  <span class="eq-product-card__category">Bags</span>
+                  <h3 class="eq-product-card__name">Wicker Weekend Bag</h3>
+                  <p class="eq-product-card__price">৳3,200</p>
+                </div>
+              </a>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================
+       SAREE SECTION
+       Editorial split layout: large feature image + smaller product grid
+  ================================= -->
+  <section class="eq-section eq-section--deep">
+    <div class="eq-container">
+      <div class="eq-saree eq-reveal">
+
+        <div class="eq-saree__feature">
+          <img src="images/saree/saree-1.jpg" alt="Katan Silk Heritage Saree, featured" />
+          <span class="eq-saree__feature-caption">Katan Silk Heritage Saree — ৳12,500</span>
+        </div>
+
+        <div class="eq-saree__side">
+          <div class="eq-saree__text">
+            <span class="eq-eyebrow">SIGNATURE CATEGORY</span>
+            <h2 class="eq-heading-lg">Saree</h2>
+            <p class="eq-body-lg" style="margin-top: 0.75rem;">Handwoven by artisans across Narayanganj, Tangail and Rajshahi — every Earthquick saree carries a specific weaving tradition, reworked for a contemporary drape.</p>
+            <a href="pages/saree.html" class="eq-text-link" style="margin-top: 1.25rem;">
+              View All Sarees
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+            </a>
+          </div>
+
+          <div class="eq-saree__grid">
+            <article class="eq-product-card">
+              <a href="pages/product.html?id=saree-04" class="eq-product-card__link">
+                <div class="eq-product-card__frame">
+                  <img src="images/saree/saree-2.jpg" alt="Organza Pearl Saree" loading="lazy" />
+                </div>
+                <div class="eq-product-card__body">
+                  <h3 class="eq-product-card__name">Organza Pearl</h3>
+                  <p class="eq-product-card__price">৳6,800</p>
+                </div>
+              </a>
+            </article>
+            <article class="eq-product-card">
+              <a href="pages/product.html?id=saree-06" class="eq-product-card__link">
+                <div class="eq-product-card__frame">
+                  <img src="images/saree/saree-3.jpg" alt="Cotton Nakshi Saree" loading="lazy" />
+                </div>
+                <div class="eq-product-card__body">
+                  <h3 class="eq-product-card__name">Cotton Nakshi</h3>
+                  <p class="eq-product-card__price">৳3,500</p>
+                </div>
+              </a>
+            </article>
+            <article class="eq-product-card">
+              <a href="pages/product.html?id=saree-06" class="eq-product-card__link">
+                <div class="eq-product-card__frame">
+                  <img src="images/saree/saree-4.jpg" alt="Cotton Nakshi Saree" loading="lazy" />
+                </div>
+                <div class="eq-product-card__body">
+                  <h3 class="eq-product-card__name">Cotton Nakshi</h3>
+                  <p class="eq-product-card__price">৳3,500</p>
+                </div>
+              </a>
+            </article>
+            <article class="eq-product-card">
+              <a href="pages/product.html?id=saree-06" class="eq-product-card__link">
+                <div class="eq-product-card__frame">
+                  <img src="images/saree/saree-5.jpg" alt="Cotton Nakshi Saree" loading="lazy" />
+                </div>
+                <div class="eq-product-card__body">
+                  <h3 class="eq-product-card__name">Cotton Nakshi</h3>
+                  <p class="eq-product-card__price">৳3,500</p>
+                </div>
+              </a>
+            </article>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================
+       HERITAGE STORYTELLING SECTION
+  ================================= -->
+  <section class="eq-section" id="story">
+    <div class="eq-container">
+      <div class="eq-story eq-reveal">
+        <div class="eq-story__media">
+          <img src="images/hero/story-heritage.jpg" alt="Traditional weaving craft behind Earthquick pieces" />
+        </div>
+        <div class="eq-story__text">
+          <svg class="eq-story__mark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 30c8 0 8-16 16-16s8 16 16 16" /></svg>
+          <span class="eq-eyebrow">OUR PHILOSOPHY</span>
+          <h2 class="eq-heading-lg">Tradition, Reimagined.</h2>
+          <p class="eq-body-lg">Nous Telos has spent years working directly with handloom weavers and embroidery collectives across Bangladesh. Earthquick takes that same material honesty and cuts it for how people actually get dressed today — considered, uncomplicated, built to last past one season.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================
+       THREE PIECE SECTION
+       Horizontal carousel on a dark ground for contrast
+  ================================= -->
+  <section class="eq-section eq-three-piece">
+    <div class="eq-container">
+      <div class="eq-section-head eq-reveal">
+        <div class="eq-section-head__text">
+          <span class="eq-eyebrow">READY TO WEAR</span>
+          <h2 class="eq-heading-lg">Three Piece</h2>
+          <p class="eq-body-muted" style="margin-top: 0.75rem;">Kameez, salwar and dupatta sets built for daily rotation — from block-printed cotton to fine chikankari.</p>
+        </div>
+        <div class="eq-carousel__controls" data-carousel-id="three-piece">
+          <button type="button" class="eq-arrow-btn" data-action="prev" aria-label="Previous three piece products">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+          </button>
+          <button type="button" class="eq-arrow-btn" data-action="next" aria-label="Next three piece products">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="eq-carousel eq-reveal">
+        <div class="eq-carousel__viewport">
+          <div class="eq-carousel__track">
+
+            <article class="eq-product-card">
+              <a href="pages/product.html?id=three-piece-01" class="eq-product-card__link">
+                <div class="eq-product-card__frame">
+                  <span class="eq-badge">New</span>
+                  <img src="images/three-piece/three-piece-01.jpg" alt="Aarna Embroidered Three Piece" loading="lazy" />
+                  <img class="eq-product-card__img--alt" src="images/three-piece/three-piece-01-alt.jpg" alt="" loading="lazy" />
+                  <span class="eq-product-card__quick-add">View product</span>
+                </div>
+                <div class="eq-product-card__body">
+                  <span class="eq-product-card__category">Three Piece</span>
+                  <h3 class="eq-product-card__name">Aarna Embroidered</h3>
+                  <p class="eq-product-card__price">৳4,500</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="eq-product-card">
+              <a href="pages/product.html?id=three-piece-02" class="eq-product-card__link">
+                <div class="eq-product-card__frame">
+                  <span class="eq-badge">Sale</span>
+                  <img src="images/three-piece/three-piece-02.jpg" alt="Noor Block Print Three Piece" loading="lazy" />
+                  <img class="eq-product-card__img--alt" src="images/three-piece/three-piece-02-alt.jpg" alt="" loading="lazy" />
+                  <span class="eq-product-card__quick-add">View product</span>
+                </div>
+                <div class="eq-product-card__body">
+                  <span class="eq-product-card__category">Three Piece</span>
+                  <h3 class="eq-product-card__name">Noor Block Print</h3>
+                  <p class="eq-product-card__price"><span class="eq-price--old">৳3,600</span>৳3,200</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="eq-product-card">
+              <a href="pages/product.html?id=three-piece-03" class="eq-product-card__link">
+                <div class="eq-product-card__frame">
+                  <img src="images/three-piece/three-piece-03.jpg" alt="Zara Chikankari Three Piece" loading="lazy" />
+                  <img class="eq-product-card__img--alt" src="images/three-piece/three-piece-03-alt.jpg" alt="" loading="lazy" />
+                  <span class="eq-product-card__quick-add">View product</span>
+                </div>
+                <div class="eq-product-card__body">
+                  <span class="eq-product-card__category">Three Piece</span>
+                  <h3 class="eq-product-card__name">Zara Chikankari</h3>
+                  <p class="eq-product-card__price">৳5,100</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="eq-product-card">
+              <a href="pages/product.html?id=three-piece-05" class="eq-product-card__link">
+                <div class="eq-product-card__frame">
+                  <img src="images/three-piece/three-piece-05.jpg" alt="Elan Georgette Three Piece" loading="lazy" />
+                  <img class="eq-product-card__img--alt" src="images/three-piece/three-piece-05-alt.jpg" alt="" loading="lazy" />
+                  <span class="eq-product-card__quick-add">View product</span>
+                </div>
+                <div class="eq-product-card__body">
+                  <span class="eq-product-card__category">Three Piece</span>
+                  <h3 class="eq-product-card__name">Elan Georgette</h3>
+                  <p class="eq-product-card__price">৳4,700</p>
+                </div>
+              </a>
+            </article>
+
+            <article class="eq-product-card">
+              <a href="pages/product.html?id=three-piece-06" class="eq-product-card__link">
+                <div class="eq-product-card__frame">
+                  <img src="images/three-piece/three-piece-06.jpg" alt="Iris Linen Three Piece" loading="lazy" />
+                  <img class="eq-product-card__img--alt" src="images/three-piece/three-piece-06-alt.jpg" alt="" loading="lazy" />
+                  <span class="eq-product-card__quick-add">View product</span>
+                </div>
+                <div class="eq-product-card__body">
+                  <span class="eq-product-card__category">Three Piece</span>
+                  <h3 class="eq-product-card__name">Iris Linen</h3>
+                  <p class="eq-product-card__price">৳3,900</p>
+                </div>
+              </a>
+            </article>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="eq-reveal" style="margin-top: var(--space-lg); text-align:center;">
+        <a href="pages/three-piece.html" class="eq-text-link" style="color:var(--eq-cream);">
+          View All Three Piece
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================
+       TWO PIECE SECTION
+       Asymmetric layout: large feature card + supporting card stack
+  ================================= -->
+  <section class="eq-section">
+    <div class="eq-container">
+      <div class="eq-section-head eq-reveal">
+        <div class="eq-section-head__text">
+          <span class="eq-eyebrow">EASY EVERYDAY</span>
+          <h2 class="eq-heading-lg">Two Piece</h2>
+        </div>
+        <a href="pages/two-piece.html" class="eq-text-link">
+          View All Two Piece
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+
+      <div class="eq-two-piece__layout eq-reveal">
+        <a href="pages/product.html?id=two-piece-03" class="eq-two-piece__feature">
+          <img src="images/two-piece/2pc-1.jpg" alt="Selene Tunic Two Piece" />
+          <div class="eq-two-piece__feature-info">
+            <span class="eq-eyebrow" style="color: var(--eq-lavender);">FEATURED SET</span>
+            <h3 class="eq-heading-md" style="color:#fffdf9;">Selene Tunic Two Piece</h3>
+            <p style="color: rgba(255,253,249,.8); margin-top:.35rem;">৳2,900</p>
+          </div>
+        </a>
+
+        <div class="eq-two-piece__stack">
+          <article class="eq-product-card">
+            <a href="pages/product.html?id=two-piece-01" class="eq-product-card__link" style="display:flex; gap: var(--space-sm);">
+              <div class="eq-product-card__frame">
+                <img src="images/two-piece/2pc-2.jpg" alt="Aria Linen Two Piece" loading="lazy" />
+              </div>
+              <div class="eq-product-card__body">
+                <span class="eq-product-card__category">Two Piece</span>
+                <h3 class="eq-product-card__name">Aria Linen</h3>
+                <p class="eq-product-card__price">৳2,600</p>
+              </div>
+            </a>
+          </article>
+
+          <article class="eq-product-card">
+            <a href="pages/product.html?id=two-piece-04" class="eq-product-card__link" style="display:flex; gap: var(--space-sm);">
+              <div class="eq-product-card__frame">
+                <img src="images/two-piece/2pc-3.jpg" alt="Amara Printed Two Piece" loading="lazy" />
+              </div>
+              <div class="eq-product-card__body">
+                <span class="eq-product-card__category">Two Piece</span>
+                <h3 class="eq-product-card__name">Amara Printed</h3>
+                <p class="eq-product-card__price">৳2,400</p>
+              </div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================
+       BAGS SECTION
+       Clean accessory grid: one large hero card + smaller cards
+  ================================= -->
+  <section class="eq-section eq-section--deep">
+    <div class="eq-container">
+      <div class="eq-section-head eq-reveal">
+        <div class="eq-section-head__text">
+          <span class="eq-eyebrow">FINISHING TOUCH</span>
+          <h2 class="eq-heading-lg">Bags</h2>
+        </div>
+        <a href="pages/bags.html" class="eq-text-link">
+          View All Bags
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+
+      <div class="eq-bags__layout eq-reveal">
+        <a href="pages/product.html?id=bag-01" class="eq-bags__hero-card">
+          <img src="images/bags/bag-01.jpg" alt="Heritage Tote Bag" />
+          <div class="eq-two-piece__feature-info">
+            <h3 class="eq-heading-md" style="color:#fffdf9;">Heritage Tote</h3>
+            <p style="color: rgba(255,253,249,.8); margin-top:.35rem;">৳3,800</p>
+          </div>
+        </a>
+
+        <article class="eq-product-card">
+          <a href="pages/product.html?id=bag-02" class="eq-product-card__link">
+            <div class="eq-product-card__frame">
+              <span class="eq-badge">New</span>
+              <img src="images/bags/bag-02.jpg" alt="Nomad Leather Sling" loading="lazy" />
+            </div>
+            <div class="eq-product-card__body">
+              <span class="eq-product-card__category">Bags</span>
+              <h3 class="eq-product-card__name">Nomad Leather Sling</h3>
+              <p class="eq-product-card__price">৳4,500</p>
+            </div>
+          </a>
+        </article>
+
+        <article class="eq-product-card">
+          <a href="pages/product.html?id=bag-03" class="eq-product-card__link">
+            <div class="eq-product-card__frame">
+              <span class="eq-badge">Sale</span>
+              <img src="images/bags/bag-03.jpg" alt="Terra Structured Handbag" loading="lazy" />
+            </div>
+            <div class="eq-product-card__body">
+              <span class="eq-product-card__category">Bags</span>
+              <h3 class="eq-product-card__name">Terra Structured Handbag</h3>
+              <p class="eq-product-card__price"><span class="eq-price--old">৳5,800</span>৳5,200</p>
+            </div>
+          </a>
+        </article>
+
+        <article class="eq-product-card">
+          <a href="pages/product.html?id=bag-04" class="eq-product-card__link">
+            <div class="eq-product-card__frame">
+              <span class="eq-badge">New</span>
+              <img src="images/bags/bag-04.jpg" alt="Wicker Weekend Bag" loading="lazy" />
+            </div>
+            <div class="eq-product-card__body">
+              <span class="eq-product-card__category">Bags</span>
+              <h3 class="eq-product-card__name">Wicker Weekend Bag</h3>
+              <p class="eq-product-card__price">৳3,200</p>
+            </div>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================
+       FINAL BRAND / STORY SECTION
+       Closing CTA + newsletter signup
+  ================================= -->
+  <section class="eq-final-cta eq-reveal">
+    <div class="eq-container">
+      <svg class="eq-final-cta__mark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="20" cy="20" r="16"></circle><path d="M12 20a8 8 0 0 1 16 0"></path></svg>
+      <span class="eq-eyebrow">JOIN THE HOUSE OF EARTHQUICK</span>
+      <h2 class="eq-heading-lg" style="margin: 0 auto;">Be first to see what's next.</h2>
+      <p class="eq-body-lg">Sign up for early access to new drops, restocks, and the stories behind the makers we work with.</p>
+      <form class="eq-newsletter" data-newsletter-form>
+        <input type="email" required placeholder="Your email address" aria-label="Email address" />
+        <button type="submit" class="eq-btn eq-btn--primary">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+
+  <!-- ================================
+       FOOTER
+  ================================= -->
+  <footer class="eq-footer">
+    <div class="eq-container">
+      <div class="eq-footer__top">
+        <div class="eq-footer__brand">
+          <img src="images/logo/earthquick-logo.png" alt="Earthquick" />
+          <p>Premium fashion and lifestyle pieces from Nous Telos — handloom sarees, tailored sets and considered accessories.</p>
+          <div class="eq-footer__social">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a>
+            <a href="#" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M9 10a3 3 0 1 1 4.5 2.6c-.7.4-1.1 1-1.1 1.9"></path></svg></a>
+          </div>
+        </div>
+
+        <div class="eq-footer__nav">
+          <h4 class="eq-footer__heading">SHOP</h4>
+          <ul class="eq-footer__links">
+            <li><a href="pages/saree.html">Saree</a></li>
+            <li><a href="pages/three-piece.html">Three Piece</a></li>
+            <li><a href="pages/two-piece.html">Two Piece</a></li>
+            <li><a href="pages/bags.html">Bags</a></li>
+          </ul>
+        </div>
+
+        <div class="eq-footer__nav">
+          <h4 class="eq-footer__heading">COMPANY</h4>
+          <ul class="eq-footer__links">
+            <li><a href="index.html#story">Our Story</a></li>
+            <li><a href="#">Sustainability</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="eq-footer__nav">
+          <h4 class="eq-footer__heading">CONTACT</h4>
+          <ul class="eq-footer__links">
+            <li>House 12, Road 4, Dhanmondi</li>
+            <li>Dhaka 1209, Bangladesh</li>
+            <li>hello@earthquick.com</li>
+            <li>+880 1XXX-XXXXXX</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="eq-footer__bottom">
+        <span>&copy; 2026 Earthquick. All rights reserved.</span>
+        <span>A Nous Telos brand.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 bundle (only used for the odd utility/behavior, not layout) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
