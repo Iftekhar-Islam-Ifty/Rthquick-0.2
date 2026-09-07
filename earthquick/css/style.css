@@ -2055,6 +2055,13 @@ p {
   transform: translateY(0);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .eq-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 
 /* =====================================================================
    20. RESPONSIVE RULES

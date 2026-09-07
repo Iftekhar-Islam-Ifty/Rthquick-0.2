@@ -358,6 +358,11 @@ function initScrollReveal() {
   const items = document.querySelectorAll(".eq-reveal");
   if (!items.length) return;
 
+  // Fail-safe: ensure all items become visible after 1.2s regardless of scroll state
+  setTimeout(() => {
+    items.forEach((el) => el.classList.add("is-visible"));
+  }, 1200);
+
   if (!("IntersectionObserver" in window)) {
     items.forEach((el) => el.classList.add("is-visible"));
     return;
@@ -372,7 +377,7 @@ function initScrollReveal() {
         }
       });
     },
-    { threshold: 0.12 }
+    { threshold: 0.05, rootMargin: "0px 0px 120px 0px" }
   );
 
   items.forEach((el) => observer.observe(el));
@@ -607,7 +612,7 @@ function initQuickViewModal() {
    11. INITIALIZATION BOOTSTRAP
    Mounts all components cleanly after the document is loaded.
    ===================================================================== */
-document.addEventListener("DOMContentLoaded", () => {
+function initEarthquickApp() {
   Toast.init();
   initNavbar();
   initHeroSlider();
@@ -618,4 +623,10 @@ document.addEventListener("DOMContentLoaded", () => {
   initCarousels();
   initScrollReveal();
   initNewsletterForm();
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initEarthquickApp);
+} else {
+  initEarthquickApp();
+}
