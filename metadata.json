@@ -1,0 +1,8 @@
+{
+  "name": "Earthquick",
+  "description": "Earthquick is a premium fashion and lifestyle brand featuring Saree, Three Piece, Two Piece and Bags from Nous Telos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -68,7 +68,11 @@ function initCartIcon() {
 
   if (cartButton) {
     cartButton.addEventListener("click", () => {
-      alert("This is a frontend demo — the cart drawer isn't wired up yet.");
+      try {
+        alert("This is a frontend demo — the cart drawer isn't wired up yet.");
+      } catch (e) {
+        console.log("This is a frontend demo — the cart drawer isn't wired up yet.");
+      }
     });
   }
 }
@@ -173,7 +177,11 @@ function initNewsletterForm() {
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    alert("Thanks for subscribing — this demo does not send data anywhere.");
+    try {
+      alert("Thanks for subscribing — this demo does not send data anywhere.");
+    } catch (e) {
+      console.log("Thanks for subscribing — this demo does not send data anywhere.");
+    }
     form.reset();
   });
 }
