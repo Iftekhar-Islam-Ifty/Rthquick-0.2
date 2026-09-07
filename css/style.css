@@ -2042,21 +2042,26 @@ p {
   100% { top: 100%; }
 }
 
-/* Reveal-on-scroll: a single, deliberate fade+rise applied via JS
-   when a section enters the viewport (see script.js -> initScrollReveal) */
+/* Reveal-on-scroll: visible by default so content and images are NEVER hidden */
 .eq-reveal {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s var(--ease-standard), transform 0.6s var(--ease-standard);
+}
+
+.js-ready .eq-reveal:not(.is-visible) {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s var(--ease-standard), transform 0.8s var(--ease-standard);
+  transform: translateY(20px);
 }
 
 .eq-reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .eq-reveal {
+  .eq-reveal,
+  .js-ready .eq-reveal {
     opacity: 1 !important;
     transform: none !important;
   }
