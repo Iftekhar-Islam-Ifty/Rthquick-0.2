@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ===================================================================
+       DOCUMENT METADATA & RESOURCE HINTS
+       Customer Login — Earthquick by Nous Telos
+       Mapped to Laravel Blade: resources/views/auth/login.blade.php
+       =================================================================== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Login — Earthquick by Nous Telos</title>
+  <meta name="description" content="Sign in to your Earthquick account to manage your fashion orders, track parcels, and view personal profile." />
+
+  <!-- Google Fonts: Fraunces (display/serif) + Jost (body/sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Earthquick Custom Stylesheet -->
+  <link rel="stylesheet" href="../css/style.css?v=9.2" />
+
+  <!-- Reusable Components Loader (Navbar & Footer) -->
+  <script src="../js/layout.js?v=9.2"></script>
+</head>
+<body class="eq-auth-page">
+
+  <!-- Reusable Navigation Header -->
+  <div id="site-header"></div>
+
+  <!-- Breadcrumb Bar -->
+  <nav class="eq-breadcrumb" aria-label="Breadcrumb" style="padding: 0.9rem 0; border-bottom: 1px solid var(--eq-line); background: var(--eq-white);">
+    <div class="eq-container">
+      <ol class="eq-breadcrumb__list" style="display: flex; align-items: center; gap: 0.5rem; list-style: none; margin: 0; padding: 0; font-size: 0.84rem; color: var(--eq-charcoal-soft);">
+        <li><a href="../index.html" style="color: inherit; text-decoration: none;">Home</a></li>
+        <li style="color: var(--eq-line-dark);">&rsaquo;</li>
+        <li style="color: var(--eq-charcoal); font-weight: 500;" aria-current="page">Login</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Login Form Container -->
+  <main class="eq-container" id="main-content">
+    <div class="eq-auth-wrap">
+      <div class="eq-auth-card">
+        
+        <div class="eq-auth-card__header">
+          <h1 class="eq-auth-card__title">Welcome Back</h1>
+          <p class="eq-auth-card__desc">Sign in to your Nous Telos / Earthquick account</p>
+        </div>
+
+        <form class="eq-auth-form" id="customer-login-form" novalidate>
+          
+          <div class="eq-form-group">
+            <label for="login-identifier" class="eq-form-label">Email or Mobile Number <span class="req">*</span></label>
+            <input 
+              type="text" 
+              id="login-identifier" 
+              name="identifier" 
+              class="eq-form-input" 
+              placeholder="e.g. iftekharislamifty@gmail.com or 017931***87" 
+              value="iftekharislamifty@gmail.com"
+              required 
+              autocomplete="username"
+            />
+          </div>
+
+          <div class="eq-form-group">
+            <div class="eq-auth-row-between" style="margin-bottom: 0.35rem;">
+              <label for="login-password" class="eq-form-label" style="margin-bottom: 0;">Password <span class="req">*</span></label>
+              <a href="#" class="eq-auth-link" id="link-forgot-password" onclick="alert('Password reset instructions dispatched in prototype mode.'); return false;">Forgot Password?</a>
+            </div>
+            <input 
+              type="password" 
+              id="login-password" 
+              name="password" 
+              class="eq-form-input" 
+              placeholder="Enter your password" 
+              value="secret123"
+              required 
+              autocomplete="current-password"
+            />
+          </div>
+
+          <div class="eq-auth-row-between">
+            <label style="display: flex; align-items: center; gap: 0.45rem; cursor: pointer; color: var(--eq-charcoal-soft); font-size: 0.86rem;">
+              <input type="checkbox" id="remember-me" checked style="accent-color: var(--eq-gold);" />
+              <span>Remember me</span>
+            </label>
+          </div>
+
+          <button type="submit" class="eq-auth-submit-btn" id="btn-login-submit">
+            Sign In &rarr;
+          </button>
+
+        </form>
+
+        <div class="eq-auth-footer-prompt">
+          Don't have an account yet? 
+          <a href="register.html" class="eq-auth-link" style="font-weight: 600;">Create Account</a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Reusable Footer & Search Modal -->
+  <div id="site-footer"></div>
+
+  <!-- Global Application Scripts -->
+  <script src="../js/script.js?v=9.2"></script>
+
+  <!-- Login Logic Script -->
+  <script>
+    (function () {
+      "use strict";
+
+      const form = document.querySelector("#customer-login-form");
+      const identifierInput = document.querySelector("#login-identifier");
+      const passwordInput = document.querySelector("#login-password");
+
+      if (form) {
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const identifier = identifierInput.value.trim();
+          const password = passwordInput.value.trim();
+
+          if (!identifier) {
+            identifierInput.focus();
+            if (window.Toast) window.Toast.show("Please enter your email or mobile number.");
+            return;
+          }
+
+          if (!password) {
+            passwordInput.focus();
+            if (window.Toast) window.Toast.show("Please enter your password.");
+            return;
+          }
+
+          // Check against registered users in localStorage (Prototype Authentication)
+          let users = [];
+          try {
+            users = JSON.parse(localStorage.getItem("earthquick_users") || "[]");
+          } catch (err) {}
+
+          let matchedUser = users.find(u => 
+            (u.email && u.email.toLowerCase() === identifier.toLowerCase()) || 
+            (u.phone && u.phone === identifier)
+          );
+
+          if (!matchedUser) {
+            matchedUser = {
+              name: identifier.includes("@") ? identifier.split("@")[0] : "Iftekhar Islam Ifty",
+              email: identifier.includes("@") ? identifier : "iftekharislamifty@gmail.com",
+              phone: !identifier.includes("@") ? identifier : "017931***87",
+              city: "Chattogram",
+              area: "GEC, Nasirabad"
+            };
+          }
+
+          // Store logged-in user session
+          localStorage.setItem("earthquick_auth_user", JSON.stringify(matchedUser));
+
+          if (window.Toast) window.Toast.show(`Welcome back, ${matchedUser.name}!`);
+
+          setTimeout(() => {
+            window.location.href = "account.html";
+          }, 350);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

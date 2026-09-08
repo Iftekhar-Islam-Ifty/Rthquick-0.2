@@ -18,6 +18,9 @@
   <!-- Earthquick Custom Stylesheet -->
   <link rel="stylesheet" href="../css/style.css?v=9.0" />
 
+  <!-- Reusable Components Loader -->
+  <script src="../js/layout.js?v=9.0"></script>
+
   <!-- Resilient Image Fallback for GitHub Pages & static hosting -->
   <script>
     window.addEventListener('error', function(e) {
@@ -42,143 +45,7 @@
        SECTION 1: HEADER & PRIMARY NAVIGATION
        Reusable across all pages (maps to Blade: `resources/views/partials/navbar.blade.php`)
        =================================================================== -->
-  <header class="eq-navbar" id="eq-main-navbar">
-    <div class="eq-navbar__inner">
-      <!-- Brand Logo -->
-      <a href="../index.html" class="eq-navbar__logo" id="eq-brand-logo" aria-label="Earthquick Home">
-        <img src="../images/logo/earthquick-logo.png?v=3" alt="Earthquick — Crafted for the Modern You" />
-      </a>
-
-      <!-- Desktop Navigation Menu -->
-      <nav id="eq-nav-menu" aria-label="Primary Navigation">
-        <ul class="eq-navbar__links" id="eq-nav-links">
-          <li><a href="../index.html" id="nav-link-home">Home</a></li>
-          <li><a href="men.html" id="nav-link-men">Men</a></li>
-          
-          <!-- Women Category with Mega-Dropdown -->
-          <li class="eq-nav-item eq-nav-item--has-dropdown" id="nav-item-women">
-            <div class="eq-nav-link-wrapper">
-              <a href="women.html" id="nav-link-women">Women</a>
-              <button type="button" class="eq-dropdown-toggle-btn" id="btn-toggle-women-sub" aria-expanded="false" aria-label="Toggle Women subcategories">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </button>
-            </div>
-
-            <!-- Women Dropdown Mega-Panel -->
-            <div class="eq-megamenu" id="megamenu-women" role="region" aria-label="Women Subcategories">
-              <div class="eq-megamenu__grid">
-                <div class="eq-megamenu__col">
-                  <div class="eq-megamenu__heading">Saree Atelier</div>
-                  <ul class="eq-megamenu__list">
-                    <li><a href="saree-jamdani.html">Jamdani Weaves</a></li>
-                    <li><a href="saree-tantuj.html">Tantuj &amp; Tangail</a></li>
-                    <li><a href="saree-half-silk.html">Half Silk</a></li>
-                    <li><a href="saree-full-silk.html">Pure Silk</a></li>
-                    <li><a href="saree.html" class="eq-megamenu__view-all">All Sarees &rarr;</a></li>
-                  </ul>
-                </div>
-                <div class="eq-megamenu__col">
-                  <div class="eq-megamenu__heading">Ready to Wear</div>
-                  <ul class="eq-megamenu__list">
-                    <li><a href="three-piece.html">Three Piece Sets</a></li>
-                    <li><a href="two-piece.html">Two Piece Co-ords</a></li>
-                    <li><a href="women.html" class="eq-megamenu__view-all">Explore Women's Hub &rarr;</a></li>
-                  </ul>
-                </div>
-                <div class="eq-megamenu__feature">
-                  <a href="women.html" class="eq-megamenu__feature-card">
-                    <div class="eq-megamenu__feature-media">
-                      <img src="../images/hero/hero-main-saree-2.jpg?v=3" alt="Heritage Women Collection" />
-                    </div>
-                    <div class="eq-megamenu__feature-content">
-                      <span class="eq-megamenu__tag">NOUS TELOS</span>
-                      <strong class="eq-megamenu__feature-title">Heritage Weaves</strong>
-                      <span class="eq-megamenu__feature-link">Explore Hub &rarr;</span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li><a href="kids.html" id="nav-link-kids">Kids</a></li>
-          <li><a href="ornaments.html" id="nav-link-ornaments">Ornaments</a></li>
-          <li><a href="bags.html" id="nav-link-bags">Bags</a></li>
-          
-          <!-- Home Decor Category with Dropdown -->
-          <li class="eq-nav-item eq-nav-item--has-dropdown" id="nav-item-home-decor">
-            <div class="eq-nav-link-wrapper">
-              <a href="home-decor.html" id="nav-link-home-decor" class="is-active">Home Decor</a>
-              <button type="button" class="eq-dropdown-toggle-btn" id="btn-toggle-decor-sub" aria-expanded="false" aria-label="Toggle Home Decor subcategories">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </button>
-            </div>
-
-            <!-- Home Decor Dropdown Panel -->
-            <div class="eq-megamenu eq-megamenu--compact" id="megamenu-home-decor" role="region" aria-label="Home Decor Subcategories">
-              <div class="eq-megamenu__grid eq-megamenu__grid--2col">
-                <div class="eq-megamenu__col">
-                  <div class="eq-megamenu__heading">Home Sanctuary</div>
-                  <ul class="eq-megamenu__list">
-                    <li><a href="home-decor-kantha.html">Kantha (Nakshi Quilt)</a></li>
-                    <li><a href="home-decor-bedsheet.html">Bedsheet Sets</a></li>
-                    <li><a href="home-decor-cushion.html">Cushion Cover</a></li>
-                    <li><a href="home-decor.html" class="eq-megamenu__view-all">All Home Decor &rarr;</a></li>
-                  </ul>
-                </div>
-                <div class="eq-megamenu__feature">
-                  <a href="home-decor.html" class="eq-megamenu__feature-card">
-                    <div class="eq-megamenu__feature-media">
-                      <img src="../images/hero/story-craft.jpg?v=3" alt="Artisanal Nakshi Kantha Quilt" />
-                    </div>
-                    <div class="eq-megamenu__feature-content">
-                      <span class="eq-megamenu__tag">NOUS TELOS LIVING</span>
-                      <strong class="eq-megamenu__feature-title">Nakshi Kantha</strong>
-                      <span class="eq-megamenu__feature-link">Explore Living &rarr;</span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li><a href="../index.html#story" id="nav-link-story">Our Story</a></li>
-        </ul>
-      </nav>
-
-      <!-- Utility Action Icons -->
-      <div class="eq-navbar__icons" id="eq-navbar-actions">
-        <button type="button" aria-label="Search collection" id="eq-btn-search" data-action="open-search">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="7"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </button>
-        <button type="button" aria-label="My Account" id="eq-btn-account" data-action="open-account">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-        </button>
-        <button type="button" aria-label="Shopping Bag" id="eq-btn-cart" data-action="open-cart">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
-            <path d="M3 6h18"></path>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
-          </svg>
-          <span class="eq-cart-count" id="eq-cart-count">0</span>
-        </button>
-      </div>
-
-      <button type="button" class="eq-navbar__toggle" id="eq-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="eq-nav-links">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
+  <div id="site-header"></div>
 
   <!-- ===================================================================
        MAIN CONTENT CONTAINER
@@ -336,55 +203,7 @@
     </div>
   </main>
 
-  <footer class="eq-footer" id="eq-main-footer">
-    <div class="eq-container">
-      <div class="eq-footer__top">
-        <div class="eq-footer__brand" id="footer-col-brand">
-          <img src="../images/logo/earthquick-logo.png?v=3" alt="Earthquick" />
-          <p>Premium fashion and lifestyle pieces from Nous Telos — handloom sarees, tailored sets and considered accessories.</p>
-        </div>
-        <div class="eq-footer__nav" id="footer-col-shop">
-          <h4 class="eq-footer__heading">SHOP</h4>
-          <ul class="eq-footer__links">
-            <li><a href="saree.html">Saree</a></li>
-            <li><a href="three-piece.html">Three Piece</a></li>
-            <li><a href="two-piece.html">Two Piece</a></li>
-            <li><a href="bags.html">Bags</a></li>
-            <li><a href="home-decor.html">Home Decor</a></li>
-          </ul>
-        </div>
-        <div class="eq-footer__nav" id="footer-col-company">
-          <h4 class="eq-footer__heading">COMPANY</h4>
-          <ul class="eq-footer__links">
-            <li><a href="../index.html#story">Our Story</a></li>
-            <li><a href="../index.html#story">Sustainability</a></li>
-            <li><a href="../index.html#newsletter-section">Contact Us</a></li>
-          </ul>
-        </div>
-        <div class="eq-footer__nav" id="footer-col-contact">
-          <h4 class="eq-footer__heading">CONTACT</h4>
-          <ul class="eq-footer__links">
-            <li>House 12, Road 4, Dhanmondi</li>
-            <li>Dhaka 1209, Bangladesh</li>
-            <li>hello@earthquick.com</li>
-          </ul>
-        </div>
-      </div>
-      <div class="eq-footer__bottom">
-        <span>&copy; 2026 Earthquick. All rights reserved.</span>
-        <span>A Nous Telos brand.</span>
-      </div>
-    </div>
-  </footer>
-
-  <div class="eq-search-modal" id="eq-search-modal" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="eq-search-box">
-      <div class="eq-search-box__input-row">
-        <input type="text" class="eq-search-box__input" id="eq-search-input" placeholder="Search quilts, bedsheets, cushions..." />
-        <button type="button" class="eq-search-box__close" id="eq-search-close">&times;</button>
-      </div>
-    </div>
-  </div>
+  <div id="site-footer"></div>
 
   <div class="eq-quickview-modal" id="eq-quickview-modal" aria-hidden="true" role="dialog">
     <div class="eq-quickview-backdrop" id="eq-quickview-backdrop"></div>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Product Details — Earthquick</title>
+  <meta name="description" content="Discover premium handcrafted fashion and lifestyle collections at Earthquick / Nous Telos." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="../css/style.css?v=9.0" />
+
+  <!-- Reusable Components Loader -->
+  <script src="../js/layout.js?v=9.0"></script>
+</head>
+<body>
+
+  <!-- ===================================================================
+       HEADER & PRIMARY NAVIGATION (REUSABLE COMPONENT)
+       Mapped to Laravel Blade: resources/views/partials/navbar.blade.php
+       Changes in /components/navbar.html automatically update here!
+       =================================================================== -->
+  <div id="site-header"></div>
+
+  <!-- ===================================================================
+       BREADCRUMB BAR
+       =================================================================== -->
+  <nav class="eq-breadcrumb" aria-label="Breadcrumb" style="padding: 1rem 0; border-bottom: 1px solid var(--eq-line);">
+    <div class="eq-container">
+      <ol class="eq-breadcrumb__list" id="eq-breadcrumb-list" style="display: flex; align-items: center; gap: 0.5rem; list-style: none; margin: 0; padding: 0; font-size: 0.84rem; color: var(--eq-charcoal-soft);">
+        <li><a href="../index.html" style="color: inherit; text-decoration: none;">Home</a></li>
+        <li style="color: var(--eq-line-dark);">&rsaquo;</li>
+        <li id="bc-category"><a href="women.html" style="color: inherit; text-decoration: none;">Collection</a></li>
+        <li style="color: var(--eq-line-dark);">&rsaquo;</li>
+        <li id="bc-product" style="color: var(--eq-charcoal); font-weight: 500;" aria-current="page">Product Detail</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- ===================================================================
+       PRODUCT DETAIL SECTION
+       =================================================================== -->
+  <main id="main-content" style="padding: 2.5rem 0 4rem;">
+    <div class="eq-container">
+      <div class="eq-product-detail" id="product-detail-container">
+        
+        <!-- LEFT: GALLERY -->
+        <div class="eq-product-gallery">
+          <div class="eq-product-gallery__main" id="gallery-main-wrap">
+            <img id="main-product-img" src="../images/saree/saree-01.jpg" alt="Product Image" />
+            <span class="eq-product-card__badge" id="product-badge" style="position: absolute; top: 16px; left: 16px; margin: 0;">Handloom</span>
+          </div>
+
+          <!-- Thumbnails Strip -->
+          <div class="eq-product-gallery__thumbs" id="gallery-thumbs">
+            <button type="button" class="is-active" data-src="../images/saree/saree-01.jpg">
+              <img id="thumb-1" src="../images/saree/saree-01.jpg" alt="View 1" />
+            </button>
+            <button type="button" data-src="../images/saree/saree-01-alt.jpg">
+              <img id="thumb-2" src="../images/saree/saree-01-alt.jpg" alt="View 2" />
+            </button>
+          </div>
+        </div>
+
+        <!-- RIGHT: PRODUCT INFO -->
+        <div class="eq-product-info">
+          <div class="eq-product-info__category" id="product-category-label">NOUS TELOS • SAREE ATELIER</div>
+          <h1 id="product-name" style="margin-bottom: 0.5rem; color: var(--eq-charcoal);">Crimson Heirloom Jamdani</h1>
+
+          <!-- Reviews rating summary -->
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
+            <div style="display: flex; gap: 2px; color: #f59e0b;" id="rating-stars">
+              ★★★★★
+            </div>
+            <span style="font-size: 0.85rem; color: var(--eq-charcoal-soft);" id="product-rating-text">4.9 (48 customer reviews)</span>
+          </div>
+
+          <!-- Price row -->
+          <div class="eq-product-info__price" style="display: flex; align-items: baseline; gap: 0.85rem;">
+            <span id="product-price" style="font-family: var(--font-display); font-size: 1.85rem; font-weight: 700; color: var(--eq-teal-dark);">৳18,500</span>
+            <span id="product-old-price" style="font-size: 1.15rem; color: #9ca3af; text-decoration: line-through;">৳22,000</span>
+            <span id="product-discount-tag" style="background-color: #fee2e2; color: #b91c1c; font-size: 0.76rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);">SAVE 16%</span>
+          </div>
+
+          <!-- Short Description -->
+          <p class="eq-product-info__desc" id="product-description" style="line-height: 1.7; color: var(--eq-charcoal-soft); margin-top: 1.25rem;">
+            Intricately hand-woven by master heritage artisans using traditional motifs. Made from breathable, pure combed threads offering timeless elegance and effortless drape for celebratory and festive gatherings.
+          </p>
+
+          <!-- Color Option -->
+          <div class="eq-product-info__row">
+            <span class="eq-product-info__label">Selected Color: <strong id="selected-color-name" style="color: var(--eq-charcoal);">Crimson</strong></span>
+            <div style="display: flex; gap: 0.65rem; margin-top: 0.45rem;" id="color-options-wrap">
+              <button type="button" class="color-swatch is-active" style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--eq-charcoal); background-color: #8b0000; cursor: pointer;" title="Crimson"></button>
+            </div>
+          </div>
+
+          <!-- Size / Dimensions Option -->
+          <div class="eq-product-info__row">
+            <span class="eq-product-info__label">Size / Fit:</span>
+            <div class="eq-size-options" id="size-options">
+              <button type="button" class="is-active" data-size="Standard / Free Size">Free Size (5.5m + Blouse)</button>
+              <button type="button" data-size="Custom Stitched">Custom Blouse (৳1,200)</button>
+            </div>
+          </div>
+
+          <!-- Stock & Urgency Notice -->
+          <div style="margin-top: 1.25rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #15803d;" id="stock-notice">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span id="stock-text">In Stock — Ready to ship from Dhaka atelier (3 left)</span>
+          </div>
+
+          <!-- Quantity and Action Buttons -->
+          <div class="eq-product-actions" style="margin-top: 1.5rem;">
+            <!-- Qty Stepper -->
+            <div class="eq-qty-selector">
+              <button type="button" id="btn-qty-minus" aria-label="Decrease quantity">&minus;</button>
+              <span id="qty-display">1</span>
+              <button type="button" id="btn-qty-plus" aria-label="Increase quantity">&plus;</button>
+            </div>
+
+            <!-- Add to Cart -->
+            <button type="button" class="eq-btn eq-btn--primary" id="btn-add-to-cart" style="flex: 2; padding: 0.85rem 1.5rem; font-size: 0.95rem;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              Add to Bag
+            </button>
+
+            <!-- Buy Now -->
+            <button type="button" class="eq-btn eq-btn--secondary" id="btn-buy-now" style="flex: 1.5; padding: 0.85rem 1.25rem; font-size: 0.95rem;">
+              Buy Now
+            </button>
+          </div>
+
+          <!-- Highlights & Assurance Metadata -->
+          <div class="eq-product-meta-list" style="margin-top: 2rem;">
+            <div class="eq-product-meta-list__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+              <span><strong>Free Delivery:</strong> Complimentary inside Dhaka within 48 hours. Express nationwide courier available.</span>
+            </div>
+            <div class="eq-product-meta-list__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <span><strong>100% Authentic Handloom:</strong> Certified craft heritage sourced directly from verified artisan looms.</span>
+            </div>
+            <div class="eq-product-meta-list__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+              </svg>
+              <span><strong>Easy Returns:</strong> 7-day doorstep exchange for sizing or quality assurance.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===============================================================
+           SECTION: ARTISANAL DETAILS ACCORDION
+           =============================================================== -->
+      <section style="margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid var(--eq-line);">
+        <div style="max-width: 800px; margin: 0 auto;">
+          <h2 style="font-family: var(--font-display); font-size: 1.6rem; text-align: center; margin-bottom: 2rem; color: var(--eq-charcoal);">
+            Craftsmanship &amp; Details
+          </h2>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <!-- Tab 1 -->
+            <details open style="border: 1px solid var(--eq-line); border-radius: var(--radius-sm); padding: 1rem 1.25rem; background: #fff;">
+              <summary style="font-weight: 600; cursor: pointer; color: var(--eq-charcoal);">
+                Fabric &amp; Artisan Origin
+              </summary>
+              <div style="padding-top: 0.85rem; font-size: 0.9rem; line-height: 1.6; color: var(--eq-charcoal-soft);" id="tab-fabric-desc">
+                Hand-spun pure threads woven by master craftsmen. Each warp and weft is tensioned manually to achieve supreme drape, softness, and resilience that softens with every wash.
+              </div>
+            </details>
+
+            <!-- Tab 2 -->
+            <details style="border: 1px solid var(--eq-line); border-radius: var(--radius-sm); padding: 1rem 1.25rem; background: #fff;">
+              <summary style="font-weight: 600; cursor: pointer; color: var(--eq-charcoal);">
+                Care &amp; Longevity Instructions
+              </summary>
+              <div style="padding-top: 0.85rem; font-size: 0.9rem; line-height: 1.6; color: var(--eq-charcoal-soft);">
+                • Dry clean recommended for initial cleaning to preserve dye radiance.<br />
+                • Hand wash gently in cold water with mild silk/cotton detergent thereafter.<br />
+                • Avoid wringing or direct harsh sunlight drying.<br />
+                • Warm iron on reverse side under a cotton pressing cloth.
+              </div>
+            </details>
+
+            <!-- Tab 3 -->
+            <details style="border: 1px solid var(--eq-line); border-radius: var(--radius-sm); padding: 1rem 1.25rem; background: #fff;">
+              <summary style="font-weight: 600; cursor: pointer; color: var(--eq-charcoal);">
+                Delivery, Returns &amp; Warranty
+              </summary>
+              <div style="padding-top: 0.85rem; font-size: 0.9rem; line-height: 1.6; color: var(--eq-charcoal-soft);">
+                Every order is packaged with utmost care in our signature eco-friendly cloth bag. We offer 7-day hassle-free doorstep returns across Bangladesh. Cash on Delivery is available in all major metropolitan areas.
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===============================================================
+           SECTION: RELATED PRODUCTS
+           =============================================================== -->
+      <section style="margin-top: 4.5rem;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.75rem; border-bottom: 1px solid var(--eq-line); padding-bottom: 0.75rem;">
+          <div>
+            <span style="font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--eq-teal-dark);">Curated Suggestions</span>
+            <h2 style="font-family: var(--font-display); font-size: 1.65rem; color: var(--eq-charcoal); margin: 0.25rem 0 0;">You May Also Admire</h2>
+          </div>
+          <a href="women.html" id="related-view-all" style="font-size: 0.88rem; font-weight: 600; color: var(--eq-teal-dark); text-decoration: none;">View Entire Category &rarr;</a>
+        </div>
+
+        <div class="eq-catalog-grid" id="related-products-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 1.5rem;">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ===================================================================
+       FOOTER (REUSABLE COMPONENT)
+       Mapped to Laravel Blade: resources/views/partials/footer.blade.php
+       Changes in /components/footer.html automatically update here!
+       =================================================================== -->
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
+  <script src="../js/script.js?v=9.0"></script>
+  <script src="../js/category.js?v=9.0"></script>
+
+  <!-- Product Detail Page Dynamic Loader Logic -->
+  <script>
+    (function () {
+      'use strict';
+
+      // 1. Get Product ID from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      let productId = urlParams.get('id');
+
+      // Fallback default
+      if (!productId) productId = "saree-01";
+
+      // 2. Find product in CATALOG_PRODUCTS
+      const catalog = window.CATALOG_PRODUCTS || [];
+      let product = catalog.find(p => p.id === productId);
+
+      // Graceful fallback if ID not found
+      if (!product && catalog.length > 0) {
+        product = catalog[0];
+      }
+
+      if (!product) return;
+
+      // 3. Update DOM with Product Data
+      document.title = `${product.name} — Earthquick / Nous Telos`;
+      const titleEl = document.querySelector("#product-name");
+      if (titleEl) titleEl.textContent = product.name;
+
+      // Category / Subcategory
+      const catLabel = document.querySelector("#product-category-label");
+      if (catLabel) {
+        const cat = (product.categoryLabel || product.category || "").toUpperCase();
+        const sub = (product.subLabel || product.subCategory || "").toUpperCase();
+        catLabel.textContent = `NOUS TELOS • ${cat}${sub ? ' • ' + sub : ''}`;
+      }
+
+      // Breadcrumb
+      const bcCat = document.querySelector("#bc-category a");
+      if (bcCat) {
+        bcCat.textContent = product.categoryLabel || (product.category.charAt(0).toUpperCase() + product.category.slice(1));
+        bcCat.href = `${product.category}.html`;
+      }
+      const bcProd = document.querySelector("#bc-product");
+      if (bcProd) bcProd.textContent = product.name;
+
+      // Images
+      const mainImg = document.querySelector("#main-product-img");
+      const thumb1 = document.querySelector("#thumb-1");
+      const thumb2 = document.querySelector("#thumb-2");
+      const badgeEl = document.querySelector("#product-badge");
+
+      const imgSrc1 = "../" + product.image;
+      const imgSrc2 = product.imageAlt ? "../" + product.imageAlt : imgSrc1;
+
+      if (mainImg) mainImg.src = imgSrc1;
+      if (thumb1) {
+        thumb1.src = imgSrc1;
+        thumb1.parentElement.setAttribute("data-src", imgSrc1);
+      }
+      if (thumb2) {
+        thumb2.src = imgSrc2;
+        thumb2.parentElement.setAttribute("data-src", imgSrc2);
+      }
+
+      // Badge
+      if (badgeEl) {
+        if (product.badge) {
+          badgeEl.textContent = product.badge;
+          badgeEl.style.display = "inline-block";
+        } else {
+          badgeEl.style.display = "none";
+        }
+      }
+
+      // Price & Discount
+      const priceEl = document.querySelector("#product-price");
+      const oldPriceEl = document.querySelector("#product-old-price");
+      const discountTag = document.querySelector("#product-discount-tag");
+
+      if (priceEl) priceEl.textContent = `৳${product.price.toLocaleString("en-IN")}`;
+
+      if (product.oldPrice && product.oldPrice > product.price) {
+        if (oldPriceEl) {
+          oldPriceEl.textContent = `৳${product.oldPrice.toLocaleString("en-IN")}`;
+          oldPriceEl.style.display = "inline";
+        }
+        if (discountTag) {
+          const discountPct = Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100);
+          discountTag.textContent = `SAVE ${discountPct}%`;
+          discountTag.style.display = "inline-block";
+        }
+      } else {
+        if (oldPriceEl) oldPriceEl.style.display = "none";
+        if (discountTag) discountTag.style.display = "none";
+      }
+
+      // Rating
+      const ratingText = document.querySelector("#product-rating-text");
+      if (ratingText && product.rating) {
+        ratingText.textContent = `${product.rating} (${Math.floor(product.rating * 10 + 3)} reviews)`;
+      }
+
+      // Fabric & Color
+      const colorNameEl = document.querySelector("#selected-color-name");
+      if (colorNameEl) colorNameEl.textContent = product.colorName || "Artisan Weave";
+
+      const fabricDescEl = document.querySelector("#tab-fabric-desc");
+      if (fabricDescEl && product.fabric) {
+        fabricDescEl.innerHTML = `<strong>Material:</strong> 100% Genuine ${product.fabric}.<br>Hand-spun threads woven on heritage looms to ensure superior hand-feel, rich drape, and lifelong weave integrity.`;
+      }
+
+      // Stock
+      const stockText = document.querySelector("#stock-text");
+      if (stockText) {
+        if (product.inStock) {
+          stockText.textContent = `In Stock — Ready to ship (${product.stockCount || 5} units left)`;
+        } else {
+          stockText.textContent = `Made to Order — Dispatches within 3-5 business days`;
+        }
+      }
+
+      // 4. Thumbnail switching interaction
+      const thumbs = document.querySelectorAll("#gallery-thumbs button");
+      thumbs.forEach(btn => {
+        btn.addEventListener("click", () => {
+          thumbs.forEach(b => b.classList.remove("is-active"));
+          btn.classList.add("is-active");
+          const targetSrc = btn.getAttribute("data-src");
+          if (mainImg && targetSrc) {
+            mainImg.src = targetSrc;
+          }
+        });
+      });
+
+      // 5. Quantity Controls
+      let currentQty = 1;
+      const qtyDisplay = document.querySelector("#qty-display");
+      const btnMinus = document.querySelector("#btn-qty-minus");
+      const btnPlus = document.querySelector("#btn-qty-plus");
+
+      if (btnMinus && btnPlus && qtyDisplay) {
+        btnMinus.addEventListener("click", () => {
+          if (currentQty > 1) {
+            currentQty--;
+            qtyDisplay.textContent = String(currentQty);
+          }
+        });
+        btnPlus.addEventListener("click", () => {
+          currentQty++;
+          qtyDisplay.textContent = String(currentQty);
+        });
+      }
+
+      // 6. Size Selection
+      let selectedSize = "Free Size";
+      const sizeButtons = document.querySelectorAll("#size-options button");
+      sizeButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          sizeButtons.forEach(b => b.classList.remove("is-active"));
+          btn.classList.add("is-active");
+          selectedSize = btn.getAttribute("data-size") || btn.textContent.trim();
+        });
+      });
+
+      // 7. Add to Cart & Buy Now Action Handlers
+      const btnAdd = document.querySelector("#btn-add-to-cart");
+      const btnBuy = document.querySelector("#btn-buy-now");
+
+      const addToBag = () => {
+        if (window.EarthquickCart) {
+          window.EarthquickCart.addItem({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            colorName: product.colorName || ""
+          }, currentQty, selectedSize, product.colorName || "");
+        }
+      };
+
+      if (btnAdd) btnAdd.addEventListener("click", addToBag);
+
+      if (btnBuy) {
+        btnBuy.addEventListener("click", () => {
+          addToBag();
+          // Opens cart drawer ready for checkout
+        });
+      }
+
+      // 8. Render Related Products
+      const relatedGrid = document.querySelector("#related-products-grid");
+      if (relatedGrid && catalog.length > 0) {
+        const related = catalog
+          .filter(p => p.id !== product.id && (p.category === product.category || p.subCategory === product.subCategory))
+          .slice(0, 4);
+
+        if (related.length > 0) {
+          relatedGrid.innerHTML = related.map(rel => `
+            <div class="eq-product-card" data-product-id="${rel.id}">
+              <div class="eq-product-card__media">
+                <a href="product.html?id=${rel.id}">
+                  <img src="../${rel.image}" alt="${rel.name}" loading="lazy" />
+                </a>
+                ${rel.badge ? `<span class="eq-product-card__badge">${rel.badge}</span>` : ""}
+                <button type="button" class="eq-product-card__quick-add" onclick="EarthquickCart.addItem({id:'${rel.id}', name:'${rel.name.replace(/'/g, "\\'")}', price:${rel.price}, image:'${rel.image}', colorName:'${rel.colorName || ''}'})">Quick Add</button>
+              </div>
+              <div class="eq-product-card__content">
+                <span class="eq-product-card__category">${rel.categoryLabel || rel.category}</span>
+                <h3 class="eq-product-card__name">
+                  <a href="product.html?id=${rel.id}">${rel.name}</a>
+                </h3>
+                <div class="eq-product-card__price">
+                  <span class="eq-price-current">৳${rel.price.toLocaleString("en-IN")}</span>
+                  ${rel.oldPrice ? `<span class="eq-price-old">৳${rel.oldPrice.toLocaleString("en-IN")}</span>` : ""}
+                </div>
+              </div>
+            </div>
+          `).join("");
+        }
+      }
+
+    })();
+  </script>
+</body>
+</html>

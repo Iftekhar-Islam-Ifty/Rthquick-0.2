@@ -1,0 +1,156 @@
+<!-- =====================================================================
+     EARTHQUICK / NOUS TELOS — REUSABLE HEADER & NAVIGATION COMPONENT
+     Future Laravel Blade Partial: resources/views/partials/navbar.blade.php
+     Changes made here will automatically update across all pages!
+     ===================================================================== -->
+<header class="eq-navbar" id="eq-main-navbar">
+  <div class="eq-navbar__inner">
+    <!-- Brand Logo -->
+    <a href="{{BASE}}index.html" class="eq-navbar__logo" id="eq-brand-logo" aria-label="Earthquick Home">
+      <img src="{{BASE}}images/logo/earthquick-logo.png?v=3" alt="Earthquick — Crafted for the Modern You" />
+    </a>
+
+    <!-- Desktop Navigation Menu -->
+    <nav id="eq-nav-menu" aria-label="Primary Navigation">
+      <ul class="eq-navbar__links" id="eq-nav-links">
+        <li><a href="{{BASE}}index.html" id="nav-link-home">Home</a></li>
+        <li><a href="{{BASE}}pages/men.html" id="nav-link-men">Men</a></li>
+        
+        <!-- Women Category with Mega-Dropdown -->
+        <li class="eq-nav-item eq-nav-item--has-dropdown" id="nav-item-women">
+          <div class="eq-nav-link-wrapper">
+            <a href="{{BASE}}pages/women.html" id="nav-link-women">Women</a>
+            <button type="button" class="eq-dropdown-toggle-btn" id="btn-toggle-women-sub" aria-expanded="false" aria-label="Toggle Women subcategories">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Women Dropdown Mega-Panel -->
+          <div class="eq-megamenu" id="megamenu-women" role="region" aria-label="Women Subcategories">
+            <div class="eq-megamenu__grid">
+              <!-- Column 1: Saree Atelier -->
+              <div class="eq-megamenu__col">
+                <div class="eq-megamenu__heading">Saree Atelier</div>
+                <ul class="eq-megamenu__list">
+                  <li><a href="{{BASE}}pages/saree-jamdani.html">Jamdani Weaves</a></li>
+                  <li><a href="{{BASE}}pages/saree-tantuj.html">Tantuj &amp; Tangail</a></li>
+                  <li><a href="{{BASE}}pages/saree-half-silk.html">Half Silk</a></li>
+                  <li><a href="{{BASE}}pages/saree-full-silk.html">Pure Silk</a></li>
+                  <li><a href="{{BASE}}pages/saree.html" class="eq-megamenu__view-all">All Sarees &rarr;</a></li>
+                </ul>
+              </div>
+
+              <!-- Column 2: Ready to Wear -->
+              <div class="eq-megamenu__col">
+                <div class="eq-megamenu__heading">Ready to Wear</div>
+                <ul class="eq-megamenu__list">
+                  <li><a href="{{BASE}}pages/three-piece.html">Three Piece Sets</a></li>
+                  <li><a href="{{BASE}}pages/two-piece.html">Two Piece Co-ords</a></li>
+                  <li><a href="{{BASE}}pages/women.html" class="eq-megamenu__view-all">Explore Women's Hub &rarr;</a></li>
+                </ul>
+              </div>
+
+              <!-- Column 3: Visual Spotlight Card -->
+              <div class="eq-megamenu__feature">
+                <a href="{{BASE}}pages/women.html" class="eq-megamenu__feature-card">
+                  <div class="eq-megamenu__feature-media">
+                    <img src="{{BASE}}images/hero/hero-main-saree-2.jpg?v=3" alt="Heritage Women Collection" />
+                  </div>
+                  <div class="eq-megamenu__feature-content">
+                    <span class="eq-megamenu__tag">NOUS TELOS</span>
+                    <strong class="eq-megamenu__feature-title">Heritage Weaves</strong>
+                    <span class="eq-megamenu__feature-link">Explore Hub &rarr;</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li><a href="{{BASE}}pages/kids.html" id="nav-link-kids">Kids</a></li>
+        <li><a href="{{BASE}}pages/ornaments.html" id="nav-link-ornaments">Ornaments</a></li>
+        <li><a href="{{BASE}}pages/bags.html" id="nav-link-bags">Bags</a></li>
+        
+        <!-- Home Decor Category with Dropdown (Kantha, Bedsheet, Cushion Cover) -->
+        <li class="eq-nav-item eq-nav-item--has-dropdown" id="nav-item-home-decor">
+          <div class="eq-nav-link-wrapper">
+            <a href="{{BASE}}pages/home-decor.html" id="nav-link-home-decor">Home Decor</a>
+            <button type="button" class="eq-dropdown-toggle-btn" id="btn-toggle-decor-sub" aria-expanded="false" aria-label="Toggle Home Decor subcategories">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Home Decor Dropdown Panel -->
+          <div class="eq-megamenu eq-megamenu--compact" id="megamenu-home-decor" role="region" aria-label="Home Decor Subcategories">
+            <div class="eq-megamenu__grid eq-megamenu__grid--2col">
+              <!-- Column 1: Subcategories -->
+              <div class="eq-megamenu__col">
+                <div class="eq-megamenu__heading">Home Sanctuary</div>
+                <ul class="eq-megamenu__list">
+                  <li><a href="{{BASE}}pages/home-decor-kantha.html">Kantha (Nakshi Quilt)</a></li>
+                  <li><a href="{{BASE}}pages/home-decor-bedsheet.html">Bedsheet Sets</a></li>
+                  <li><a href="{{BASE}}pages/home-decor-cushion.html">Cushion Cover</a></li>
+                  <li><a href="{{BASE}}pages/home-decor.html" class="eq-megamenu__view-all">All Home Decor &rarr;</a></li>
+                </ul>
+              </div>
+
+              <!-- Column 2: Visual Spotlight Card -->
+              <div class="eq-megamenu__feature">
+                <a href="{{BASE}}pages/home-decor.html" class="eq-megamenu__feature-card">
+                  <div class="eq-megamenu__feature-media">
+                    <img src="{{BASE}}images/categories/decor-kantha.svg" alt="Artisanal Nakshi Kantha Quilt" />
+                  </div>
+                  <div class="eq-megamenu__feature-content">
+                    <span class="eq-megamenu__tag">NOUS TELOS LIVING</span>
+                    <strong class="eq-megamenu__feature-title">Nakshi Kantha</strong>
+                    <span class="eq-megamenu__feature-link">Explore Living &rarr;</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li><a href="{{BASE}}index.html#story" id="nav-link-story">Our Story</a></li>
+      </ul>
+    </nav>
+
+    <!-- Utility Action Icons -->
+    <div class="eq-navbar__icons" id="eq-navbar-actions">
+      <!-- Search Button -->
+      <button type="button" aria-label="Search collection" id="eq-btn-search" data-action="open-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+
+      <!-- Account Button -->
+      <a href="{{BASE}}pages/account.html" aria-label="My Account" id="eq-btn-account" data-action="open-account" style="display: flex; align-items: center; justify-content: center; color: inherit; text-decoration: none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
+
+      <!-- Shopping Bag / Cart Button -->
+      <button type="button" aria-label="Shopping Bag" id="eq-btn-cart" data-action="open-cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+          <path d="M3 6h18"></path>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span class="eq-cart-count" id="eq-cart-count">0</span>
+      </button>
+    </div>
+
+    <!-- Mobile Hamburger Menu Toggle -->
+    <button type="button" class="eq-navbar__toggle" id="eq-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="eq-nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>

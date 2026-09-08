@@ -37,6 +37,7 @@ app.use('/earthquick', express.static(__dirname, {
 app.use('/pages/css', express.static(path.join(__dirname, 'css')));
 app.use('/pages/js', express.static(path.join(__dirname, 'js')));
 app.use('/pages/images', express.static(path.join(__dirname, 'images')));
+app.use('/pages/components', express.static(path.join(__dirname, 'components')));
 
 // 5. Default fallback: serve root index.html
 app.get('*', (req, res) => {

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ===================================================================
+       DOCUMENT METADATA & RESOURCE HINTS
+       Customer Registration — Earthquick by Nous Telos
+       Mapped to Laravel Blade: resources/views/auth/register.blade.php
+       =================================================================== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account — Earthquick by Nous Telos</title>
+  <meta name="description" content="Register an account with Earthquick by Nous Telos to enjoy expedited checkout, parcel tracking, and personalized shopping." />
+
+  <!-- Google Fonts: Fraunces (display/serif) + Jost (body/sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Earthquick Custom Stylesheet -->
+  <link rel="stylesheet" href="../css/style.css?v=9.2" />
+
+  <!-- Reusable Components Loader (Navbar & Footer) -->
+  <script src="../js/layout.js?v=9.2"></script>
+</head>
+<body class="eq-auth-page">
+
+  <!-- Reusable Navigation Header -->
+  <div id="site-header"></div>
+
+  <!-- Breadcrumb Bar -->
+  <nav class="eq-breadcrumb" aria-label="Breadcrumb" style="padding: 0.9rem 0; border-bottom: 1px solid var(--eq-line); background: var(--eq-white);">
+    <div class="eq-container">
+      <ol class="eq-breadcrumb__list" style="display: flex; align-items: center; gap: 0.5rem; list-style: none; margin: 0; padding: 0; font-size: 0.84rem; color: var(--eq-charcoal-soft);">
+        <li><a href="../index.html" style="color: inherit; text-decoration: none;">Home</a></li>
+        <li style="color: var(--eq-line-dark);">&rsaquo;</li>
+        <li style="color: var(--eq-charcoal); font-weight: 500;" aria-current="page">Register</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Register Form Container -->
+  <main class="eq-container" id="main-content">
+    <div class="eq-auth-wrap" style="max-width: 520px;">
+      <div class="eq-auth-card">
+        
+        <div class="eq-auth-card__header">
+          <h1 class="eq-auth-card__title">Create Account</h1>
+          <p class="eq-auth-card__desc">Join Nous Telos for artisanal fashion &amp; priority orders</p>
+        </div>
+
+        <form class="eq-auth-form" id="customer-register-form" novalidate>
+          
+          <div class="eq-form-group">
+            <label for="reg-name" class="eq-form-label">Full Name <span class="req">*</span></label>
+            <input 
+              type="text" 
+              id="reg-name" 
+              name="name" 
+              class="eq-form-input" 
+              placeholder="e.g. Iftekhar Islam Ifty" 
+              value="Iftekhar Islam Ifty"
+              required 
+            />
+          </div>
+
+          <div class="eq-form-group">
+            <label for="reg-phone" class="eq-form-label">Mobile Phone Number <span class="req">*</span></label>
+            <input 
+              type="tel" 
+              id="reg-phone" 
+              name="phone" 
+              class="eq-form-input" 
+              placeholder="e.g. 017931***87" 
+              value="017931***87"
+              required 
+            />
+          </div>
+
+          <div class="eq-form-group">
+            <label for="reg-email" class="eq-form-label">Email Address <span class="req">*</span></label>
+            <input 
+              type="email" 
+              id="reg-email" 
+              name="email" 
+              class="eq-form-input" 
+              placeholder="e.g. iftekharislamifty@gmail.com" 
+              value="iftekharislamifty@gmail.com"
+              required 
+            />
+          </div>
+
+          <div class="eq-form-group">
+            <label for="reg-city" class="eq-form-label">City / Region <span class="req">*</span></label>
+            <select id="reg-city" name="city" class="eq-form-select" required>
+              <option value="Chattogram" selected>Chattogram (Chittagong)</option>
+              <option value="Dhaka">Dhaka</option>
+              <option value="Sylhet">Sylhet</option>
+              <option value="Rajshahi">Rajshahi</option>
+              <option value="Khulna">Khulna</option>
+              <option value="Barishal">Barishal</option>
+              <option value="Other">Other Region</option>
+            </select>
+          </div>
+
+          <div class="eq-form-group">
+            <label for="reg-password" class="eq-form-label">Create Password <span class="req">*</span></label>
+            <input 
+              type="password" 
+              id="reg-password" 
+              name="password" 
+              class="eq-form-input" 
+              placeholder="Minimum 6 characters" 
+              value="secret123"
+              required 
+              minlength="6"
+            />
+          </div>
+
+          <div style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.84rem; color: var(--eq-charcoal-soft); margin-top: 0.25rem;">
+            <input type="checkbox" id="agree-terms" checked required style="accent-color: var(--eq-gold); margin-top: 0.2rem;" />
+            <label for="agree-terms">
+              I agree to the <a href="../index.html#story" class="eq-auth-link">Terms &amp; Conditions</a> and <a href="../index.html#story" class="eq-auth-link">Privacy Policy</a>.
+            </label>
+          </div>
+
+          <button type="submit" class="eq-auth-submit-btn" id="btn-register-submit">
+            Create My Account &rarr;
+          </button>
+
+        </form>
+
+        <div class="eq-auth-footer-prompt">
+          Already have an account? 
+          <a href="login.html" class="eq-auth-link" style="font-weight: 600;">Sign In</a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Reusable Footer & Search Modal -->
+  <div id="site-footer"></div>
+
+  <!-- Global Application Scripts -->
+  <script src="../js/script.js?v=9.2"></script>
+
+  <!-- Registration Logic Script -->
+  <script>
+    (function () {
+      "use strict";
+
+      const form = document.querySelector("#customer-register-form");
+      const nameInput = document.querySelector("#reg-name");
+      const phoneInput = document.querySelector("#reg-phone");
+      const emailInput = document.querySelector("#reg-email");
+      const citySelect = document.querySelector("#reg-city");
+      const passwordInput = document.querySelector("#reg-password");
+      const termsCheckbox = document.querySelector("#agree-terms");
+
+      if (form) {
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          if (!nameInput.value.trim()) {
+            nameInput.focus();
+            if (window.Toast) window.Toast.show("Please enter your full name.");
+            return;
+          }
+
+          if (!phoneInput.value.trim()) {
+            phoneInput.focus();
+            if (window.Toast) window.Toast.show("Please enter your phone number.");
+            return;
+          }
+
+          if (!emailInput.value.trim() || !emailInput.value.includes("@")) {
+            emailInput.focus();
+            if (window.Toast) window.Toast.show("Please enter a valid email address.");
+            return;
+          }
+
+          if (!passwordInput.value || passwordInput.value.length < 6) {
+            passwordInput.focus();
+            if (window.Toast) window.Toast.show("Password must be at least 6 characters.");
+            return;
+          }
+
+          if (!termsCheckbox.checked) {
+            if (window.Toast) window.Toast.show("Please agree to the Terms & Conditions.");
+            return;
+          }
+
+          const newUser = {
+            name: nameInput.value.trim(),
+            phone: phoneInput.value.trim(),
+            email: emailInput.value.trim(),
+            city: citySelect.value,
+            createdAt: new Date().toISOString()
+          };
+
+          // Save to registered users pool
+          let users = [];
+          try {
+            users = JSON.parse(localStorage.getItem("earthquick_users") || "[]");
+          } catch (err) {}
+          users.push(newUser);
+          localStorage.setItem("earthquick_users", JSON.stringify(users));
+
+          // Set active logged in session
+          localStorage.setItem("earthquick_auth_user", JSON.stringify(newUser));
+
+          if (window.Toast) window.Toast.show("Account created successfully!");
+
+          setTimeout(() => {
+            window.location.href = "account.html";
+          }, 350);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

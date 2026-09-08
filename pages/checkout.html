@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ===================================================================
+       DOCUMENT METADATA & RESOURCE HINTS
+       Checkout & Order Confirmation Page — Earthquick by Nous Telos
+       Mapped to Laravel Blade: resources/views/pages/checkout.blade.php
+       =================================================================== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Earthquick by Nous Telos</title>
+  <meta name="description" content="Securely complete your order for handcrafted fashion and lifestyle collections at Earthquick / Nous Telos." />
+
+  <!-- Google Fonts: Fraunces (display/serif) + Jost (body/sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Earthquick Custom Stylesheet -->
+  <link rel="stylesheet" href="../css/style.css?v=9.0" />
+
+  <!-- Reusable Components Loader (Navbar & Footer) -->
+  <script src="../js/layout.js?v=9.0"></script>
+</head>
+<body class="eq-checkout-page">
+
+  <!-- ===================================================================
+       HEADER & PRIMARY NAVIGATION (REUSABLE COMPONENT)
+       Mapped to Blade: resources/views/partials/navbar.blade.php
+       =================================================================== -->
+  <div id="site-header"></div>
+
+  <!-- ===================================================================
+       BREADCRUMB BAR
+       =================================================================== -->
+  <nav class="eq-breadcrumb" aria-label="Breadcrumb" style="padding: 0.9rem 0; border-bottom: 1px solid var(--eq-line); background: var(--eq-white);">
+    <div class="eq-container">
+      <ol class="eq-breadcrumb__list" style="display: flex; align-items: center; gap: 0.5rem; list-style: none; margin: 0; padding: 0; font-size: 0.84rem; color: var(--eq-charcoal-soft);">
+        <li><a href="../index.html" style="color: inherit; text-decoration: none;">Home</a></li>
+        <li style="color: var(--eq-line-dark);">&rsaquo;</li>
+        <li><a href="women.html" style="color: inherit; text-decoration: none;">Shop</a></li>
+        <li style="color: var(--eq-line-dark);">&rsaquo;</li>
+        <li style="color: var(--eq-charcoal); font-weight: 500;" aria-current="page">Checkout</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- ===================================================================
+       CHECKOUT HERO HEADER
+       =================================================================== -->
+  <section class="eq-checkout-hero">
+    <div class="eq-container">
+      <h1 class="eq-checkout-hero__title" id="checkout-main-title">Secure Checkout</h1>
+      <p class="eq-checkout-hero__desc">Please provide your delivery information to finalize your Nous Telos order.</p>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       MAIN CHECKOUT SECTION
+       =================================================================== -->
+  <main class="eq-container" id="main-content">
+
+    <!-- STATE 1: EMPTY CART VIEW (Shown if bag has 0 items) -->
+    <div class="eq-checkout-empty-view" id="checkout-empty-state" style="display: none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+      </svg>
+      <h2>Your shopping bag is empty</h2>
+      <p>You haven't added any products to your bag yet. Discover our artisanal sarees, tailored three-piece sets, and curated bags.</p>
+      <a href="women.html" class="eq-btn eq-btn--primary" style="padding: 0.85rem 2rem; display: inline-block; text-decoration: none;">
+        Explore Collections &rarr;
+      </a>
+    </div>
+
+    <!-- STATE 2: ACTIVE CHECKOUT FORM (Shown when cart has items) -->
+    <div class="eq-checkout-layout" id="checkout-active-view">
+      
+      <!-- LEFT COLUMN: CUSTOMER DETAILS, DELIVERY & PAYMENT -->
+      <form class="eq-checkout-form" id="checkout-order-form" novalidate>
+        
+        <!-- CARD 1: CONTACT & CUSTOMER INFORMATION -->
+        <div class="eq-checkout-card">
+          <div class="eq-checkout-card__header">
+            <span class="eq-checkout-card__step-num">1</span>
+            <h2 class="eq-checkout-card__title">Customer Contact Details</h2>
+          </div>
+          
+          <div class="eq-form-grid">
+            <div class="eq-form-group eq-form-group--full">
+              <label for="cust-name" class="eq-form-label">Full Name <span class="req">*</span></label>
+              <input type="text" id="cust-name" name="name" class="eq-form-input" placeholder="e.g. Iftekhar Islam Ifty" required />
+            </div>
+
+            <div class="eq-form-group">
+              <label for="cust-phone" class="eq-form-label">Mobile Phone Number <span class="req">*</span></label>
+              <input type="tel" id="cust-phone" name="phone" class="eq-form-input" placeholder="e.g. 017931***87" required />
+              <small style="font-size: 0.76rem; color: var(--eq-charcoal-soft); margin-top: 2px;">We'll call this number to confirm your order.</small>
+            </div>
+
+            <div class="eq-form-group">
+              <label for="cust-email" class="eq-form-label">Email Address <span style="color: var(--eq-charcoal-soft); font-weight: normal;">(Optional)</span></label>
+              <input type="email" id="cust-email" name="email" class="eq-form-input" placeholder="e.g. iftekharislamifty@gmail.com" />
+              <small style="font-size: 0.76rem; color: var(--eq-charcoal-soft); margin-top: 2px;">Order invoice & tracking link will be sent here.</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: DELIVERY DESTINATION & SHIPPING -->
+        <div class="eq-checkout-card">
+          <div class="eq-checkout-card__header">
+            <span class="eq-checkout-card__step-num">2</span>
+            <h2 class="eq-checkout-card__title">Delivery Address &amp; Shipping</h2>
+          </div>
+
+          <!-- Delivery Zone Selection -->
+          <div class="eq-form-group" style="margin-bottom: 1.25rem;">
+            <label class="eq-form-label" style="margin-bottom: 0.5rem;">Select Delivery Zone <span class="req">*</span></label>
+            <div class="eq-delivery-methods">
+              
+              <!-- Option: Inside Chittagong -->
+              <label class="eq-method-card is-selected" id="card-shipping-inside">
+                <input type="radio" name="shipping_zone" value="inside" checked />
+                <div class="eq-method-card__content">
+                  <div class="eq-method-card__name">
+                    <span>Inside Chittagong (Ctg)</span>
+                    <span class="eq-method-card__price" id="shipping-rate-inside">৳60</span>
+                  </div>
+                  <div class="eq-method-card__desc">Same / Next day delivery within Chittagong City</div>
+                </div>
+              </label>
+
+              <!-- Option: Outside Chittagong -->
+              <label class="eq-method-card" id="card-shipping-outside">
+                <input type="radio" name="shipping_zone" value="outside" />
+                <div class="eq-method-card__content">
+                  <div class="eq-method-card__name">
+                    <span>Outside Chittagong</span>
+                    <span class="eq-method-card__price" id="shipping-rate-outside">৳130</span>
+                  </div>
+                  <div class="eq-method-card__desc">Nationwide delivery via Currier (Sundarban / Steadfast) in 2–4 days</div>
+                </div>
+              </label>
+
+            </div>
+          </div>
+
+          <!-- Address Fields -->
+          <div class="eq-form-grid">
+            <div class="eq-form-group">
+              <label for="cust-city" class="eq-form-label">District / City <span class="req">*</span></label>
+              <select id="cust-city" name="city" class="eq-form-select" required>
+                <option value="Chattogram" selected>Chattogram (Chittagong)</option>
+                <option value="Dhaka">Dhaka</option>
+                <option value="Sylhet">Sylhet</option>
+                <option value="Rajshahi">Rajshahi</option>
+                <option value="Khulna">Khulna</option>
+                <option value="Barishal">Barishal</option>
+                <option value="Rangpur">Rangpur</option>
+                <option value="Mymensingh">Mymensingh</option>
+                <option value="Comilla">Comilla</option>
+                <option value="Cox's Bazar">Cox's Bazar</option>
+                <option value="Gazipur">Gazipur</option>
+                <option value="Narayanganj">Narayanganj</option>
+                <option value="Bogra">Bogra</option>
+                <option value="Other">Other District</option>
+              </select>
+            </div>
+
+            <div class="eq-form-group">
+              <label for="cust-area" class="eq-form-label">Area / Thana <span class="req">*</span></label>
+              <input type="text" id="cust-area" name="area" class="eq-form-input" placeholder="e.g. GEC, Nasirabad, Agrabad, Panchlaish" required />
+            </div>
+
+            <div class="eq-form-group eq-form-group--full">
+              <label for="cust-address" class="eq-form-label">Full Street Address / House / Road <span class="req">*</span></label>
+              <textarea id="cust-address" name="address" class="eq-form-textarea" placeholder="e.g. Holding 45, Road 2, O.R. Nizam Road, Flat 4A" required></textarea>
+            </div>
+
+            <div class="eq-form-group eq-form-group--full">
+              <label for="cust-notes" class="eq-form-label">Special Delivery Instructions <span style="color: var(--eq-charcoal-soft); font-weight: normal;">(Optional)</span></label>
+              <input type="text" id="cust-notes" name="notes" class="eq-form-input" placeholder="e.g. Please call before arrival or leave at reception" />
+            </div>
+          </div>
+
+        </div>
+
+        <!-- CARD 3: PAYMENT METHOD -->
+        <div class="eq-checkout-card">
+          <div class="eq-checkout-card__header">
+            <span class="eq-checkout-card__step-num">3</span>
+            <h2 class="eq-checkout-card__title">Payment Method</h2>
+          </div>
+
+          <div class="eq-payment-methods">
+
+            <!-- COD (Cash on Delivery) -->
+            <div class="eq-payment-card is-selected" id="payment-card-cod">
+              <label class="eq-payment-card__header" for="pay-cod">
+                <input type="radio" id="pay-cod" name="payment_method" value="cod" checked />
+                <span class="eq-payment-card__title">Cash on Delivery (COD)</span>
+                <span class="eq-payment-card__badge">Most Popular</span>
+              </label>
+              <div class="eq-payment-card__body">
+                Pay safely in cash to our courier partner when you inspect and receive your parcel at your doorstep.
+              </div>
+            </div>
+
+            <!-- bKash / Mobile Banking -->
+            <div class="eq-payment-card" id="payment-card-bkash">
+              <label class="eq-payment-card__header" for="pay-bkash">
+                <input type="radio" id="pay-bkash" name="payment_method" value="bkash" />
+                <span class="eq-payment-card__title">bKash / Nagad / Rocket (Mobile Banking)</span>
+                <span class="eq-payment-card__badge" style="background-color: rgba(201, 150, 47, 0.15); color: var(--eq-gold-dark);">Instant</span>
+              </label>
+              <div class="eq-payment-card__body" id="bkash-details-box" style="display: none;">
+                <p style="margin-top: 0; margin-bottom: 0.75rem;">
+                  Please send the order amount to our Official Merchant bKash Number: <strong>01876-543210</strong> (Payment / Send Money).
+                </p>
+                <div class="eq-form-grid" style="margin-top: 0.5rem;">
+                  <div class="eq-form-group">
+                    <label for="bkash-sender" class="eq-form-label" style="font-size: 0.8rem;">Your bKash / Nagad Number</label>
+                    <input type="tel" id="bkash-sender" class="eq-form-input" placeholder="e.g. 017931***87" style="padding: 0.55rem 0.75rem;" />
+                  </div>
+                  <div class="eq-form-group">
+                    <label for="bkash-trx" class="eq-form-label" style="font-size: 0.8rem;">Transaction ID (TrxID)</label>
+                    <input type="text" id="bkash-trx" class="eq-form-input" placeholder="e.g. 9J4K8L7M" style="padding: 0.55rem 0.75rem; text-transform: uppercase;" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Online Card Payment -->
+            <div class="eq-payment-card" id="payment-card-card">
+              <label class="eq-payment-card__header" for="pay-card">
+                <input type="radio" id="pay-card" name="payment_method" value="card" />
+                <span class="eq-payment-card__title">Debit / Credit Card (Online Gateway)</span>
+                <span class="eq-payment-card__badge">Visa / Mastercard</span>
+              </label>
+              <div class="eq-payment-card__body" id="card-details-box" style="display: none;">
+                Safe &amp; encrypted SSLCommerz / Bank gateway will be initiated upon order placement.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Terms acceptance -->
+          <div style="margin-top: 1.5rem; display: flex; align-items: flex-start; gap: 0.65rem; font-size: 0.84rem; color: var(--eq-charcoal-soft);">
+            <input type="checkbox" id="accept-terms" checked required style="accent-color: var(--eq-gold); margin-top: 0.2rem;" />
+            <label for="accept-terms">
+              I agree to the <a href="../index.html#story" style="color: var(--eq-charcoal); text-decoration: underline;">Terms &amp; Conditions</a> and <a href="../index.html#story" style="color: var(--eq-charcoal); text-decoration: underline;">Privacy Policy</a> of Earthquick / Nous Telos.
+            </label>
+          </div>
+
+        </div>
+
+        <!-- MOBILE / FORM SUBMIT BUTTON (For Mobile screens) -->
+        <div class="d-block d-lg-none" style="margin-bottom: 2rem;">
+          <button type="submit" class="eq-btn-place-order" id="btn-submit-order-mobile">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span>Confirm &amp; Place Order &bull; <span class="order-total-display">৳0</span></span>
+          </button>
+        </div>
+
+      </form>
+
+      <!-- RIGHT COLUMN: STICKY ORDER SUMMARY -->
+      <aside class="eq-order-summary-panel" aria-label="Order Summary">
+        <div class="eq-order-summary__title">
+          <span>Order Summary</span>
+          <span style="font-size: 0.86rem; font-weight: normal; color: var(--eq-charcoal-soft);" id="summary-items-count">0 items</span>
+        </div>
+
+        <!-- Items Listing -->
+        <div class="eq-order-summary__items" id="checkout-items-list">
+          <!-- Dynamically populated via JavaScript -->
+        </div>
+
+        <!-- Coupon Code Box -->
+        <div class="eq-coupon-wrap">
+          <input type="text" id="coupon-code-input" class="eq-coupon-input" placeholder="Promo / Coupon code" aria-label="Coupon code" />
+          <button type="button" id="btn-apply-coupon" class="eq-coupon-btn">Apply</button>
+        </div>
+        <div id="coupon-message" class="eq-coupon-status" style="display: none;"></div>
+
+        <!-- Price Breakdown -->
+        <div class="eq-price-breakdown">
+          <div class="eq-price-row">
+            <span>Subtotal</span>
+            <span id="price-subtotal">৳0</span>
+          </div>
+          <div class="eq-price-row">
+            <span>Delivery Fee</span>
+            <span id="price-shipping">৳60</span>
+          </div>
+          <div class="eq-price-row eq-price-row--discount" id="row-discount" style="display: none;">
+            <span>Discount (Promo)</span>
+            <span id="price-discount">-৳0</span>
+          </div>
+          <div class="eq-price-row eq-price-row--total">
+            <span>Grand Total</span>
+            <span class="eq-total-amount" id="price-grand-total">৳0</span>
+          </div>
+        </div>
+
+        <!-- Place Order Button (Desktop) -->
+        <button type="button" class="eq-btn-place-order" id="btn-submit-order-desktop">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span>Confirm &amp; Place Order</span>
+        </button>
+
+        <div class="eq-checkout-trust-badge">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>100% Genuine Handcrafted Pieces &bull; Express Delivery</span>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- STATE 3: ORDER CONFIRMATION / THANK YOU VIEW (Shown after successful submission) -->
+    <div class="eq-order-success-view" id="checkout-success-view" style="display: none;">
+      <div class="eq-order-success__icon">
+        <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+
+      <h2 class="eq-order-success__title">Thank you for your order!</h2>
+      <p class="eq-order-success__subtitle">
+        Your order has been placed successfully. A confirmation message and call will be initiated shortly.
+      </p>
+
+      <!-- Receipt Card -->
+      <div class="eq-order-receipt-card">
+        <div class="eq-receipt-header">
+          <div>
+            <div class="eq-receipt-id" id="receipt-order-id">Order #EQ-2026-XXXX</div>
+            <div style="font-size: 0.8rem; color: var(--eq-charcoal-soft);" id="receipt-order-date">Date: 08 Sep 2026</div>
+          </div>
+          <span class="eq-receipt-badge" id="receipt-status-badge">Confirmed</span>
+        </div>
+
+        <div class="eq-receipt-grid">
+          <div>
+            <div class="eq-receipt-group-label">Customer Name</div>
+            <div class="eq-receipt-group-val" id="receipt-cust-name">-</div>
+          </div>
+          <div>
+            <div class="eq-receipt-group-label">Phone Number</div>
+            <div class="eq-receipt-group-val" id="receipt-cust-phone">-</div>
+          </div>
+          <div>
+            <div class="eq-receipt-group-label">Delivery Destination</div>
+            <div class="eq-receipt-group-val" id="receipt-cust-address">-</div>
+          </div>
+          <div>
+            <div class="eq-receipt-group-label">Payment Method</div>
+            <div class="eq-receipt-group-val" id="receipt-pay-method">-</div>
+          </div>
+        </div>
+
+        <table class="eq-receipt-items-table" aria-label="Purchased Items">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th style="text-align: center;">Qty</th>
+              <th style="text-align: right;">Total</th>
+            </tr>
+          </thead>
+          <tbody id="receipt-items-body">
+            <!-- Dynamically populated -->
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2" style="padding-top: 1rem; font-weight: 500;">Subtotal:</td>
+              <td style="text-align: right; padding-top: 1rem; font-weight: 500;" id="receipt-subtotal">৳0</td>
+            </tr>
+            <tr>
+              <td colspan="2" style="font-size: 0.85rem; color: var(--eq-charcoal-soft);">Delivery Charge:</td>
+              <td style="text-align: right; font-size: 0.85rem;" id="receipt-shipping">৳60</td>
+            </tr>
+            <tr id="receipt-discount-row" style="display: none;">
+              <td colspan="2" style="font-size: 0.85rem; color: #27ae60;">Discount:</td>
+              <td style="text-align: right; font-size: 0.85rem; color: #27ae60;" id="receipt-discount">-৳0</td>
+            </tr>
+            <tr style="border-top: 1.5px solid var(--eq-line);">
+              <td colspan="2" style="padding-top: 0.75rem; font-weight: 600; font-size: 1.05rem; color: var(--eq-charcoal);">Total Payable:</td>
+              <td style="text-align: right; padding-top: 0.75rem; font-weight: 600; font-size: 1.15rem; color: var(--eq-gold-dark);" id="receipt-total">৳0</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="eq-order-success__actions">
+        <button type="button" class="eq-btn eq-btn--outline" onclick="window.print()" style="padding: 0.8rem 1.75rem; cursor: pointer;">
+          Print Invoice Receipt
+        </button>
+        <a href="../index.html" class="eq-btn eq-btn--primary" style="padding: 0.8rem 2rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+          Return to Homepage &rarr;
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ===================================================================
+       FOOTER & SEARCH MODAL (REUSABLE COMPONENT)
+       Mapped to Blade: resources/views/partials/footer.blade.php
+       =================================================================== -->
+  <div id="site-footer"></div>
+
+  <!-- Global Application Logic & Cart Operations -->
+  <script src="../js/script.js?v=9.0"></script>
+
+  <!-- ===================================================================
+       CHECKOUT CONTROLLER & EVENT LISTENERS
+       Laravel Blade friendly: Easy to port to server-side controller later!
+       =================================================================== -->
+  <script>
+    (function () {
+      "use strict";
+
+      // 1. DOM Elements
+      const emptyStateEl = document.querySelector("#checkout-empty-state");
+      const activeViewEl = document.querySelector("#checkout-active-view");
+      const successViewEl = document.querySelector("#checkout-success-view");
+      const formEl = document.querySelector("#checkout-order-form");
+      const btnSubmitDesktop = document.querySelector("#btn-submit-order-desktop");
+      const itemsContainer = document.querySelector("#checkout-items-list");
+      const itemsCountBadge = document.querySelector("#summary-items-count");
+      
+      const subtotalEl = document.querySelector("#price-subtotal");
+      const shippingEl = document.querySelector("#price-shipping");
+      const discountRow = document.querySelector("#row-discount");
+      const discountEl = document.querySelector("#price-discount");
+      const grandTotalEl = document.querySelector("#price-grand-total");
+      const totalDisplays = document.querySelectorAll(".order-total-display");
+
+      // Shipping & Payment selection
+      const shippingRadios = document.querySelectorAll('input[name="shipping_zone"]');
+      const paymentRadios = document.querySelectorAll('input[name="payment_method"]');
+      const bkashDetailsBox = document.querySelector("#bkash-details-box");
+      const cardDetailsBox = document.querySelector("#card-details-box");
+
+      // Coupon Elements
+      const couponInput = document.querySelector("#coupon-code-input");
+      const btnCoupon = document.querySelector("#btn-apply-coupon");
+      const couponMsg = document.querySelector("#coupon-message");
+
+      // State
+      let appliedDiscount = 0;
+      let appliedCouponCode = "";
+      const validCoupons = {
+        "NOUSTELOS10": { type: "percent", value: 10, label: "10% Off on Heritage Collection" },
+        "WELCOME": { type: "fixed", value: 200, label: "৳200 Welcome Gift" },
+        "EID2026": { type: "percent", value: 15, label: "15% Special Festive Discount" }
+      };
+
+      /**
+       * Formats currency with Bangladeshi Taka symbol
+       */
+      function formatTaka(amount) {
+        return "৳" + Number(amount).toLocaleString("en-IN");
+      }
+
+      /**
+       * Get current cart items
+       */
+      function getCartItems() {
+        if (window.EarthquickCart && typeof window.EarthquickCart.getItems === "function") {
+          return window.EarthquickCart.getItems();
+        }
+        try {
+          const stored = localStorage.getItem("earthquick_cart_v1");
+          return stored ? JSON.parse(stored) : [];
+        } catch (e) {
+          return [];
+        }
+      }
+
+      /**
+       * Get selected shipping rate
+       * Shop based in Chittagong: Inside Ctg = 60, Outside Ctg = 130
+       */
+      function getShippingCost(subtotal) {
+        // Free shipping if subtotal >= 3000
+        if (subtotal >= 3000) {
+          return 0;
+        }
+        const selectedZone = document.querySelector('input[name="shipping_zone"]:checked')?.value || "inside";
+        return selectedZone === "inside" ? 60 : 130;
+      }
+
+      /**
+       * Recalculate totals and update UI
+       */
+      function renderCheckout() {
+        const items = getCartItems();
+
+        if (!items || items.length === 0) {
+          emptyStateEl.style.display = "block";
+          activeViewEl.style.display = "none";
+          successViewEl.style.display = "none";
+          return;
+        }
+
+        emptyStateEl.style.display = "none";
+        activeViewEl.style.display = "grid";
+        successViewEl.style.display = "none";
+
+        // Render Summary Items
+        const totalCount = items.reduce((sum, it) => sum + (it.qty || 1), 0);
+        itemsCountBadge.textContent = `${totalCount} item${totalCount !== 1 ? 's' : ''}`;
+
+        itemsContainer.innerHTML = items.map((item, idx) => {
+          let imgSrc = item.image || "images/hero/hero-main.jpg";
+          if (!imgSrc.startsWith("../") && !imgSrc.startsWith("http") && !imgSrc.startsWith("/")) {
+            imgSrc = "../" + imgSrc;
+          }
+          const itemTotal = (item.price || 0) * (item.qty || 1);
+          return `
+            <div class="eq-summary-item" data-id="${item.id}">
+              <img src="${imgSrc}" alt="${item.name}" class="eq-summary-item__img" onerror="this.src='../images/hero/hero-main.jpg'" />
+              <div class="eq-summary-item__details">
+                <div class="eq-summary-item__name">${item.name}</div>
+                <div class="eq-summary-item__meta">${item.size || "Standard"}${item.color ? " • " + item.color : ""} &times; ${item.qty || 1}</div>
+              </div>
+              <div class="eq-summary-item__price">${formatTaka(itemTotal)}</div>
+            </div>
+          `;
+        }).join("");
+
+        // Calculate Prices
+        const subtotal = items.reduce((sum, it) => sum + ((it.price || 0) * (it.qty || 1)), 0);
+        const shipping = getShippingCost(subtotal);
+
+        // Update shipping labels for free threshold
+        const insideLabel = document.querySelector("#shipping-rate-inside");
+        const outsideLabel = document.querySelector("#shipping-rate-outside");
+        if (subtotal >= 3000) {
+          if (insideLabel) { insideLabel.textContent = "FREE"; insideLabel.classList.add("is-free"); }
+          if (outsideLabel) { outsideLabel.textContent = "FREE"; outsideLabel.classList.add("is-free"); }
+        } else {
+          if (insideLabel) { insideLabel.textContent = "৳60"; insideLabel.classList.remove("is-free"); }
+          if (outsideLabel) { outsideLabel.textContent = "৳130"; outsideLabel.classList.remove("is-free"); }
+        }
+
+        // Recalculate discount if coupon active
+        if (appliedCouponCode && validCoupons[appliedCouponCode]) {
+          const coup = validCoupons[appliedCouponCode];
+          if (coup.type === "percent") {
+            appliedDiscount = Math.round((subtotal * coup.value) / 100);
+          } else {
+            appliedDiscount = coup.value;
+          }
+        } else {
+          appliedDiscount = 0;
+        }
+
+        const grandTotal = Math.max(0, subtotal + shipping - appliedDiscount);
+
+        subtotalEl.textContent = formatTaka(subtotal);
+        shippingEl.textContent = shipping === 0 ? "FREE" : formatTaka(shipping);
+        
+        if (appliedDiscount > 0) {
+          discountRow.style.display = "flex";
+          discountEl.textContent = `-${formatTaka(appliedDiscount)}`;
+        } else {
+          discountRow.style.display = "none";
+        }
+
+        grandTotalEl.textContent = formatTaka(grandTotal);
+        totalDisplays.forEach(el => el.textContent = formatTaka(grandTotal));
+      }
+
+      // 2. Shipping radio interaction
+      shippingRadios.forEach(radio => {
+        radio.addEventListener("change", (e) => {
+          document.querySelectorAll(".eq-method-card").forEach(c => c.classList.remove("is-selected"));
+          const parentCard = e.target.closest(".eq-method-card");
+          if (parentCard) parentCard.classList.add("is-selected");
+
+          // Sync City Dropdown: Chittagong shop
+          const citySelect = document.querySelector("#cust-city");
+          if (citySelect) {
+            if (e.target.value === "inside") {
+              citySelect.value = "Chattogram";
+            } else if (citySelect.value === "Chattogram") {
+              citySelect.value = "Dhaka";
+            }
+          }
+
+          renderCheckout();
+        });
+      });
+
+      // City select interaction (syncs shipping radio)
+      const citySelect = document.querySelector("#cust-city");
+      if (citySelect) {
+        citySelect.addEventListener("change", (e) => {
+          const isChattogram = e.target.value === "Chattogram";
+          const targetRadio = document.querySelector(`input[name="shipping_zone"][value="${isChattogram ? 'inside' : 'outside'}"]`);
+          if (targetRadio) {
+            targetRadio.checked = true;
+            document.querySelectorAll(".eq-method-card").forEach(c => c.classList.remove("is-selected"));
+            targetRadio.closest(".eq-method-card").classList.add("is-selected");
+            renderCheckout();
+          }
+        });
+      }
+
+      // 3. Payment radio interaction
+      paymentRadios.forEach(radio => {
+        radio.addEventListener("change", (e) => {
+          document.querySelectorAll(".eq-payment-card").forEach(c => c.classList.remove("is-selected"));
+          const parentCard = e.target.closest(".eq-payment-card");
+          if (parentCard) parentCard.classList.add("is-selected");
+
+          if (bkashDetailsBox) bkashDetailsBox.style.display = e.target.value === "bkash" ? "block" : "none";
+          if (cardDetailsBox) cardDetailsBox.style.display = e.target.value === "card" ? "block" : "none";
+        });
+      });
+
+      // 4. Coupon Code Application
+      if (btnCoupon && couponInput) {
+        btnCoupon.addEventListener("click", () => {
+          const code = couponInput.value.trim().toUpperCase();
+          if (!code) {
+            couponMsg.textContent = "Please enter a coupon code.";
+            couponMsg.className = "eq-coupon-status error";
+            couponMsg.style.display = "block";
+            return;
+          }
+
+          if (validCoupons[code]) {
+            appliedCouponCode = code;
+            couponMsg.textContent = `Promo code "${code}" applied successfully! (${validCoupons[code].label})`;
+            couponMsg.className = "eq-coupon-status success";
+            couponMsg.style.display = "block";
+            renderCheckout();
+            if (window.Toast) window.Toast.show(`Coupon "${code}" applied!`);
+          } else {
+            couponMsg.textContent = `Invalid coupon code. Try "NOUSTELOS10" or "WELCOME".`;
+            couponMsg.className = "eq-coupon-status error";
+            couponMsg.style.display = "block";
+          }
+        });
+      }
+
+      // 5. Desktop Submit Trigger
+      if (btnSubmitDesktop) {
+        btnSubmitDesktop.addEventListener("click", () => {
+          formEl.requestSubmit();
+        });
+      }
+
+      // 6. Form Submission & Order Placement
+      if (formEl) {
+        formEl.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          // Form validation
+          const nameInput = document.querySelector("#cust-name");
+          const phoneInput = document.querySelector("#cust-phone");
+          const addressInput = document.querySelector("#cust-address");
+          const termsInput = document.querySelector("#accept-terms");
+
+          if (!nameInput.value.trim()) {
+            nameInput.focus();
+            if (window.Toast) window.Toast.show("Please enter your full name.");
+            return;
+          }
+
+          const phoneVal = phoneInput.value.trim().replace(/[^0-9]/g, "");
+          if (phoneVal.length < 11) {
+            phoneInput.focus();
+            if (window.Toast) window.Toast.show("Please enter a valid 11-digit mobile number.");
+            return;
+          }
+
+          if (!addressInput.value.trim()) {
+            addressInput.focus();
+            if (window.Toast) window.Toast.show("Please enter your delivery street address.");
+            return;
+          }
+
+          if (!termsInput.checked) {
+            if (window.Toast) window.Toast.show("Please accept the Terms & Conditions.");
+            return;
+          }
+
+          const items = getCartItems();
+          if (items.length === 0) {
+            if (window.Toast) window.Toast.show("Your bag is empty.");
+            renderCheckout();
+            return;
+          }
+
+          const subtotal = items.reduce((sum, it) => sum + ((it.price || 0) * (it.qty || 1)), 0);
+          const shipping = getShippingCost(subtotal);
+          const grandTotal = Math.max(0, subtotal + shipping - appliedDiscount);
+          const selectedPayment = document.querySelector('input[name="payment_method"]:checked')?.value || "cod";
+
+          // Generate Unique Order ID
+          const orderNum = Math.floor(100000 + Math.random() * 900000);
+          const orderId = `EQ-${new Date().getFullYear()}-${orderNum}`;
+          const orderDate = new Date().toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+          });
+
+          // Order Payload (Saved to localStorage for order history)
+          const orderData = {
+            id: orderId,
+            date: orderDate,
+            customer: {
+              name: nameInput.value.trim(),
+              phone: phoneInput.value.trim(),
+              email: document.querySelector("#cust-email").value.trim(),
+              city: document.querySelector("#cust-city").value,
+              area: document.querySelector("#cust-area").value.trim(),
+              address: addressInput.value.trim(),
+              notes: document.querySelector("#cust-notes").value.trim()
+            },
+            paymentMethod: selectedPayment,
+            items: items,
+            pricing: {
+              subtotal: subtotal,
+              shipping: shipping,
+              discount: appliedDiscount,
+              coupon: appliedCouponCode,
+              grandTotal: grandTotal
+            },
+            status: "Processing"
+          };
+
+          try {
+            const existingOrders = JSON.parse(localStorage.getItem("earthquick_orders") || "[]");
+            existingOrders.unshift(orderData);
+            localStorage.setItem("earthquick_orders", JSON.stringify(existingOrders));
+          } catch (err) {}
+
+          // Clear Cart
+          if (window.EarthquickCart && typeof window.EarthquickCart.clearCart === "function") {
+            window.EarthquickCart.clearCart();
+          } else {
+            localStorage.removeItem("earthquick_cart_v1");
+          }
+
+          // Populate Receipt View
+          document.querySelector("#receipt-order-id").textContent = `Order #${orderId}`;
+          document.querySelector("#receipt-order-date").textContent = `Date: ${orderDate}`;
+          document.querySelector("#receipt-cust-name").textContent = orderData.customer.name;
+          document.querySelector("#receipt-cust-phone").textContent = orderData.customer.phone;
+          document.querySelector("#receipt-cust-address").textContent = `${orderData.customer.address}, ${orderData.customer.area}, ${orderData.customer.city}`;
+          
+          let paymentLabel = "Cash on Delivery (COD)";
+          if (selectedPayment === "bkash") paymentLabel = "bKash Mobile Banking";
+          if (selectedPayment === "card") paymentLabel = "Online Card Gateway";
+          document.querySelector("#receipt-pay-method").textContent = paymentLabel;
+
+          const receiptItemsTbody = document.querySelector("#receipt-items-body");
+          receiptItemsTbody.innerHTML = items.map(it => `
+            <tr>
+              <td>
+                <div style="font-weight: 500; color: var(--eq-charcoal);">${it.name}</div>
+                <div style="font-size: 0.76rem; color: var(--eq-charcoal-soft);">${it.size || "Standard"}${it.color ? " • " + it.color : ""}</div>
+              </td>
+              <td style="text-align: center; color: var(--eq-charcoal);">${it.qty || 1}</td>
+              <td style="text-align: right; font-weight: 500; color: var(--eq-charcoal);">${formatTaka((it.price || 0) * (it.qty || 1))}</td>
+            </tr>
+          `).join("");
+
+          document.querySelector("#receipt-subtotal").textContent = formatTaka(subtotal);
+          document.querySelector("#receipt-shipping").textContent = shipping === 0 ? "FREE" : formatTaka(shipping);
+          
+          const receiptDiscRow = document.querySelector("#receipt-discount-row");
+          const receiptDiscEl = document.querySelector("#receipt-discount");
+          if (appliedDiscount > 0) {
+            receiptDiscRow.style.display = "table-row";
+            receiptDiscEl.textContent = `-${formatTaka(appliedDiscount)}`;
+          } else {
+            receiptDiscRow.style.display = "none";
+          }
+
+          document.querySelector("#receipt-total").textContent = formatTaka(grandTotal);
+
+          // Transition Views
+          activeViewEl.style.display = "none";
+          successViewEl.style.display = "block";
+          document.querySelector("#checkout-main-title").textContent = "Order Confirmation";
+          window.scrollTo({ top: 0, behavior: "smooth" });
+
+          if (window.Toast) {
+            window.Toast.show("Order placed successfully! Thank you.");
+          }
+        });
+      }
+
+      // Initial Render
+      renderCheckout();
+
+      // Listen to layout or cart changes
+      document.addEventListener("eq:components-loaded", renderCheckout);
+      window.addEventListener("storage", (e) => {
+        if (e.key === "earthquick_cart_v1") {
+          renderCheckout();
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>

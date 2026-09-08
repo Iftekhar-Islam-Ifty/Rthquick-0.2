@@ -194,66 +194,374 @@ function initSearchModal() {
 
 
 /* =====================================================================
-   4. SHOPPING CART & QUICK ADD
-   Manages client-side cart count, badge updates, and quick-add actions.
+   4. SHOPPING CART & SLIDE-IN DRAWER
+   Manages client-side cart storage, badge updates, quick-add actions,
+   and dynamic interactive slide-in cart drawer.
    ===================================================================== */
-let cartCount = 0;
+const EarthquickCart = {
+  storageKey: "earthquick_cart_v1",
+  drawerEl: null,
+  backdropEl: null,
+  freeShippingThreshold: 3000,
 
-function initCart() {
-  const countBadge = document.querySelector("#eq-cart-count") || document.querySelector(".eq-cart-count");
-  const cartButton = document.querySelector('[data-action="open-cart"]');
+  getItems() {
+    try {
+      const stored = localStorage.getItem(this.storageKey);
+      return stored ? JSON.parse(stored) : [];
+    } catch (e) {
+      return [];
+    }
+  },
 
-  // Update badge display state
-  const updateBadge = () => {
-    if (!countBadge) return;
-    countBadge.textContent = String(cartCount);
-    countBadge.style.display = cartCount > 0 ? "flex" : "none";
-  };
-  updateBadge();
+  saveItems(items) {
+    try {
+      localStorage.setItem(this.storageKey, JSON.stringify(items));
+    } catch (e) {}
+    this.updateBadges();
+  },
 
-  // Cart button click handler
-  if (cartButton) {
-    cartButton.addEventListener("click", () => {
-      if (cartCount === 0) {
-        Toast.show("Your shopping bag is currently empty.");
-      } else {
-        Toast.show(`Your bag contains ${cartCount} ${cartCount === 1 ? "item" : "items"}. Checkout ready.`);
+  addItem(product, qty = 1, size = "Standard", color = "") {
+    const items = this.getItems();
+    const existingIndex = items.findIndex(
+      (item) => item.id === product.id && item.size === size && item.color === (color || product.colorName || "")
+    );
+
+    if (existingIndex > -1) {
+      items[existingIndex].qty += qty;
+    } else {
+      items.push({
+        id: product.id,
+        name: product.name,
+        price: Number(product.price) || 0,
+        image: product.image,
+        size: size,
+        color: color || product.colorName || "",
+        qty: qty
+      });
+    }
+
+    this.saveItems(items);
+    this.renderDrawer();
+    this.openDrawer();
+    Toast.show(`Added "${product.name}" to your bag.`);
+  },
+
+  updateQty(index, delta) {
+    const items = this.getItems();
+    if (!items[index]) return;
+
+    items[index].qty += delta;
+    if (items[index].qty <= 0) {
+      items.splice(index, 1);
+    }
+    this.saveItems(items);
+    this.renderDrawer();
+  },
+
+  removeItem(index) {
+    const items = this.getItems();
+    if (!items[index]) return;
+    const removedName = items[index].name;
+    items.splice(index, 1);
+    this.saveItems(items);
+    this.renderDrawer();
+    Toast.show(`Removed "${removedName}" from bag.`);
+  },
+
+  clearCart() {
+    this.saveItems([]);
+    this.renderDrawer();
+  },
+
+  getTotalCount() {
+    return this.getItems().reduce((sum, item) => sum + (item.qty || 1), 0);
+  },
+
+  getSubtotal() {
+    return this.getItems().reduce((sum, item) => sum + (item.price * (item.qty || 1)), 0);
+  },
+
+  formatMoney(num) {
+    return "৳" + Number(num).toLocaleString("en-IN");
+  },
+
+  updateBadges() {
+    const count = this.getTotalCount();
+    document.querySelectorAll("#eq-cart-count, .eq-cart-count").forEach((badge) => {
+      badge.textContent = String(count);
+      badge.style.display = count > 0 ? "flex" : "none";
+    });
+  },
+
+  buildDrawerDOM() {
+    if (document.querySelector("#eq-cart-drawer")) {
+      this.drawerEl = document.querySelector("#eq-cart-drawer");
+      this.backdropEl = document.querySelector("#eq-cart-backdrop");
+      return;
+    }
+
+    // Backdrop
+    const backdrop = document.createElement("div");
+    backdrop.id = "eq-cart-backdrop";
+    backdrop.className = "eq-cart-backdrop";
+    document.body.appendChild(backdrop);
+    this.backdropEl = backdrop;
+
+    // Drawer container
+    const drawer = document.createElement("aside");
+    drawer.id = "eq-cart-drawer";
+    drawer.className = "eq-cart-drawer";
+    drawer.setAttribute("role", "dialog");
+    drawer.setAttribute("aria-label", "Shopping Bag");
+    drawer.innerHTML = `
+      <div class="eq-cart-drawer__header">
+        <h2 class="eq-cart-drawer__title">
+          Shopping Bag
+          <span class="eq-cart-drawer__count-badge" id="eq-drawer-count">0</span>
+        </h2>
+        <button type="button" class="eq-cart-drawer__close" id="eq-btn-close-cart" aria-label="Close Shopping Bag">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="eq-cart-drawer__shipping-bar" id="eq-shipping-bar">
+        <div class="eq-cart-drawer__shipping-text" id="eq-shipping-text">
+          Free delivery unlocked on orders over ৳3,000
+        </div>
+        <div class="eq-cart-drawer__progress-track">
+          <div class="eq-cart-drawer__progress-fill" id="eq-shipping-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="eq-cart-drawer__body" id="eq-cart-items-container">
+        <!-- Items dynamically injected -->
+      </div>
+
+      <div class="eq-cart-drawer__footer">
+        <div class="eq-cart-drawer__subtotal-row">
+          <span class="eq-cart-drawer__subtotal-label">Subtotal</span>
+          <span class="eq-cart-drawer__subtotal-amount" id="eq-cart-subtotal">৳0</span>
+        </div>
+        <p class="eq-cart-drawer__note">Delivery fee and taxes calculated at checkout</p>
+        <button type="button" class="eq-cart-drawer__btn-checkout" id="eq-btn-checkout">
+          Proceed to Checkout &rarr;
+        </button>
+        <button type="button" class="eq-cart-drawer__btn-continue" id="eq-btn-continue-shopping">
+          Continue Shopping
+        </button>
+      </div>
+    `;
+
+    document.body.appendChild(drawer);
+    this.drawerEl = drawer;
+
+    // Attach listener events
+    backdrop.addEventListener("click", () => this.closeDrawer());
+    drawer.querySelector("#eq-btn-close-cart").addEventListener("click", () => this.closeDrawer());
+    drawer.querySelector("#eq-btn-continue-shopping").addEventListener("click", () => this.closeDrawer());
+
+    drawer.querySelector("#eq-btn-checkout").addEventListener("click", () => {
+      const items = this.getItems();
+      if (items.length === 0) {
+        Toast.show("Your bag is empty! Add products first.");
+        return;
       }
+      Toast.show("Directing to secure checkout...");
+      const isSubpage = window.location.pathname.includes("/pages/");
+      setTimeout(() => {
+        window.location.href = isSubpage ? "checkout.html" : "pages/checkout.html";
+      }, 350);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && this.drawerEl.classList.contains("is-open")) {
+        this.closeDrawer();
+      }
+    });
+  },
+
+  renderDrawer() {
+    this.buildDrawerDOM();
+    const items = this.getItems();
+    const count = this.getTotalCount();
+    const subtotal = this.getSubtotal();
+
+    // Update count badge
+    const countBadge = this.drawerEl.querySelector("#eq-drawer-count");
+    if (countBadge) countBadge.textContent = String(count);
+
+    // Update Subtotal
+    const subtotalEl = this.drawerEl.querySelector("#eq-cart-subtotal");
+    if (subtotalEl) subtotalEl.textContent = this.formatMoney(subtotal);
+
+    // Update Shipping Bar
+    const shippingText = this.drawerEl.querySelector("#eq-shipping-text");
+    const shippingFill = this.drawerEl.querySelector("#eq-shipping-fill");
+    if (shippingText && shippingFill) {
+      if (subtotal >= this.freeShippingThreshold) {
+        shippingText.innerHTML = `<strong>Congratulations!</strong> You have unlocked Free Delivery.`;
+        shippingFill.style.width = "100%";
+      } else {
+        const remaining = this.freeShippingThreshold - subtotal;
+        const pct = Math.min(100, Math.round((subtotal / this.freeShippingThreshold) * 100));
+        shippingText.innerHTML = `Add <strong>${this.formatMoney(remaining)}</strong> more to unlock <strong>Free Delivery</strong>`;
+        shippingFill.style.width = `${pct}%`;
+      }
+    }
+
+    // Body items container
+    const container = this.drawerEl.querySelector("#eq-cart-items-container");
+    if (!container) return;
+
+    if (items.length === 0) {
+      container.innerHTML = `
+        <div class="eq-cart-empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <div class="eq-cart-empty__title">Your bag is empty</div>
+          <p class="eq-cart-empty__desc">Explore our handpicked collection and discover pieces crafted for you.</p>
+        </div>
+      `;
+      return;
+    }
+
+    // Resolve relative image path depending on whether on subpage or root
+    const isSubpage = window.location.pathname.includes("/pages/");
+
+    container.innerHTML = items
+      .map((item, idx) => {
+        let imgSrc = item.image || "images/hero/hero-main.jpg";
+        if (isSubpage && !imgSrc.startsWith("../") && !imgSrc.startsWith("http") && !imgSrc.startsWith("/")) {
+          imgSrc = "../" + imgSrc;
+        } else if (!isSubpage && imgSrc.startsWith("../")) {
+          imgSrc = imgSrc.replace(/^\.\.\//, "");
+        }
+
+        return `
+          <div class="eq-cart-item" data-index="${idx}">
+            <img class="eq-cart-item__image" src="${imgSrc}" alt="${item.name}" onerror="this.src='${isSubpage ? '../' : ''}images/hero/hero-main.jpg'" />
+            <div class="eq-cart-item__info">
+              <div>
+                <h4 class="eq-cart-item__title">${item.name}</h4>
+                <div class="eq-cart-item__variant">${item.size}${item.color ? " • " + item.color : ""}</div>
+                <div class="eq-cart-item__price">${this.formatMoney(item.price)}</div>
+              </div>
+              <div class="eq-cart-item__bottom">
+                <div class="eq-cart-item__qty">
+                  <button type="button" class="eq-cart-item__qty-btn" onclick="EarthquickCart.updateQty(${idx}, -1)" aria-label="Decrease quantity">&minus;</button>
+                  <span class="eq-cart-item__qty-val">${item.qty}</span>
+                  <button type="button" class="eq-cart-item__qty-btn" onclick="EarthquickCart.updateQty(${idx}, 1)" aria-label="Increase quantity">&plus;</button>
+                </div>
+                <button type="button" class="eq-cart-item__remove" onclick="EarthquickCart.removeItem(${idx})" aria-label="Remove item">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      })
+      .join("");
+  },
+
+  openDrawer() {
+    this.buildDrawerDOM();
+    this.renderDrawer();
+    this.drawerEl.classList.add("is-open");
+    this.backdropEl.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  },
+
+  closeDrawer() {
+    if (this.drawerEl) this.drawerEl.classList.remove("is-open");
+    if (this.backdropEl) this.backdropEl.classList.remove("is-open");
+    document.body.style.overflow = "";
+  },
+
+  init() {
+    this.buildDrawerDOM();
+    this.updateBadges();
+
+    // Attach to any open-cart buttons
+    document.querySelectorAll('[data-action="open-cart"], #eq-btn-cart').forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.openDrawer();
+      });
+    });
+
+    // Quick add handlers on product cards
+    document.querySelectorAll(".eq-product-card__quick-add").forEach((btn) => {
+      btn.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const card = btn.closest(".eq-product-card") || btn.closest(".eq-saree-masterpiece");
+        if (card && typeof window.openQuickView === "function") {
+          window.openQuickView(card);
+          return;
+        }
+
+        const nameEl = card ? card.querySelector(".eq-product-card__name") : null;
+        const priceEl = card ? card.querySelector(".eq-product-card__price") : null;
+        const imgEl = card ? card.querySelector("img") : null;
+
+        const name = nameEl ? nameEl.textContent.trim() : "Boutique Collection Item";
+        let price = 5500;
+        if (priceEl) {
+          const match = priceEl.textContent.match(/[\d,]+/);
+          if (match) price = parseInt(match[0].replace(/,/g, ""), 10);
+        }
+
+        const img = imgEl ? imgEl.getAttribute("src") : "images/hero/hero-main.jpg";
+
+        EarthquickCart.addItem({
+          id: "prod-" + Math.abs(name.split("").reduce((a, b) => ((a << 5) - a) + b.charCodeAt(0), 0)),
+          name: name,
+          price: price,
+          image: img,
+          colorName: "Curated"
+        });
+      });
     });
   }
+};
 
-  // Quick add / quick view buttons on product cards
-  document.querySelectorAll(".eq-product-card__quick-add").forEach((btn) => {
-    btn.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
+// Global expose
+window.EarthquickCart = EarthquickCart;
 
-      const card = btn.closest(".eq-product-card") || btn.closest(".eq-saree-masterpiece");
-      if (card && typeof window.openQuickView === "function") {
-        window.openQuickView(card);
-      } else {
-        cartCount++;
-        updateBadge();
-        const nameEl = card ? card.querySelector(".eq-product-card__name") : null;
-        const title = nameEl ? nameEl.textContent.trim() : "Item";
-        Toast.show(`Added "${title}" to your bag.`);
-      }
-    });
-  });
+function initCart() {
+  EarthquickCart.init();
 }
 
 
 /* =====================================================================
    5. ACCOUNT ACTIONS
-   Handles feedback for the user profile/account icon in header.
+   Handles navigation to Customer Account & Orders portal.
    ===================================================================== */
 function initAccount() {
-  const accountButton = document.querySelector('[data-action="open-account"]');
-  if (accountButton) {
-    accountButton.addEventListener("click", () => {
-      Toast.show("Member Account & Orders portal is coming soon.");
-    });
-  }
+  document.addEventListener("click", (e) => {
+    const accountButton = e.target.closest('[data-action="open-account"], #eq-btn-account');
+    if (!accountButton) return;
+    
+    e.preventDefault();
+    const isSubpage = window.location.pathname.includes("/pages/");
+    const activeUser = localStorage.getItem("earthquick_auth_user");
+
+    if (activeUser) {
+      window.location.href = isSubpage ? "account.html" : "pages/account.html";
+    } else {
+      window.location.href = isSubpage ? "login.html" : "pages/login.html";
+    }
+  });
 }
 
 
@@ -639,8 +947,24 @@ function initEarthquickApp() {
   initNewsletterForm();
 }
 
+// Re-bind navbar, search, and cart if common layout components load dynamically
+document.addEventListener("eq:components-loaded", () => {
+  Toast.init();
+  initNavbar();
+  initSearchModal();
+  if (window.EarthquickCart && typeof window.EarthquickCart.init === "function") {
+    window.EarthquickCart.init();
+  }
+});
+
+// Expose globally for layout loader
+window.initNavbar = initNavbar;
+window.initSearchModal = initSearchModal;
+window.initEarthquickApp = initEarthquickApp;
+
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initEarthquickApp);
 } else {
   initEarthquickApp();
 }
+

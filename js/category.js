@@ -756,6 +756,9 @@
     }
   ];
 
+  // Expose to window for global access (Product Details, Cart, Search, etc.)
+  window.CATALOG_PRODUCTS = CATALOG_PRODUCTS;
+
   // ===================================================================
   // 2. CATEGORY METADATA CONFIGURATION
   // In Laravel, this maps to the `Category` model table
@@ -1348,8 +1351,9 @@
         state.gridColumns = cols;
         const grid = document.querySelector("#catalog-grid");
         if (grid) {
-          grid.classList.remove("view-2col", "view-4col");
+          grid.classList.remove("view-2col", "view-3col", "view-4col");
           if (cols === 2) grid.classList.add("view-2col");
+          if (cols === 3) grid.classList.add("view-3col");
           if (cols === 4) grid.classList.add("view-4col");
         }
       });

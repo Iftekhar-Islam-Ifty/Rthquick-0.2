@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ===================================================================
+       DOCUMENT METADATA & RESOURCE HINTS
+       Customer Account & Orders Dashboard — Earthquick by Nous Telos
+       Mapped to Laravel Blade: resources/views/pages/account.blade.php
+       =================================================================== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account &amp; Orders — Earthquick by Nous Telos</title>
+  <meta name="description" content="View your past orders, delivery tracking status, shipping address, and profile details." />
+
+  <!-- Google Fonts: Fraunces (display/serif) + Jost (body/sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Earthquick Custom Stylesheet -->
+  <link rel="stylesheet" href="../css/style.css?v=9.2" />
+
+  <!-- Reusable Components Loader (Navbar & Footer) -->
+  <script src="../js/layout.js?v=9.2"></script>
+</head>
+<body class="eq-checkout-page">
+
+  <!-- Reusable Header -->
+  <div id="site-header"></div>
+
+  <!-- Breadcrumb Bar -->
+  <nav class="eq-breadcrumb" aria-label="Breadcrumb" style="padding: 0.9rem 0; border-bottom: 1px solid var(--eq-line); background: var(--eq-white);">
+    <div class="eq-container">
+      <ol class="eq-breadcrumb__list" style="display: flex; align-items: center; gap: 0.5rem; list-style: none; margin: 0; padding: 0; font-size: 0.84rem; color: var(--eq-charcoal-soft);">
+        <li><a href="../index.html" style="color: inherit; text-decoration: none;">Home</a></li>
+        <li style="color: var(--eq-line-dark);">&rsaquo;</li>
+        <li style="color: var(--eq-charcoal); font-weight: 500;" aria-current="page">My Account</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="eq-checkout-hero">
+    <div class="eq-container">
+      <h1 class="eq-checkout-hero__title">My Account &amp; Orders</h1>
+      <p class="eq-checkout-hero__desc">Manage your orders, shipment status, and personal preferences.</p>
+    </div>
+  </section>
+
+  <!-- Main Dashboard Grid -->
+  <main class="eq-container" id="main-content">
+    <div class="eq-account-layout">
+      
+      <!-- SIDEBAR NAVIGATION -->
+      <aside class="eq-account-sidebar">
+        <div class="eq-account-user-badge">
+          <div class="eq-account-avatar" id="sidebar-user-avatar">I</div>
+          <div style="min-width: 0;">
+            <div style="font-weight: 600; color: var(--eq-charcoal); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" id="sidebar-user-name">
+              Iftekhar Islam Ifty
+            </div>
+            <div style="font-size: 0.78rem; color: var(--eq-charcoal-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" id="sidebar-user-phone">
+              017931***87
+            </div>
+          </div>
+        </div>
+
+        <ul class="eq-account-nav">
+          <li>
+            <button type="button" class="eq-account-nav-btn is-active" data-tab="orders" id="tab-btn-orders">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+              <span>My Orders</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="eq-account-nav-btn" data-tab="profile" id="tab-btn-profile">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>Profile Information</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="eq-account-nav-btn" data-tab="address" id="tab-btn-address">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>Delivery Address</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="eq-account-nav-btn eq-account-nav-btn--logout" id="btn-account-logout">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+              <span>Sign Out</span>
+            </button>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- CONTENT PANELS -->
+      <section class="eq-account-content">
+        
+        <!-- PANEL 1: ORDERS -->
+        <div class="eq-account-panel is-active" id="panel-orders">
+          <div class="eq-checkout-card">
+            <div class="eq-checkout-card__header">
+              <h2 class="eq-checkout-card__title">Order History &amp; Parcel Tracking</h2>
+            </div>
+            
+            <!-- List of orders -->
+            <div id="orders-list-container">
+              <!-- Dynamically populated via script -->
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 2: PROFILE INFORMATION -->
+        <div class="eq-account-panel" id="panel-profile">
+          <div class="eq-checkout-card">
+            <div class="eq-checkout-card__header">
+              <h2 class="eq-checkout-card__title">Personal Profile Details</h2>
+            </div>
+
+            <form class="eq-form-grid" id="profile-edit-form">
+              <div class="eq-form-group eq-form-group--full">
+                <label for="profile-name" class="eq-form-label">Full Name</label>
+                <input type="text" id="profile-name" class="eq-form-input" value="Iftekhar Islam Ifty" />
+              </div>
+              <div class="eq-form-group">
+                <label for="profile-phone" class="eq-form-label">Mobile Number</label>
+                <input type="tel" id="profile-phone" class="eq-form-input" value="017931***87" />
+              </div>
+              <div class="eq-form-group">
+                <label for="profile-email" class="eq-form-label">Email Address</label>
+                <input type="email" id="profile-email" class="eq-form-input" value="iftekharislamifty@gmail.com" />
+              </div>
+              <div class="eq-form-group eq-form-group--full">
+                <button type="submit" class="eq-btn eq-btn--primary" style="padding: 0.75rem 1.75rem; border: none; cursor: pointer; border-radius: 4px;">
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- PANEL 3: DELIVERY ADDRESS -->
+        <div class="eq-account-panel" id="panel-address">
+          <div class="eq-checkout-card">
+            <div class="eq-checkout-card__header">
+              <h2 class="eq-checkout-card__title">Saved Shipping Address</h2>
+            </div>
+
+            <div class="eq-form-grid">
+              <div class="eq-form-group">
+                <label class="eq-form-label">City / Region</label>
+                <input type="text" class="eq-form-input" value="Chattogram (Chittagong)" readonly style="background: var(--eq-cream);" />
+              </div>
+              <div class="eq-form-group">
+                <label class="eq-form-label">Area / Thana</label>
+                <input type="text" class="eq-form-input" value="GEC Circle, Nasirabad" readonly style="background: var(--eq-cream);" />
+              </div>
+              <div class="eq-form-group eq-form-group--full">
+                <label class="eq-form-label">Street Address</label>
+                <input type="text" class="eq-form-input" value="Nasirabad, Chattogram 4000, Bangladesh" readonly style="background: var(--eq-cream);" />
+              </div>
+            </div>
+            <p style="font-size: 0.84rem; color: var(--eq-charcoal-soft); margin-top: 1rem;">
+              You can easily provide or modify your delivery destination on the <a href="checkout.html" class="eq-auth-link">Checkout Page</a> anytime.
+            </p>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Reusable Footer -->
+  <div id="site-footer"></div>
+
+  <!-- Global Application Scripts -->
+  <script src="../js/script.js?v=9.2"></script>
+
+  <!-- Account Dashboard Controller -->
+  <script>
+    (function () {
+      "use strict";
+
+      // 1. Get current logged in user or set default prototype profile
+      let currentUser = null;
+      try {
+        currentUser = JSON.parse(localStorage.getItem("earthquick_auth_user"));
+      } catch (e) {}
+
+      if (!currentUser) {
+        currentUser = {
+          name: "Iftekhar Islam Ifty",
+          email: "iftekharislamifty@gmail.com",
+          phone: "017931***87",
+          city: "Chattogram",
+          area: "GEC, Nasirabad"
+        };
+        localStorage.setItem("earthquick_auth_user", JSON.stringify(currentUser));
+      }
+
+      // Update Header Badge
+      document.querySelector("#sidebar-user-name").textContent = currentUser.name || "Iftekhar Islam Ifty";
+      document.querySelector("#sidebar-user-phone").textContent = currentUser.phone || "017931***87";
+      const initial = (currentUser.name || "I").charAt(0).toUpperCase();
+      document.querySelector("#sidebar-user-avatar").textContent = initial;
+
+      // Profile Form inputs
+      const profileName = document.querySelector("#profile-name");
+      const profilePhone = document.querySelector("#profile-phone");
+      const profileEmail = document.querySelector("#profile-email");
+      if (profileName) profileName.value = currentUser.name || "";
+      if (profilePhone) profilePhone.value = currentUser.phone || "";
+      if (profileEmail) profileEmail.value = currentUser.email || "";
+
+      // Profile Form Submit
+      const profileForm = document.querySelector("#profile-edit-form");
+      if (profileForm) {
+        profileForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          currentUser.name = profileName.value.trim();
+          currentUser.phone = profilePhone.value.trim();
+          currentUser.email = profileEmail.value.trim();
+          localStorage.setItem("earthquick_auth_user", JSON.stringify(currentUser));
+          document.querySelector("#sidebar-user-name").textContent = currentUser.name;
+          document.querySelector("#sidebar-user-phone").textContent = currentUser.phone;
+          if (window.Toast) window.Toast.show("Profile details updated successfully!");
+        });
+      }
+
+      // 2. Tab Navigation
+      const tabButtons = document.querySelectorAll(".eq-account-nav-btn[data-tab]");
+      const panels = document.querySelectorAll(".eq-account-panel");
+
+      tabButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          tabButtons.forEach(b => b.classList.remove("is-active"));
+          panels.forEach(p => p.classList.remove("is-active"));
+
+          btn.classList.add("is-active");
+          const target = btn.getAttribute("data-tab");
+          const targetPanel = document.querySelector(`#panel-${target}`);
+          if (targetPanel) targetPanel.classList.add("is-active");
+        });
+      });
+
+      // 3. Logout action
+      const logoutBtn = document.querySelector("#btn-account-logout");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+          localStorage.removeItem("earthquick_auth_user");
+          if (window.Toast) window.Toast.show("Logged out successfully.");
+          setTimeout(() => {
+            window.location.href = "login.html";
+          }, 350);
+        });
+      }
+
+      // 4. Render Orders List
+      function renderOrders() {
+        const container = document.querySelector("#orders-list-container");
+        let orders = [];
+        try {
+          orders = JSON.parse(localStorage.getItem("earthquick_orders") || "[]");
+        } catch (e) {}
+
+        // If no orders yet, populate a sample order for demonstration in prototype
+        if (orders.length === 0) {
+          orders = [
+            {
+              id: "EQ-2026-849201",
+              date: "08 Sep 2026",
+              status: "Processing",
+              paymentMethod: "cod",
+              pricing: { grandTotal: 5860, shipping: 60, subtotal: 5800 },
+              customer: {
+                name: currentUser.name,
+                phone: currentUser.phone,
+                city: "Chattogram",
+                address: "GEC Circle, Nasirabad, Chattogram"
+              },
+              items: [
+                {
+                  name: "Heritage Royal Navy Blue Dhakai Jamdani Saree",
+                  qty: 1,
+                  price: 5800,
+                  size: "Standard (12 Haat)",
+                  image: "../images/saree/saree-1.jpg"
+                }
+              ]
+            }
+          ];
+          localStorage.setItem("earthquick_orders", JSON.stringify(orders));
+        }
+
+        if (orders.length === 0) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 2.5rem 1rem;">
+              <p style="color: var(--eq-charcoal-soft); margin-bottom: 1rem;">You have not placed any orders yet.</p>
+              <a href="women.html" class="eq-btn eq-btn--primary" style="padding: 0.6rem 1.5rem; text-decoration: none; display: inline-block;">
+                Start Shopping &rarr;
+              </a>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = orders.map(ord => {
+          const itemsList = (ord.items || []).map(it => `
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; font-size: 0.88rem; border-bottom: 1px solid rgba(42, 38, 34, 0.05);">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <span style="font-weight: 500; color: var(--eq-charcoal);">${it.name}</span>
+                <span style="color: var(--eq-charcoal-soft); font-size: 0.8rem;">&times; ${it.qty || 1}</span>
+              </div>
+              <span style="font-weight: 500;">৳${Number((it.price || 0) * (it.qty || 1)).toLocaleString("en-IN")}</span>
+            </div>
+          `).join("");
+
+          const statusColor = ord.status === "Delivered" ? "#27ae60" : "var(--eq-gold-dark)";
+          const statusBg = ord.status === "Delivered" ? "rgba(39, 174, 96, 0.12)" : "rgba(201, 150, 47, 0.12)";
+
+          return `
+            <div class="eq-order-receipt-card" style="margin-bottom: 1.5rem; background: var(--eq-white); border: 1px solid var(--eq-line);">
+              <div class="eq-receipt-header">
+                <div>
+                  <div class="eq-receipt-id" style="font-size: 1.05rem;">Order #${ord.id}</div>
+                  <div style="font-size: 0.8rem; color: var(--eq-charcoal-soft);">Placed on: ${ord.date} &bull; Delivery: ${ord.customer?.city || "Chattogram"}</div>
+                </div>
+                <span class="eq-receipt-badge" style="background-color: ${statusBg}; color: ${statusColor};">
+                  ${ord.status || "Processing"}
+                </span>
+              </div>
+
+              <div style="margin: 0.75rem 0 1rem;">
+                ${itemsList}
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.75rem; border-top: 1px solid var(--eq-line); font-size: 0.95rem;">
+                <span style="color: var(--eq-charcoal-soft); font-size: 0.86rem;">
+                  Payment: <strong>${ord.paymentMethod === 'cod' ? 'Cash on Delivery' : 'bKash / Card'}</strong>
+                </span>
+                <span style="font-weight: 600; color: var(--eq-charcoal);">
+                  Total: <span style="color: var(--eq-gold-dark); font-size: 1.1rem;">৳${Number(ord.pricing?.grandTotal || 0).toLocaleString("en-IN")}</span>
+                </span>
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      renderOrders();
+
+    })();
+  </script>
+</body>
+</html>
