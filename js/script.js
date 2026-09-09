@@ -76,10 +76,16 @@ const Toast = {
    ===================================================================== */
 function initNavbar() {
   const navbar = document.querySelector("#eq-main-navbar") || document.querySelector(".eq-navbar");
+  if (!navbar) return;
+
+  // Prevent duplicate initialization on the same DOM element
+  if (navbar.dataset.eqNavbarInitialized === "true") {
+    return;
+  }
+  navbar.dataset.eqNavbarInitialized = "true";
+
   const toggle = document.querySelector("#eq-nav-toggle") || document.querySelector(".eq-navbar__toggle");
   const links = document.querySelector("#eq-nav-links") || document.querySelector(".eq-navbar__links");
-
-  if (!navbar) return;
 
   // Add elevation shadow when scrolled
   const onScroll = () => {
@@ -88,38 +94,69 @@ function initNavbar() {
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
-  // Mobile toggle behavior
-  if (toggle && links) {
-    toggle.addEventListener("click", () => {
-      const isOpen = links.classList.toggle("is-open");
-      toggle.classList.toggle("is-open", isOpen);
-      toggle.setAttribute("aria-expanded", String(isOpen));
-      document.body.style.overflow = isOpen ? "hidden" : "";
-    });
+  const openMobileNav = () => {
+    if (!links || !toggle) return;
+    links.classList.add("is-open");
+    toggle.classList.add("is-open");
+    toggle.setAttribute("aria-expanded", "true");
+    document.documentElement.classList.add("eq-drawer-open");
+    document.body.classList.add("eq-drawer-open");
+  };
 
-    // Close menu when clicking any link
+  const closeMobileNav = () => {
+    if (!links || !toggle) return;
+    links.classList.remove("is-open");
+    toggle.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+    document.documentElement.classList.remove("eq-drawer-open");
+    document.body.classList.remove("eq-drawer-open");
+  };
+
+  const toggleMobileNav = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (!links || !toggle) return;
+    const isOpen = links.classList.contains("is-open");
+    if (isOpen) {
+      closeMobileNav();
+    } else {
+      openMobileNav();
+    }
+  };
+
+  // Mobile toggle behavior
+  if (toggle) {
+    toggle.addEventListener("click", toggleMobileNav);
+  }
+
+  // Close menu when clicking any link
+  if (links) {
     links.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
-        links.classList.remove("is-open");
-        toggle.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-        document.body.style.overflow = "";
+        closeMobileNav();
       });
-    });
-
-    // Close on Escape key press
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && links.classList.contains("is-open")) {
-        links.classList.remove("is-open");
-        toggle.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-        document.body.style.overflow = "";
-      }
     });
   }
 
+  // Close on Escape key press
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && links && links.classList.contains("is-open")) {
+      closeMobileNav();
+    }
+  });
+
+  // Close when clicking outside on backdrop
+  document.addEventListener("click", (e) => {
+    if (!links || !toggle || !links.classList.contains("is-open")) return;
+    if (!links.contains(e.target) && !toggle.contains(e.target)) {
+      closeMobileNav();
+    }
+  });
+
   // Dropdown toggle handling (for mobile accordion & accessible keyboard navigation)
-  const dropdownToggles = document.querySelectorAll(".eq-dropdown-toggle-btn");
+  const dropdownToggles = navbar.querySelectorAll(".eq-dropdown-toggle-btn");
   dropdownToggles.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -1174,9 +1211,97 @@ function init3DCoverflow() {
 
 
 /* =====================================================================
-   11. INITIALIZATION BOOTSTRAP
-   Mounts all components cleanly after the document is loaded.
+   11. INITIALIZATION BOOTSTRAP & IN-PAGE ANCHOR SCROLL CONTROLLER
+   Accurately handles all in-page jumps (Navbar, CTA, Footer, Drawer)
+   with precise sticky header offset and breathing room.
    ===================================================================== */
+
+/**
+ * Accurately scrolls to a target section accounting for sticky navbar height and breathing space.
+ * Guarantees zero header overlap on both desktop and mobile.
+ */
+function scrollToSection(target, behavior) {
+  if (!target) return;
+  const navbar = document.querySelector("#eq-main-navbar") || document.querySelector(".eq-navbar");
+  const navHeight = navbar ? navbar.offsetHeight : (window.innerWidth <= 768 ? 60 : 70);
+  const breathingSpace = window.innerWidth <= 768 ? 16 : 24;
+
+  const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+  const offsetPosition = Math.max(0, elementPosition - navHeight - breathingSpace);
+
+  window.scrollTo({
+    top: offsetPosition,
+    behavior: behavior || "smooth"
+  });
+}
+
+// Universal click listener for all in-page anchor links (Navbar, Drawer, Hero CTA, Footer)
+document.addEventListener("click", function (e) {
+  const link = e.target.closest("a");
+  if (!link) return;
+
+  const href = link.getAttribute("href") || "";
+  if (!href.includes("#")) return;
+
+  const hashIndex = href.indexOf("#");
+  const hash = href.substring(hashIndex);
+  if (!hash || hash === "#") return;
+
+  const path = href.substring(0, hashIndex);
+  const isHome = window.location.pathname.endsWith("index.html") || 
+                 window.location.pathname.endsWith("/") || 
+                 window.location.pathname === "" || 
+                 !window.location.pathname.includes("/pages/");
+
+  // Verify if link targets an anchor on the current homepage
+  const isCurrentPageAnchor = path === "" || path === "index.html" || path === "./index.html" || path === window.location.pathname;
+
+  if (isHome && isCurrentPageAnchor) {
+    const target = document.querySelector(hash);
+    if (target) {
+      e.preventDefault();
+
+      // Close mobile navigation drawer if open
+      const navLinks = document.querySelector("#eq-nav-links");
+      const navToggle = document.querySelector("#eq-nav-toggle");
+      if (navLinks && navLinks.classList.contains("is-open")) {
+        navLinks.classList.remove("is-open");
+        if (navToggle) {
+          navToggle.classList.remove("is-open");
+          navToggle.setAttribute("aria-expanded", "false");
+        }
+        document.body.style.overflow = "";
+      }
+
+      // Smooth scroll with precise offset & breathing room
+      scrollToSection(target, "smooth");
+
+      try {
+        history.pushState(null, "", hash);
+      } catch (err) {}
+    }
+  }
+});
+
+let hashNavHandled = false;
+
+function handleHashNavigationOnLoad() {
+  if (hashNavHandled || !window.location.hash) return;
+  const hash = window.location.hash;
+  const target = document.querySelector(hash);
+  if (!target) return;
+
+  hashNavHandled = true;
+
+  // Prevent browser scroll restoration jump
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+
+  // Instant scroll on first load: eliminates awkward delayed millisecond jump
+  scrollToSection(target, "auto");
+}
+
 function initEarthquickApp() {
   Toast.init();
   initNavbar();
@@ -1189,6 +1314,7 @@ function initEarthquickApp() {
   init3DCoverflow();
   initScrollReveal();
   initNewsletterForm();
+  handleHashNavigationOnLoad();
 }
 
 // Re-bind navbar, search, and cart if common layout components load dynamically
@@ -1199,6 +1325,7 @@ document.addEventListener("eq:components-loaded", () => {
   if (window.EarthquickCart && typeof window.EarthquickCart.init === "function") {
     window.EarthquickCart.init();
   }
+  handleHashNavigationOnLoad();
 });
 
 // Expose globally for layout loader

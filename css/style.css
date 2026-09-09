@@ -1442,11 +1442,13 @@ p {
 /* =====================================================================
    11. HERITAGE / STORYTELLING SECTIONS — DEEP NAVY STATEMENT BAND
    ===================================================================== */
+#story,
 .eq-story-section {
   background-color: var(--eq-navy);
   color: var(--eq-white);
   padding: clamp(2rem, 3.2vw, 2.75rem) 0;
   position: relative;
+  scroll-margin-top: 96px;
 }
 
 .eq-story {
@@ -2634,7 +2636,23 @@ p {
     padding: 0 var(--space-md);
   }
 
+  .eq-navbar {
+    height: 60px !important;
+  }
+
+  .eq-navbar,
+  .eq-navbar.is-scrolled {
+    height: 60px !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1050 !important;
+    background-color: #f7f2e9 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
   .eq-navbar__inner {
+    height: 60px !important;
     padding: 0 0.85rem !important;
     gap: 0.5rem !important;
     justify-content: space-between !important;
@@ -2656,7 +2674,7 @@ p {
   }
 
   .eq-navbar__logo img {
-    height: clamp(28px, 6vw, 34px) !important;
+    height: 32px !important;
     width: auto !important;
     max-width: 130px !important;
     object-fit: contain !important;
@@ -2673,8 +2691,8 @@ p {
   .eq-navbar__icons button,
   .eq-navbar__icons a {
     padding: 5px !important;
-    width: 32px !important;
-    height: 32px !important;
+    width: 34px !important;
+    height: 34px !important;
   }
 
   .eq-navbar__icons svg {
@@ -2682,33 +2700,94 @@ p {
     height: 18px !important;
   }
 
+  /* Compact, Refined Mobile Hamburger Menu Toggle */
   .eq-navbar__toggle {
-    display: flex !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0 !important;
-    padding: 6px 4px !important;
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 6px;
+    cursor: pointer !important;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    z-index: 1070 !important;
+    position: relative;
+    transition: background-color 0.2s ease;
   }
 
+  .eq-navbar__toggle:active {
+    background-color: rgba(27, 58, 75, 0.08) !important;
+  }
+
+  .eq-navbar__toggle span {
+    display: block;
+    width: 18px !important;
+    height: 1.75px !important;
+    background-color: var(--eq-charcoal) !important;
+    border-radius: 2px;
+    pointer-events: none !important;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  }
+
+  .eq-navbar__toggle span:nth-child(2) {
+    margin: 3.5px 0 !important;
+  }
+
+  .eq-navbar__toggle.is-open span:nth-child(1) {
+    transform: translateY(5.25px) rotate(45deg) !important;
+  }
+
+  .eq-navbar__toggle.is-open span:nth-child(2) {
+    opacity: 0 !important;
+    transform: scaleX(0) !important;
+  }
+
+  .eq-navbar__toggle.is-open span:nth-child(3) {
+    transform: translateY(-5.25px) rotate(-45deg) !important;
+  }
+
+  /* Ultra-Smooth Full-Height Mobile Drawer */
   .eq-navbar__links {
-    position: fixed;
-    top: var(--navbar-height);
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--eq-cream);
+    position: fixed !important;
+    top: 60px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: calc(100vh - 60px) !important;
+    height: calc(100dvh - 60px) !important;
+    background-color: #f7f2e9 !important;
     border-top: 1px solid var(--eq-line);
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: var(--space-xl) var(--space-lg);
-    gap: var(--space-md);
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    padding: 1.25rem 1.25rem 3.5rem !important;
+    gap: 0.25rem !important;
     transform: translateX(-100%);
-    transition: transform var(--transition-standard);
-    overflow-y: auto;
-    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.25s ease,
+                visibility 0.35s;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    z-index: 1060 !important;
+    box-shadow: 0 12px 36px rgba(27, 58, 75, 0.16);
   }
 
   .eq-navbar__links.is-open {
-    transform: translateX(0);
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
   }
 
   .eq-navbar__links a {
@@ -2833,8 +2912,16 @@ p {
     display: none !important;
   }
 
-  .eq-navbar__toggle {
-    display: flex;
+  /* Safe Body Scroll Lock when Mobile Navigation Drawer is Open */
+  html.eq-drawer-open,
+  body.eq-drawer-open {
+    overflow: hidden !important;
+    touch-action: none !important;
+  }
+
+  html.eq-drawer-open .eq-navbar__links,
+  body.eq-drawer-open .eq-navbar__links {
+    touch-action: pan-y !important;
   }
 
   /* Hero Section on Mobile: Reduced height, full-width photo, subtle bottom gradient, compact side/bottom text overlay */
@@ -3198,10 +3285,12 @@ p {
   }
 
   /* Our Story on Mobile: Symmetrical picture padding with natural, unified gap */
-  #story {
+  #story,
+  .eq-story-section {
     padding: clamp(1.4rem, 3vw, 1.85rem) 0 !important;
     background-color: var(--eq-navy) !important;
     color: var(--eq-white) !important;
+    scroll-margin-top: 76px !important;
   }
 
   .eq-story {

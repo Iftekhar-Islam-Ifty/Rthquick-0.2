@@ -50,6 +50,14 @@
    * Inject and initialize navbar
    */
   async function mountNavbar() {
+    // If navbar is already mounted, simply update active state
+    const existingHeader = document.querySelector("#eq-main-navbar");
+    if (existingHeader) {
+      highlightActiveNav();
+      rebindEvents();
+      return;
+    }
+
     const headerSelector = "#site-header, #eq-site-header, [data-component=\"header\"]";
     const targetEl = document.querySelector(headerSelector);
     if (!targetEl) return;
@@ -58,48 +66,22 @@
     targetEl.outerHTML = resolveBasePaths(DEFAULT_NAVBAR);
     highlightActiveNav();
     rebindEvents();
-
-    // Async re-fetch from disk to ensure any live file modifications in components/navbar.html apply
-    try {
-      const response = await fetch(basePath + "components/navbar.html");
-      if (response.ok) {
-        const freshHtml = await response.text();
-        const mountedHeader = document.querySelector("#eq-main-navbar");
-        if (mountedHeader) {
-          mountedHeader.outerHTML = resolveBasePaths(freshHtml);
-          highlightActiveNav();
-          rebindEvents();
-        }
-      }
-    } catch (e) {
-      // Offline / fallback already active
-    }
   }
 
   /**
    * Inject and initialize footer
    */
   async function mountFooter() {
+    // If footer is already mounted, do nothing
+    const existingFooter = document.querySelector("#eq-main-footer");
+    if (existingFooter) return;
+
     const footerSelector = "#site-footer, #eq-site-footer, [data-component=\"footer\"]";
     const targetEl = document.querySelector(footerSelector);
     if (!targetEl) return;
 
     // Instant synchronous render with embedded default
     targetEl.outerHTML = resolveBasePaths(DEFAULT_FOOTER);
-
-    // Async re-fetch from disk to ensure any live file modifications in components/footer.html apply
-    try {
-      const response = await fetch(basePath + "components/footer.html");
-      if (response.ok) {
-        const freshHtml = await response.text();
-        const mountedFooter = document.querySelector("#eq-main-footer");
-        if (mountedFooter) {
-          mountedFooter.outerHTML = resolveBasePaths(freshHtml);
-        }
-      }
-    } catch (e) {
-      // Offline / fallback already active
-    }
   }
 
   function rebindEvents() {

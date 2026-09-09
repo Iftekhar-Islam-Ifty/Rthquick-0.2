@@ -810,7 +810,37 @@
         });
       }
 
+      // Prefill customer contact details if authenticated user exists
+      function prefillUserData() {
+        try {
+          const authUser = JSON.parse(localStorage.getItem("earthquick_auth_user"));
+          if (authUser) {
+            const nameInput = document.querySelector("#cust-name");
+            const phoneInput = document.querySelector("#cust-phone");
+            const emailInput = document.querySelector("#cust-email");
+            const cityInput = document.querySelector("#cust-city");
+            const areaInput = document.querySelector("#cust-area");
+
+            if (nameInput && !nameInput.value && authUser.name) nameInput.value = authUser.name;
+            if (phoneInput && !phoneInput.value && authUser.phone) phoneInput.value = authUser.phone;
+            if (emailInput && !emailInput.value && authUser.email) emailInput.value = authUser.email;
+            if (cityInput && authUser.city) {
+              cityInput.value = authUser.city;
+              const isChattogram = authUser.city === "Chattogram";
+              const targetRadio = document.querySelector(`input[name="shipping_zone"][value="${isChattogram ? 'inside' : 'outside'}"]`);
+              if (targetRadio) {
+                targetRadio.checked = true;
+                document.querySelectorAll(".eq-method-card").forEach(c => c.classList.remove("is-selected"));
+                targetRadio.closest(".eq-method-card").classList.add("is-selected");
+              }
+            }
+            if (areaInput && !areaInput.value && authUser.area) areaInput.value = authUser.area;
+          }
+        } catch (e) {}
+      }
+
       // Initial Render
+      prefillUserData();
       renderCheckout();
 
       // Listen to layout or cart changes
