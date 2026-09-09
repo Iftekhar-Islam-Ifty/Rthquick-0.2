@@ -1440,21 +1440,33 @@ p {
 
 
 /* =====================================================================
-   11. HERITAGE / STORYTELLING SECTIONS
+   11. HERITAGE / STORYTELLING SECTIONS — DEEP NAVY STATEMENT BAND
    ===================================================================== */
+.eq-story-section {
+  background-color: var(--eq-navy);
+  color: var(--eq-white);
+  padding: clamp(2rem, 3.2vw, 2.75rem) 0;
+  position: relative;
+}
+
 .eq-story {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 270px 1fr;
   align-items: center;
-  gap: var(--space-2xl);
+  gap: clamp(2.25rem, 4vw, 3.75rem);
+  max-width: 860px;
+  margin: 0 auto;
 }
 
 .eq-story__media {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  border-radius: var(--radius-lg);
-  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-md);
+  aspect-ratio: 3.2 / 4;
+  max-height: 330px;
+  width: 100%;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
 }
 
 .eq-story__media img {
@@ -1468,21 +1480,54 @@ p {
   content: "";
   position: absolute;
   inset: -1px;
-  border: 1px solid var(--eq-lavender);
-  border-radius: var(--radius-lg);
-  transform: translate(14px, 14px);
+  border: 1.5px solid rgba(201, 150, 47, 0.45);
+  border-radius: var(--radius-md);
+  transform: translate(10px, 10px);
   z-index: -1;
 }
 
+.eq-story__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.eq-story__text .eq-eyebrow {
+  color: var(--eq-gold);
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  font-size: 0.74rem;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.eq-story__text h2 {
+  color: var(--eq-white);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  line-height: 1.25;
+  margin-bottom: 0.65rem;
+}
+
 .eq-story__text p {
-  margin-top: var(--space-md);
+  margin-top: 0.2rem;
+}
+
+.eq-story__desc-desktop {
+  color: rgba(247, 242, 233, 0.88);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  max-width: 500px;
+}
+
+.eq-story__desc-mobile {
+  display: none;
 }
 
 .eq-story__mark {
-  width: 38px;
-  height: 38px;
-  margin-bottom: var(--space-md);
-  color: var(--eq-lavender);
+  width: 28px;
+  height: 28px;
+  margin-bottom: 0.5rem;
+  color: var(--eq-gold);
 }
 
 .eq-story--reverse .eq-story__media {
@@ -1491,12 +1536,12 @@ p {
 
 
 /* =====================================================================
-   12. THREE PIECE SECTION — horizontal carousel, dark ground
+   12. THREE PIECE SECTION — Refined Light Ground Carousel
    ===================================================================== */
 .eq-three-piece {
-  background-color: var(--eq-navy);
-  color: var(--eq-cream);
-  padding: clamp(2rem, 3.5vw, 2.75rem) 0;
+  background-color: var(--eq-white);
+  color: var(--eq-charcoal);
+  padding: clamp(2.2rem, 3.8vw, 3rem) 0;
 }
 
 .eq-three-piece .eq-section-head {
@@ -1505,53 +1550,50 @@ p {
 
 .eq-three-piece .eq-product-card__frame {
   max-height: 300px;
+  background-color: var(--eq-sand);
 }
 
 .eq-three-piece .eq-section-head__text .eq-eyebrow {
-  color: var(--eq-gold);
+  color: var(--eq-gold-dark);
 }
 
 .eq-three-piece h2 {
-  color: var(--eq-white);
+  color: var(--eq-charcoal);
 }
 
 .eq-three-piece .eq-body-lg,
 .eq-three-piece .eq-body-muted {
-  color: rgba(247, 242, 233, 0.72);
+  color: var(--eq-charcoal-soft);
 }
 
 .eq-three-piece .eq-product-card__name {
-  color: var(--eq-white);
+  color: var(--eq-charcoal);
 }
 
 .eq-three-piece .eq-product-card__category {
-  color: var(--eq-gold);
+  color: var(--eq-gold-dark);
 }
 
 .eq-three-piece .eq-product-card__price {
-  color: rgba(247, 242, 233, 0.72);
+  color: var(--eq-charcoal-soft);
 }
 
 .eq-three-piece .eq-arrow-btn {
-  background-color: transparent;
-  border-color: rgba(247, 242, 233, 0.3);
+  background-color: var(--eq-white);
+  border-color: var(--eq-line);
 }
 
 .eq-three-piece .eq-arrow-btn svg {
-  stroke: var(--eq-cream);
+  stroke: var(--eq-charcoal);
 }
 
 .eq-three-piece .eq-arrow-btn:hover {
-  background-color: var(--eq-gold);
-  border-color: var(--eq-gold);
+  background-color: var(--eq-navy);
+  border-color: var(--eq-navy);
 }
 
 .eq-three-piece .eq-arrow-btn:hover svg {
-  stroke: var(--eq-navy);
-}
-
-.eq-three-piece .eq-product-card__frame {
-  background-color: rgba(247, 242, 233, 0.08);
+  stroke: var(--eq-white);
 }
 
 
@@ -3155,23 +3197,28 @@ p {
     text-align: center !important;
   }
 
-  /* Our Story on Mobile: Minimal, clean, organized ("guchano") */
+  /* Our Story on Mobile: Symmetrical picture padding with natural, unified gap */
   #story {
-    padding: clamp(1.2rem, 2.5vw, 1.6rem) 0 !important;
+    padding: clamp(1.4rem, 3vw, 1.85rem) 0 !important;
+    background-color: var(--eq-navy) !important;
+    color: var(--eq-white) !important;
   }
 
   .eq-story {
-    grid-template-columns: 95px 1fr !important;
-    gap: 0.85rem !important;
+    grid-template-columns: 124px 1fr !important;
+    gap: 1rem !important;
     align-items: center !important;
+    max-width: 365px !important;
+    margin: 0 auto !important;
+    padding: 0 1rem !important;
   }
 
   .eq-story__media {
-    aspect-ratio: 4 / 5 !important;
-    max-height: 125px !important;
+    aspect-ratio: 3.2 / 4 !important;
+    max-height: 148px !important;
     width: 100% !important;
-    border-radius: 8px !important;
-    box-shadow: 0 4px 12px rgba(27, 58, 75, 0.08) !important;
+    border-radius: 9px !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35) !important;
   }
 
   .eq-story__media::before {
@@ -3182,18 +3229,33 @@ p {
     display: none !important;
   }
 
+  .eq-story__text {
+    text-align: left !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
   .eq-story__text .eq-eyebrow {
     font-size: 0.62rem !important;
-    letter-spacing: 0.1em !important;
-    margin-bottom: 0.15rem !important;
-    color: var(--eq-gold-dark) !important;
+    letter-spacing: 0.12em !important;
+    margin: 0 0 0.15rem 0 !important;
+    color: var(--eq-gold) !important;
+    text-align: left !important;
+    display: block !important;
   }
 
   .eq-story__text h2 {
-    font-size: 1.05rem !important;
+    font-size: clamp(1.02rem, 3.5vw, 1.18rem) !important;
     font-weight: 600 !important;
     line-height: 1.2 !important;
-    margin: 0 0 0.25rem !important;
+    margin: 0 0 0.25rem 0 !important;
+    color: var(--eq-white) !important;
+    text-align: left !important;
   }
 
   .eq-story__desc-desktop {
@@ -3202,10 +3264,11 @@ p {
 
   .eq-story__desc-mobile {
     display: block !important;
-    font-size: 0.74rem !important;
-    line-height: 1.4 !important;
-    color: var(--eq-charcoal-soft) !important;
+    font-size: 0.72rem !important;
+    line-height: 1.38 !important;
+    color: rgba(247, 242, 233, 0.9) !important;
     margin: 0 !important;
+    text-align: left !important;
   }
 
   .eq-story__text .eq-btn {
@@ -3214,9 +3277,23 @@ p {
     margin-top: 0.4rem !important;
   }
 
-  /* Three Piece Section on Mobile */
+  /* Three Piece Section on Mobile: Clean light ground matching apparel flow */
   #three-piece-section {
     padding: clamp(1.35rem, 2.8vw, 1.75rem) 0 !important;
+    background-color: var(--eq-white) !important;
+    color: var(--eq-charcoal) !important;
+  }
+
+  #three-piece-section .eq-section-head h2 {
+    color: var(--eq-charcoal) !important;
+  }
+
+  #three-piece-section .eq-section-head p {
+    color: var(--eq-charcoal-soft) !important;
+  }
+
+  #three-piece-section .eq-eyebrow {
+    color: var(--eq-gold-dark) !important;
   }
 
   #three-piece-section .eq-product-card {
@@ -3226,14 +3303,21 @@ p {
   #three-piece-section .eq-product-card__frame {
     aspect-ratio: 3 / 4 !important;
     max-height: 165px !important;
+    background-color: var(--eq-sand) !important;
   }
 
   #three-piece-section .eq-product-card__name {
     font-size: 0.8rem !important;
+    color: var(--eq-charcoal) !important;
   }
 
   #three-piece-section .eq-product-card__price {
     font-size: 0.76rem !important;
+    color: var(--eq-charcoal-soft) !important;
+  }
+
+  #three-piece-section .eq-product-card__category {
+    color: var(--eq-gold-dark) !important;
   }
 
   /* Two Piece Section on Mobile */
@@ -3438,6 +3522,50 @@ p {
 
   .eq-product-gallery__thumbs button {
     width: 56px;
+  }
+
+  .eq-story {
+    grid-template-columns: 116px 1fr !important;
+    gap: 0.85rem !important;
+    max-width: 340px !important;
+    margin: 0 auto !important;
+    padding: 0 0.75rem !important;
+  }
+
+  .eq-story__media {
+    aspect-ratio: 3.2 / 4 !important;
+    max-height: 138px !important;
+  }
+
+  .eq-story__text {
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .eq-story {
+    grid-template-columns: 104px 1fr !important;
+    gap: 0.75rem !important;
+    max-width: 310px !important;
+    margin: 0 auto !important;
+    padding: 0 0.5rem !important;
+  }
+
+  .eq-story__media {
+    aspect-ratio: 3.2 / 4 !important;
+    max-height: 126px !important;
+  }
+
+  .eq-story__text {
+    max-width: 100% !important;
+  }
+
+  .eq-story__text h2 {
+    font-size: 0.98rem !important;
+  }
+
+  .eq-story__desc-mobile {
+    font-size: 0.68rem !important;
   }
 }
 
