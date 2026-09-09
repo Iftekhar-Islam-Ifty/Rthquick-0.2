@@ -931,6 +931,249 @@ function initQuickViewModal() {
 
 
 /* =====================================================================
+   10B. 3D COVERFLOW CAROUSEL & EDITORIAL VISUAL DIARY
+   Interactive 3D coverflow carousel with touch swipe, category pills,
+   keyboard navigation, and responsive depth perspective.
+   ===================================================================== */
+function init3DCoverflow() {
+  const stage = document.querySelector("#eq-coverflow-stage");
+  const track = document.querySelector("#eq-coverflow-track");
+  const cards = Array.from(document.querySelectorAll(".eq-coverflow-card"));
+  const btnPrev = document.querySelector("#coverflow-btn-prev");
+  const btnNext = document.querySelector("#coverflow-btn-next");
+  const filterPills = document.querySelectorAll(".eq-coverflow-pill[data-coverflow-filter]");
+
+  if (!stage || !track || cards.length === 0) return;
+
+  let activeIndex = 0;
+  const total = cards.length;
+
+  function updateCoverflow() {
+    const width = window.innerWidth;
+    let spacing = 250;
+    if (width < 480) {
+      spacing = Math.min(width * 0.3, 110);
+    } else if (width < 640) {
+      spacing = 150;
+    } else if (width < 991) {
+      spacing = 200;
+    } else if (width < 1200) {
+      spacing = 230;
+    }
+
+    cards.forEach((card, index) => {
+      // Calculate shortest directional offset
+      let offset = index - activeIndex;
+      while (offset > total / 2) offset -= total;
+      while (offset < -total / 2) offset += total;
+
+      if (offset === 0) {
+        // Active Center Slide (Prominent, elevated, crisp shadow)
+        card.style.transform = `translateX(0px) scale(1.05) rotateY(0deg)`;
+        card.style.zIndex = "10";
+        card.style.opacity = "1";
+        card.style.filter = "none";
+        card.style.boxShadow = "0 22px 48px -8px rgba(27, 58, 75, 0.28), 0 8px 20px -4px rgba(0, 0, 0, 0.15)";
+        card.style.pointerEvents = "auto";
+        card.classList.add("is-active");
+        card.setAttribute("aria-hidden", "false");
+      } else if (offset === -1) {
+        // Immediate Left (Flanking behind center)
+        card.style.transform = `translateX(-${spacing}px) scale(0.88) rotateY(7deg)`;
+        card.style.zIndex = "6";
+        card.style.opacity = "0.92";
+        card.style.filter = "none";
+        card.style.boxShadow = "0 12px 28px -6px rgba(0, 0, 0, 0.16)";
+        card.style.pointerEvents = "auto";
+        card.classList.remove("is-active");
+        card.setAttribute("aria-hidden", "true");
+      } else if (offset === 1) {
+        // Immediate Right (Flanking behind center)
+        card.style.transform = `translateX(${spacing}px) scale(0.88) rotateY(-7deg)`;
+        card.style.zIndex = "6";
+        card.style.opacity = "0.92";
+        card.style.filter = "none";
+        card.style.boxShadow = "0 12px 28px -6px rgba(0, 0, 0, 0.16)";
+        card.style.pointerEvents = "auto";
+        card.classList.remove("is-active");
+        card.setAttribute("aria-hidden", "true");
+      } else if (offset === -2) {
+        // Outer Left (Peeking)
+        const spacing2 = spacing * 1.8;
+        card.style.transform = `translateX(-${spacing2}px) scale(0.74) rotateY(14deg)`;
+        card.style.zIndex = "3";
+        card.style.opacity = width < 480 ? "0" : "0.65";
+        card.style.filter = "none";
+        card.style.boxShadow = "none";
+        card.style.pointerEvents = width < 480 ? "none" : "auto";
+        card.classList.remove("is-active");
+        card.setAttribute("aria-hidden", "true");
+      } else if (offset === 2) {
+        // Outer Right (Peeking)
+        const spacing2 = spacing * 1.8;
+        card.style.transform = `translateX(${spacing2}px) scale(0.74) rotateY(-14deg)`;
+        card.style.zIndex = "3";
+        card.style.opacity = width < 480 ? "0" : "0.65";
+        card.style.filter = "none";
+        card.style.boxShadow = "none";
+        card.style.pointerEvents = width < 480 ? "none" : "auto";
+        card.classList.remove("is-active");
+        card.setAttribute("aria-hidden", "true");
+      } else {
+        // Hidden Off-Stage
+        const dir = offset > 0 ? 1 : -1;
+        card.style.transform = `translateX(${dir * spacing * 2.5}px) scale(0.6)`;
+        card.style.zIndex = "1";
+        card.style.opacity = "0";
+        card.style.filter = "none";
+        card.style.pointerEvents = "none";
+        card.classList.remove("is-active");
+        card.setAttribute("aria-hidden", "true");
+      }
+    });
+  }
+
+  function goToSlide(index) {
+    activeIndex = (index % total + total) % total;
+    updateCoverflow();
+  }
+
+  // Click on cards
+  cards.forEach((card, i) => {
+    card.addEventListener("click", (e) => {
+      // If clicking button/link inside active card, allow normal navigation
+      if (card.classList.contains("is-active")) {
+        if (e.target.closest("a, button")) {
+          return;
+        }
+      } else {
+        e.preventDefault();
+        goToSlide(i);
+      }
+    });
+  });
+
+  // Prev / Next button navigation
+  if (btnPrev) {
+    btnPrev.addEventListener("click", () => {
+      goToSlide(activeIndex - 1);
+    });
+  }
+  if (btnNext) {
+    btnNext.addEventListener("click", () => {
+      goToSlide(activeIndex + 1);
+    });
+  }
+
+  // Filter Pills interaction
+  if (filterPills.length > 0) {
+    filterPills.forEach(pill => {
+      pill.addEventListener("click", () => {
+        filterPills.forEach(p => p.classList.remove("is-active"));
+        pill.classList.add("is-active");
+
+        const filter = pill.getAttribute("data-coverflow-filter");
+        if (!filter || filter === "all") {
+          goToSlide(0);
+          return;
+        }
+
+        // Find the first slide matching this filter
+        const targetIndex = cards.findIndex(c => {
+          const cat = c.getAttribute("data-category") || "";
+          return cat.toLowerCase().includes(filter.toLowerCase());
+        });
+
+        if (targetIndex !== -1) {
+          goToSlide(targetIndex);
+        }
+      });
+    });
+  }
+
+  // Touch Swipe & Drag Support
+  let touchStartX = 0;
+  let touchCurrentX = 0;
+  let isSwiping = false;
+
+  stage.addEventListener("touchstart", (e) => {
+    if (e.touches.length === 1) {
+      touchStartX = e.touches[0].clientX;
+      touchCurrentX = touchStartX;
+      isSwiping = true;
+    }
+  }, { passive: true });
+
+  stage.addEventListener("touchmove", (e) => {
+    if (isSwiping && e.touches.length === 1) {
+      touchCurrentX = e.touches[0].clientX;
+    }
+  }, { passive: true });
+
+  stage.addEventListener("touchend", () => {
+    if (!isSwiping) return;
+    isSwiping = false;
+    const diff = touchCurrentX - touchStartX;
+    if (diff < -40) {
+      goToSlide(activeIndex + 1);
+    } else if (diff > 40) {
+      goToSlide(activeIndex - 1);
+    }
+  });
+
+  // Mouse Drag Support
+  let mouseStartX = 0;
+  let mouseCurrentX = 0;
+  let isMouseDown = false;
+
+  stage.addEventListener("mousedown", (e) => {
+    if (e.button !== 0) return;
+    mouseStartX = e.clientX;
+    mouseCurrentX = mouseStartX;
+    isMouseDown = true;
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    if (isMouseDown) {
+      mouseCurrentX = e.clientX;
+    }
+  });
+
+  window.addEventListener("mouseup", () => {
+    if (!isMouseDown) return;
+    isMouseDown = false;
+    const diff = mouseCurrentX - mouseStartX;
+    if (diff < -50) {
+      goToSlide(activeIndex + 1);
+    } else if (diff > 50) {
+      goToSlide(activeIndex - 1);
+    }
+  });
+
+  // Keyboard Navigation
+  stage.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      goToSlide(activeIndex - 1);
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      goToSlide(activeIndex + 1);
+    }
+  });
+
+  // Window Resize
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(updateCoverflow, 100);
+  });
+
+  // Initial render
+  updateCoverflow();
+}
+
+
+/* =====================================================================
    11. INITIALIZATION BOOTSTRAP
    Mounts all components cleanly after the document is loaded.
    ===================================================================== */
@@ -943,6 +1186,7 @@ function initEarthquickApp() {
   initCart();
   initAccount();
   initCarousels();
+  init3DCoverflow();
   initScrollReveal();
   initNewsletterForm();
 }

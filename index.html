@@ -18,10 +18,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Earthquick Custom Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=9.2" />
+  <link rel="stylesheet" href="css/style.css?v=9.4" />
 
   <!-- Reusable Components Loader -->
-  <script src="js/layout.js?v=9.2"></script>
+  <script src="js/layout.js?v=9.4"></script>
 
   <!-- Resilient Image Fallback for static hosting -->
   <script>
@@ -604,7 +604,8 @@
             </svg>
             <span class="eq-eyebrow">OUR PHILOSOPHY</span>
             <h2 class="eq-heading-lg">Tradition, Reimagined.</h2>
-            <p class="eq-body-lg">Nous Telos has spent years working directly with handloom weavers and embroidery collectives across Bangladesh. Earthquick takes that same material honesty and cuts it for how people actually get dressed today — considered, uncomplicated, built to last past one season.</p>
+            <p class="eq-body-lg eq-story__desc-desktop">Nous Telos has spent years working directly with handloom weavers and embroidery collectives across Bangladesh. Earthquick takes that same material honesty and cuts it for how people actually get dressed today — considered, uncomplicated, built to last past one season.</p>
+            <p class="eq-story__desc-mobile">Rooted in Bengal handlooms — crafted with master artisans for effortless contemporary living.</p>
           </div>
         </div>
       </div>
@@ -1011,126 +1012,105 @@
 
 
     <!-- =================================================================
-         SECTION 8.5: STYLED BY YOU (COMMUNITY LOOKBOOK & SOCIAL PROOF)
-         Curated editorial feed showcasing authentic styling, draping, and
-         real moments with Earthquick pieces by patrons across Bangladesh.
+         SECTION 8: STYLED BY YOU — 3D COVERFLOW CAROUSEL & VISUAL DIARY
+         Curated editorial gallery showcasing authentic styling, archival
+         draping, and real moments with Earthquick pieces.
          ================================================================= -->
-    <section class="eq-section eq-lookbook" id="styled-by-you" aria-label="Styled by our community">
+    <section class="eq-section eq-coverflow-section" id="styled-by-you" aria-label="Styled by our community">
       <div class="eq-container">
         
-        <!-- Section Header -->
-        <div class="eq-section-head eq-reveal">
-          <div class="eq-section-head__text">
-            <span class="eq-eyebrow">@EARTHQUICK_ATELIER</span>
-            <h2 class="eq-heading-lg">Styled by You</h2>
-            <p class="eq-body-lg" style="margin-top: 0.35rem; max-width: 54ch;">
-              Real moments, archival draping, and daily movement. Tag <strong style="color:var(--eq-navy);">#EarthquickAtelier</strong> on Instagram to be featured in our seasonal journal.
-            </p>
+        <!-- Section Header (Centered display with Glassy Facebook community button) -->
+        <div class="eq-coverflow-header eq-reveal">
+          <span class="eq-eyebrow">COMMUNITY &bull; @RTHQUICK ON FACEBOOK</span>
+          <h2 class="eq-heading-lg">Styled by You</h2>
+          <p class="eq-body-lg">
+            Real moments, archival draping, and daily movement: tagged by our patrons across Bangladesh and beyond.
+          </p>
+          <div class="eq-coverflow-header__actions">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="eq-glassy-fb-btn" id="btn-fb-community" aria-label="Join our Facebook Community">
+              <svg class="eq-fb-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+              <span>Follow on Facebook</span>
+            </a>
           </div>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="eq-btn eq-btn--outline eq-btn--pill" id="btn-instagram-follow">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </div>
+
+        <!-- Filter Pills Bar (matching the pill buttons in reference + glassy Facebook option) -->
+        <div class="eq-coverflow-pills eq-reveal" role="tablist" aria-label="Filter looks by style">
+          <button type="button" class="eq-coverflow-pill is-active" data-coverflow-filter="all" id="pill-all">All Looks</button>
+          <button type="button" class="eq-coverflow-pill" data-coverflow-filter="saree" id="pill-saree">Saree Atelier</button>
+          <button type="button" class="eq-coverflow-pill" data-coverflow-filter="jamdani" id="pill-jamdani">Jamdani</button>
+          <button type="button" class="eq-coverflow-pill" data-coverflow-filter="two-piece" id="pill-twopiece">Two Piece</button>
+          <button type="button" class="eq-coverflow-pill" data-coverflow-filter="three-piece" id="pill-threepiece">Three Piece</button>
+          <button type="button" class="eq-coverflow-pill" data-coverflow-filter="bags" id="pill-bags">Bags</button>
+          <button type="button" class="eq-coverflow-pill" data-coverflow-filter="silk" id="pill-silk">Pure Silk</button>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="eq-coverflow-pill eq-coverflow-pill--fb-glassy" id="pill-view-more" aria-label="Visit Facebook Page">
+            <svg class="eq-fb-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
             </svg>
-            Follow on Instagram
+            <span>Facebook Page &rarr;</span>
           </a>
         </div>
 
-        <!-- 5-Item Editorial Curved Lookbook Grid -->
-        <div class="eq-lookbook__grid eq-reveal">
-
-          <!-- Lookbook Card 1 -->
-          <div class="eq-lookbook__card" id="lookbook-card-1">
-            <div class="eq-lookbook__media">
-              <img src="images/saree/saree-01.jpg?v=3" alt="Muslin Jamdani draped by Tasnia" />
-              <div class="eq-lookbook__tag">
-                <span class="eq-lookbook__tag-icon">✦</span>
-                <span class="eq-lookbook__tag-text">Saree Atelier</span>
-              </div>
-              <div class="eq-lookbook__overlay">
-                <span class="eq-lookbook__author">@tasnia.k &bull; Banani, Dhaka</span>
-                <p class="eq-lookbook__caption">&ldquo;Wore the Jamdani to an evening art preview. Feather-light and holds its drape all night.&rdquo;</p>
-                <a href="pages/product.html?id=saree-01" class="eq-btn eq-btn--light eq-btn--pill eq-lookbook__btn">
-                  Shop Jamdani Saree &rarr;
-                </a>
-              </div>
+        <!-- 3D Coverflow Stage Viewport (Clean, sharp, unobstructed photography cards) -->
+        <div class="eq-coverflow-stage" id="eq-coverflow-stage" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Community style gallery 3D coverflow">
+          <div class="eq-coverflow-track" id="eq-coverflow-track">
+            
+            <!-- Slide 1: Jamdani Saree -->
+            <div class="eq-coverflow-card" data-category="saree jamdani" id="coverflow-card-1" role="group" aria-roledescription="slide" aria-label="1 of 7">
+              <img src="images/saree/saree-01.jpg?v=3" alt="Muslin Jamdani draped by Tasnia in Banani" class="eq-coverflow-card__img" loading="lazy" />
             </div>
-          </div>
 
-          <!-- Lookbook Card 2 -->
-          <div class="eq-lookbook__card" id="lookbook-card-2">
-            <div class="eq-lookbook__media">
-              <img src="images/two-piece/2pc-1.jpg?v=3" alt="Aria Linen Two Piece styled by Samira" />
-              <div class="eq-lookbook__tag">
-                <span class="eq-lookbook__tag-icon">✦</span>
-                <span class="eq-lookbook__tag-text">Two Piece</span>
-              </div>
-              <div class="eq-lookbook__overlay">
-                <span class="eq-lookbook__author">@samira_vibe &bull; Dhanmondi</span>
-                <p class="eq-lookbook__caption">&ldquo;The breathable linen is unmatched for daytime work and tea meetings.&rdquo;</p>
-                <a href="pages/product.html?id=two-piece-01" class="eq-btn eq-btn--light eq-btn--pill eq-lookbook__btn">
-                  Shop Aria Linen &rarr;
-                </a>
-              </div>
+            <!-- Slide 2: Aria Linen Two Piece -->
+            <div class="eq-coverflow-card" data-category="two-piece" id="coverflow-card-2" role="group" aria-roledescription="slide" aria-label="2 of 7">
+              <img src="images/two-piece/2pc-1.jpg?v=3" alt="Aria Linen Two Piece styled by Samira" class="eq-coverflow-card__img" loading="lazy" />
             </div>
-          </div>
 
-          <!-- Lookbook Card 3 -->
-          <div class="eq-lookbook__card" id="lookbook-card-3">
-            <div class="eq-lookbook__media">
-              <img src="images/bags/bag-1.jpg?v=3" alt="Heritage Canvas Tote on the move with Zarin" />
-              <div class="eq-lookbook__tag">
-                <span class="eq-lookbook__tag-icon">✦</span>
-                <span class="eq-lookbook__tag-text">Artisanal Bag</span>
-              </div>
-              <div class="eq-lookbook__overlay">
-                <span class="eq-lookbook__author">@zarin.dhaka &bull; Gulshan 2</span>
-                <p class="eq-lookbook__caption">&ldquo;Fits my daily journal, sketchbook, and gets better the more it wears in.&rdquo;</p>
-                <a href="pages/product.html?id=bag-01" class="eq-btn eq-btn--light eq-btn--pill eq-lookbook__btn">
-                  Shop Canvas Tote &rarr;
-                </a>
-              </div>
+            <!-- Slide 3: Heritage Canvas Bag -->
+            <div class="eq-coverflow-card" data-category="bags" id="coverflow-card-3" role="group" aria-roledescription="slide" aria-label="3 of 7">
+              <img src="images/bags/bag-1.jpg?v=3" alt="Heritage Canvas Tote with Zarin in Gulshan" class="eq-coverflow-card__img" loading="lazy" />
             </div>
-          </div>
 
-          <!-- Lookbook Card 4 -->
-          <div class="eq-lookbook__card" id="lookbook-card-4">
-            <div class="eq-lookbook__media">
-              <img src="images/saree/saree-03.jpg?v=3" alt="Tangail Handloom Saree styled by Nawrin" />
-              <div class="eq-lookbook__tag">
-                <span class="eq-lookbook__tag-icon">✦</span>
-                <span class="eq-lookbook__tag-text">Heritage Handloom</span>
-              </div>
-              <div class="eq-lookbook__overlay">
-                <span class="eq-lookbook__author">@nawrin_k &bull; Uttara, Dhaka</span>
-                <p class="eq-lookbook__caption">&ldquo;The fine weave texture and border detail make this an instant wardrobe heirloom.&rdquo;</p>
-                <a href="pages/product.html?id=saree-03" class="eq-btn eq-btn--light eq-btn--pill eq-lookbook__btn">
-                  Shop Tangail Saree &rarr;
-                </a>
-              </div>
+            <!-- Slide 4: Tangail Handloom Saree -->
+            <div class="eq-coverflow-card" data-category="saree" id="coverflow-card-4" role="group" aria-roledescription="slide" aria-label="4 of 7">
+              <img src="images/saree/saree-03.jpg?v=3" alt="Tangail Handloom Saree styled by Nawrin" class="eq-coverflow-card__img" loading="lazy" />
             </div>
-          </div>
 
-          <!-- Lookbook Card 5 -->
-          <div class="eq-lookbook__card" id="lookbook-card-5">
-            <div class="eq-lookbook__media">
-              <img src="images/bags/bag-3.jpg?v=3" alt="Terra Handbag styled by Maheen" />
-              <div class="eq-lookbook__tag">
-                <span class="eq-lookbook__tag-icon">✦</span>
-                <span class="eq-lookbook__tag-text">Everyday Bag</span>
-              </div>
-              <div class="eq-lookbook__overlay">
-                <span class="eq-lookbook__author">@maheen.drape &bull; Sylhet</span>
-                <p class="eq-lookbook__caption">&ldquo;Structured silhouette with rich tactile grain. Pairs effortlessly with both sarees and kurtis.&rdquo;</p>
-                <a href="pages/product.html?id=bag-03" class="eq-btn eq-btn--light eq-btn--pill eq-lookbook__btn">
-                  Shop Terra Bag &rarr;
-                </a>
-              </div>
+            <!-- Slide 5: Three Piece Kurti Set -->
+            <div class="eq-coverflow-card" data-category="three-piece" id="coverflow-card-5" role="group" aria-roledescription="slide" aria-label="5 of 7">
+              <img src="images/three-piece/three-piece-01.jpg?v=3" alt="Artisanal Three Piece ensemble styled by Anika" class="eq-coverflow-card__img" loading="lazy" />
             </div>
-          </div>
 
+            <!-- Slide 6: Terra Leather Bag -->
+            <div class="eq-coverflow-card" data-category="bags" id="coverflow-card-6" role="group" aria-roledescription="slide" aria-label="6 of 7">
+              <img src="images/bags/bag-3.jpg?v=3" alt="Terra Handbag styled by Maheen in Chattogram" class="eq-coverflow-card__img" loading="lazy" />
+            </div>
+
+            <!-- Slide 7: Emerald Rajshahi Pure Silk -->
+            <div class="eq-coverflow-card" data-category="saree silk" id="coverflow-card-7" role="group" aria-roledescription="slide" aria-label="7 of 7">
+              <img src="images/saree/saree-04.jpg?v=3" alt="Rajshahi Pure Silk Saree draped by Fariha" class="eq-coverflow-card__img" loading="lazy" />
+            </div>
+
+          </div>
         </div>
+
+        <!-- Centered Circular Navigation Arrows (matching reference image) -->
+        <div class="eq-coverflow-controls eq-reveal">
+          <button type="button" class="eq-coverflow-arrow eq-coverflow-arrow--prev" id="coverflow-btn-prev" aria-label="Previous look">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+          <button type="button" class="eq-coverflow-arrow eq-coverflow-arrow--next" id="coverflow-btn-next" aria-label="Next look">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+
       </div>
     </section>
     <section class="eq-final-cta eq-reveal" id="newsletter-section">
@@ -1175,6 +1155,6 @@
   <div class="eq-toast-container" id="eq-toast-container" role="status" aria-live="polite"></div>
 
   <!-- Earthquick Core Script -->
-  <script src="js/script.js?v=9.2"></script>
+  <script src="js/script.js?v=9.4"></script>
 </body>
 </html>

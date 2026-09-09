@@ -884,7 +884,9 @@
     
     if (cat && CATEGORY_META[cat]) {
       state.activeCategory = cat;
-    } else if (pathName.includes("men.html")) {
+    } else if (pathName.includes("women.html")) {
+      state.activeCategory = "women";
+    } else if (pathName.includes("/men.html") || pathName.endsWith("men.html")) {
       state.activeCategory = "men";
     } else if (pathName.includes("kids.html")) {
       state.activeCategory = "kids";
