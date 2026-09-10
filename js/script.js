@@ -94,11 +94,21 @@ function initNavbar() {
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
+  let backdrop = document.getElementById("eq-nav-backdrop") || navbar.querySelector(".eq-drawer-backdrop");
+  if (backdrop && backdrop.parentElement !== document.body) {
+    document.body.appendChild(backdrop);
+  }
+  const drawerCloseBtn = document.getElementById("eq-drawer-close") || navbar.querySelector(".eq-drawer-close-btn");
+
   const openMobileNav = () => {
     if (!links || !toggle) return;
     links.classList.add("is-open");
     toggle.classList.add("is-open");
     toggle.setAttribute("aria-expanded", "true");
+    navbar.classList.add("has-drawer-open");
+    if (backdrop) {
+      backdrop.classList.add("is-active");
+    }
     document.documentElement.classList.add("eq-drawer-open");
     document.body.classList.add("eq-drawer-open");
   };
@@ -108,6 +118,10 @@ function initNavbar() {
     links.classList.remove("is-open");
     toggle.classList.remove("is-open");
     toggle.setAttribute("aria-expanded", "false");
+    navbar.classList.remove("has-drawer-open");
+    if (backdrop) {
+      backdrop.classList.remove("is-active");
+    }
     document.documentElement.classList.remove("eq-drawer-open");
     document.body.classList.remove("eq-drawer-open");
   };
@@ -131,10 +145,70 @@ function initNavbar() {
     toggle.addEventListener("click", toggleMobileNav);
   }
 
-  // Close menu when clicking any link
+  // Drawer close button inside drawer header
+  if (drawerCloseBtn) {
+    drawerCloseBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeMobileNav();
+    });
+  }
+
+  // Drawer search button inside footer
+  const drawerSearchBtn = document.getElementById("drawer-btn-search");
+  if (drawerSearchBtn) {
+    drawerSearchBtn.addEventListener("click", () => {
+      closeMobileNav();
+    });
+  }
+
+  // Close and block touch when clicking outside on backdrop
+  if (backdrop) {
+    const handleBackdropDismiss = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeMobileNav();
+    };
+    backdrop.addEventListener("click", handleBackdropDismiss);
+    backdrop.addEventListener("touchstart", handleBackdropDismiss, { passive: false });
+    backdrop.addEventListener("touchmove", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    }, { passive: false });
+  }
+
+  // Intercept touchmove on background when drawer is open to prevent page scrolling behind drawer
+  document.addEventListener("touchmove", (e) => {
+    if (!document.body.classList.contains("eq-drawer-open")) return;
+    // Allow touch scrolling ONLY inside the drawer links container
+    if (links && !links.contains(e.target)) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  // Handle window resize: auto-close mobile drawer if resized to desktop
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768 && links && links.classList.contains("is-open")) {
+      closeMobileNav();
+    }
+  });
+
+  // Close menu when clicking navigation links, or toggle subcategories when tapping category parent header on mobile
   if (links) {
     links.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
+      link.addEventListener("click", (e) => {
+        const parentDropdown = link.closest(".eq-nav-item--has-dropdown");
+        // If clicking category header ("Women" or "Home Decor") on mobile, toggle subcategory accordion
+        if (parentDropdown && link.parentElement && link.parentElement.classList.contains("eq-nav-link-wrapper") && window.innerWidth <= 768) {
+          e.preventDefault();
+          e.stopPropagation();
+          const isExpanded = parentDropdown.classList.toggle("is-expanded");
+          const toggleBtn = parentDropdown.querySelector(".eq-dropdown-toggle-btn");
+          if (toggleBtn) {
+            toggleBtn.setAttribute("aria-expanded", String(isExpanded));
+          }
+          return;
+        }
         closeMobileNav();
       });
     });
@@ -147,7 +221,7 @@ function initNavbar() {
     }
   });
 
-  // Close when clicking outside on backdrop
+  // Global click outside drawer check
   document.addEventListener("click", (e) => {
     if (!links || !toggle || !links.classList.contains("is-open")) return;
     if (!links.contains(e.target) && !toggle.contains(e.target)) {
@@ -155,7 +229,7 @@ function initNavbar() {
     }
   });
 
-  // Dropdown toggle handling (for mobile accordion & accessible keyboard navigation)
+  // Dropdown toggle chevron handling
   const dropdownToggles = navbar.querySelectorAll(".eq-dropdown-toggle-btn");
   dropdownToggles.forEach((btn) => {
     btn.addEventListener("click", (e) => {
@@ -164,6 +238,20 @@ function initNavbar() {
       const parentDropdown = btn.closest(".eq-nav-item--has-dropdown");
       if (parentDropdown) {
         const isExpanded = parentDropdown.classList.toggle("is-expanded");
+        btn.setAttribute("aria-expanded", String(isExpanded));
+      }
+    });
+  });
+
+  // Nested subcategory toggle chevron handling (Women > Saree > Subcategories)
+  const nestedToggles = navbar.querySelectorAll(".eq-nested-toggle-btn");
+  nestedToggles.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const parentNested = btn.closest(".eq-submenu-nested");
+      if (parentNested) {
+        const isExpanded = parentNested.classList.toggle("is-expanded");
         btn.setAttribute("aria-expanded", String(isExpanded));
       }
     });

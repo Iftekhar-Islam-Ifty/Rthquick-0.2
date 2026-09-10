@@ -13,6 +13,19 @@
     <!-- Desktop Navigation Menu -->
     <nav id="eq-nav-menu" aria-label="Primary Navigation">
       <ul class="eq-navbar__links" id="eq-nav-links">
+        <!-- Mobile Drawer Pinned Header with Brand Logo -->
+        <li class="eq-drawer-header" aria-hidden="true">
+          <a href="{{BASE}}index.html" class="eq-drawer-logo" aria-label="Earthquick Home">
+            <img src="{{BASE}}images/logo/earthquick-logo.png?v=3" alt="Earthquick — Crafted for the Modern You" />
+          </a>
+          <button type="button" class="eq-drawer-close-btn" id="eq-drawer-close" aria-label="Close navigation menu">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </li>
+
         <li><a href="{{BASE}}index.html" id="nav-link-home">Home</a></li>
         <li><a href="{{BASE}}pages/men.html" id="nav-link-men">Men</a></li>
         
@@ -30,26 +43,48 @@
           <!-- Women Dropdown Mega-Panel -->
           <div class="eq-megamenu" id="megamenu-women" role="region" aria-label="Women Subcategories">
             <div class="eq-megamenu__grid">
-              <!-- Column 1: Saree Atelier -->
-              <div class="eq-megamenu__col">
-                <div class="eq-megamenu__heading">Saree Atelier</div>
-                <ul class="eq-megamenu__list">
+              <!-- Column 1: Saree (with expandable subcategory list) -->
+              <div class="eq-megamenu__col eq-submenu-nested" id="submenu-saree">
+                <div class="eq-nested-header">
+                  <a href="{{BASE}}pages/saree.html" class="eq-megamenu__heading eq-nested-title">Saree</a>
+                  <button type="button" class="eq-nested-toggle-btn" id="btn-toggle-saree" aria-expanded="false" aria-label="Toggle Saree subcategories">
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                </div>
+                <ul class="eq-megamenu__list eq-nested-list" id="list-saree-sub">
+                  <li><a href="{{BASE}}pages/saree.html" class="eq-megamenu__view-all">All Sarees &rarr;</a></li>
                   <li><a href="{{BASE}}pages/saree-jamdani.html">Jamdani Weaves</a></li>
                   <li><a href="{{BASE}}pages/saree-tantuj.html">Tantuj &amp; Tangail</a></li>
                   <li><a href="{{BASE}}pages/saree-half-silk.html">Half Silk</a></li>
                   <li><a href="{{BASE}}pages/saree-full-silk.html">Pure Silk</a></li>
-                  <li><a href="{{BASE}}pages/saree.html" class="eq-megamenu__view-all">All Sarees &rarr;</a></li>
                 </ul>
               </div>
 
-              <!-- Column 2: Ready to Wear -->
+              <!-- Column 2: Ready to Wear (Three Piece, Two Piece) -->
               <div class="eq-megamenu__col">
-                <div class="eq-megamenu__heading">Ready to Wear</div>
-                <ul class="eq-megamenu__list">
-                  <li><a href="{{BASE}}pages/three-piece.html">Three Piece Sets</a></li>
-                  <li><a href="{{BASE}}pages/two-piece.html">Two Piece Co-ords</a></li>
-                  <li><a href="{{BASE}}pages/women.html" class="eq-megamenu__view-all">Explore Women's Hub &rarr;</a></li>
-                </ul>
+                <div class="eq-submenu-nested" id="submenu-three-piece">
+                  <div class="eq-nested-header">
+                    <a href="{{BASE}}pages/three-piece.html" class="eq-megamenu__heading eq-nested-title">Three Piece Sets</a>
+                  </div>
+                  <ul class="eq-megamenu__list eq-nested-list" id="list-three-piece-sub">
+                    <li><a href="{{BASE}}pages/three-piece.html" class="eq-megamenu__view-all">All Three Piece &rarr;</a></li>
+                  </ul>
+                </div>
+
+                <div class="eq-submenu-nested" id="submenu-two-piece" style="margin-top: 0.65rem;">
+                  <div class="eq-nested-header">
+                    <a href="{{BASE}}pages/two-piece.html" class="eq-megamenu__heading eq-nested-title">Two Piece Ensembles</a>
+                  </div>
+                  <ul class="eq-megamenu__list eq-nested-list" id="list-two-piece-sub">
+                    <li><a href="{{BASE}}pages/two-piece.html" class="eq-megamenu__view-all">All Two Piece &rarr;</a></li>
+                  </ul>
+                </div>
+
+                <div class="eq-megamenu__all-link" style="margin-top: 0.85rem;">
+                  <a href="{{BASE}}pages/women.html" class="eq-megamenu__view-all" style="font-weight: 600; color: var(--eq-gold-dark);">Explore Women's Hub &rarr;</a>
+                </div>
               </div>
 
               <!-- Column 3: Visual Spotlight Card -->
@@ -116,6 +151,27 @@
         </li>
 
         <li><a href="{{BASE}}index.html#story" id="nav-link-story">Our Story</a></li>
+
+        <!-- Mobile Drawer Minimal Footer with Quick Actions -->
+        <li class="eq-drawer-footer" aria-hidden="true">
+          <div class="eq-drawer-actions">
+            <a href="{{BASE}}pages/account.html" class="eq-drawer-action-btn" id="drawer-btn-account">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>Account</span>
+            </a>
+            <button type="button" class="eq-drawer-action-btn" data-action="open-search" id="drawer-btn-search">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <span>Search</span>
+            </button>
+          </div>
+          <p class="eq-drawer-tagline">Handloom Heritage &bull; Nous Telos</p>
+        </li>
       </ul>
     </nav>
 
@@ -153,4 +209,7 @@
       <span></span><span></span><span></span>
     </button>
   </div>
+
+  <!-- Mobile Drawer Backdrop Overlay -->
+  <div class="eq-drawer-backdrop" id="eq-nav-backdrop"></div>
 </header>

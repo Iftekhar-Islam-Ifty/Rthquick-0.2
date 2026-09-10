@@ -515,6 +515,13 @@ p {
   transform: scaleX(1);
 }
 
+/* Mobile-only drawer elements (hidden on desktop) */
+.eq-drawer-header,
+.eq-drawer-footer,
+.eq-drawer-backdrop {
+  display: none;
+}
+
 /* --- Dropdown & Mega-menu Navigation --- */
 .eq-nav-item {
   position: relative;
@@ -624,6 +631,34 @@ p {
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--eq-line);
   margin-bottom: 0.65rem;
+}
+
+.eq-nested-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--eq-line);
+}
+
+.eq-nested-header .eq-megamenu__heading {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  border-bottom: none !important;
+}
+
+.eq-nested-title {
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.eq-nested-title:hover {
+  color: var(--eq-gold);
+}
+
+.eq-nested-toggle-btn {
+  display: none !important;
 }
 
 .eq-megamenu__list {
@@ -2700,48 +2735,75 @@ p {
     height: 18px !important;
   }
 
-  /* Compact, Refined Mobile Hamburger Menu Toggle */
+  .eq-navbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10000 !important;
+  }
+
+  /* Compact, Refined Mobile Hamburger Menu Toggle with Smooth Back/Close Morphing */
   .eq-navbar__toggle {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
     flex-shrink: 0 !important;
-    width: 34px !important;
-    height: 34px !important;
-    min-width: 34px !important;
-    min-height: 34px !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
     padding: 0 !important;
     background: transparent !important;
     border: none !important;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer !important;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
-    z-index: 1070 !important;
+    z-index: 10050 !important;
     position: relative;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.25s ease, transform 0.2s ease;
   }
 
   .eq-navbar__toggle:active {
-    background-color: rgba(27, 58, 75, 0.08) !important;
+    transform: scale(0.94);
+  }
+
+  .eq-navbar__toggle,
+  .eq-navbar__toggle:hover,
+  .eq-navbar__toggle:focus,
+  .eq-navbar__toggle:active,
+  .eq-navbar__toggle.is-open,
+  .eq-navbar__toggle.is-open:hover,
+  .eq-navbar__toggle.is-open:focus,
+  .eq-navbar__toggle.is-open:active {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
   }
 
   .eq-navbar__toggle span {
     display: block;
-    width: 18px !important;
-    height: 1.75px !important;
+    width: 20px !important;
+    height: 2px !important;
     background-color: var(--eq-charcoal) !important;
     border-radius: 2px;
     pointer-events: none !important;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.22s ease,
+                background-color 0.25s ease !important;
+    transform-origin: center;
   }
 
   .eq-navbar__toggle span:nth-child(2) {
-    margin: 3.5px 0 !important;
+    margin: 4px 0 !important;
+  }
+
+  /* Iconic morphing into Back / Close 'X' */
+  .eq-navbar__toggle.is-open span {
+    background-color: var(--eq-navy) !important;
   }
 
   .eq-navbar__toggle.is-open span:nth-child(1) {
-    transform: translateY(5.25px) rotate(45deg) !important;
+    transform: translateY(6px) rotate(45deg) !important;
   }
 
   .eq-navbar__toggle.is-open span:nth-child(2) {
@@ -2750,37 +2812,81 @@ p {
   }
 
   .eq-navbar__toggle.is-open span:nth-child(3) {
-    transform: translateY(-5.25px) rotate(-45deg) !important;
+    transform: translateY(-6px) rotate(-45deg) !important;
   }
 
-  /* Ultra-Smooth Full-Height Mobile Drawer */
-  .eq-navbar__links {
+  /* =====================================================================
+     MOBILE NAVIGATION DRAWER — Opens from the RIGHT Side
+     - Slides out naturally from the right (100dvh full height)
+     - Toggle icon in header smoothly morphs into Back/Close '✕' option
+     - Full viewport backdrop with soft blur and touch-scroll prevention
+     - Pinned drawer brand header aligned with navbar height
+     - Clean, smooth accordion subcategories with no awkward lines
+     ===================================================================== */
+
+  /* Backdrop overlay covering the full screen behind the drawer */
+  .eq-drawer-backdrop {
+    display: block !important;
     position: fixed !important;
-    top: 60px !important;
+    inset: 0 !important;
+    top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
-    width: 100% !important;
-    height: calc(100vh - 60px) !important;
-    height: calc(100dvh - 60px) !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    background-color: rgba(27, 58, 75, 0.45) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s !important;
+    z-index: 9998 !important;
+    touch-action: none !important;
+  }
+
+  .eq-drawer-backdrop.is-active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  /* Off-canvas mobile slide drawer from RIGHT (Full Viewport Height) */
+  .eq-navbar__links {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: auto !important;
+    bottom: 0 !important;
+    width: min(320px, 84vw) !important;
+    max-width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
     background-color: #f7f2e9 !important;
-    border-top: 1px solid var(--eq-line);
+    box-shadow: none !important;
     flex-direction: column !important;
     align-items: stretch !important;
     justify-content: flex-start !important;
-    padding: 1.25rem 1.25rem 3.5rem !important;
-    gap: 0.25rem !important;
-    transform: translateX(-100%);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                opacity 0.25s ease,
-                visibility 0.35s;
+    padding: 0 1.15rem 2.5rem !important;
+    gap: 0.15rem !important;
+    transform: translateX(100%) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.2s ease,
+                visibility 0.32s !important;
     overflow-y: auto !important;
+    overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch !important;
-    z-index: 1060 !important;
-    box-shadow: 0 12px 36px rgba(27, 58, 75, 0.16);
+    touch-action: pan-y !important;
+    overscroll-behavior-y: contain !important;
+    z-index: 9999 !important;
+    border-left: 1px solid rgba(201, 150, 47, 0.22) !important;
+    border-top: none !important;
+    border-right: none !important;
   }
 
   .eq-navbar__links.is-open {
@@ -2788,140 +2894,410 @@ p {
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
+    box-shadow: -12px 0 40px rgba(27, 58, 75, 0.24) !important;
+  }
+
+  /* Drawer Sticky Top Header aligned with 60px Navbar height */
+  .eq-drawer-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: calc(100% + 2.3rem) !important;
+    margin: 0 -1.15rem 0.85rem -1.15rem !important;
+    padding: 0 1.15rem !important;
+    background-color: #f7f2e9 !important;
+    border-bottom: 1px solid rgba(27, 58, 75, 0.08) !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 15 !important;
+    height: 60px !important;
+    min-height: 60px !important;
+    box-sizing: border-box !important;
+  }
+
+  .eq-drawer-logo,
+  .eq-navbar__links a.eq-drawer-logo,
+  .eq-navbar__links a.eq-drawer-logo:hover,
+  .eq-navbar__links a.eq-drawer-logo:focus,
+  .eq-navbar__links a.eq-drawer-logo:active,
+  .eq-navbar__links a.eq-drawer-logo.is-active,
+  .eq-drawer-header a,
+  .eq-drawer-header a:hover,
+  .eq-drawer-header a:focus,
+  .eq-drawer-header a:active,
+  .eq-drawer-header a.is-active,
+  .eq-navbar__logo,
+  .eq-navbar__logo:hover,
+  .eq-navbar__logo:focus,
+  .eq-navbar__logo:active,
+  .eq-navbar__logo.is-active {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: auto !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+    transform: none !important;
+  }
+
+  .eq-drawer-logo img {
+    height: 36px !important;
+    width: auto !important;
+    display: block !important;
+    object-fit: contain !important;
+  }
+
+  /* Internal close btn hidden since morphing toggle in navbar acts as the trigger */
+  .eq-drawer-close-btn {
+    display: none !important;
+  }
+
+  /* Mobile Primary Navigation Links */
+  .eq-navbar__links li {
+    list-style: none !important;
+    width: 100% !important;
   }
 
   .eq-navbar__links a {
-    font-size: 1.18rem;
-    font-weight: 500;
-    color: var(--eq-charcoal);
-    width: 100%;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--eq-line);
+    display: flex !important;
+    align-items: center !important;
+    font-family: var(--font-heading) !important;
+    font-size: 1.08rem !important;
+    font-weight: 500 !important;
+    color: var(--eq-navy) !important;
+    width: 100% !important;
+    padding: 0.65rem 0.85rem !important;
+    border: none !important;
+    border-radius: 8px !important;
+    letter-spacing: 0.01em !important;
+    text-decoration: none !important;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease !important;
+  }
+
+  .eq-navbar__links a::after {
+    display: none !important;
   }
 
   .eq-navbar__links a:hover,
   .eq-navbar__links a.is-active {
-    color: var(--eq-gold-dark);
-    border-bottom-color: var(--eq-gold);
+    background-color: rgba(201, 150, 47, 0.1) !important;
+    color: var(--eq-gold-dark) !important;
   }
 
-  /* Mobile Dropdown Accordion */
+  /* Dropdown Row */
   .eq-nav-item--has-dropdown {
-    width: 100%;
-    border-bottom: 1px solid var(--eq-line);
+    width: 100% !important;
+    border: none !important;
   }
 
   .eq-nav-link-wrapper {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    border-radius: 8px !important;
+    transition: background-color 0.2s ease !important;
+  }
+
+  .eq-nav-link-wrapper:hover,
+  .eq-nav-item--has-dropdown.is-expanded .eq-nav-link-wrapper {
+    background-color: rgba(27, 58, 75, 0.04) !important;
   }
 
   .eq-nav-link-wrapper a {
-    border-bottom: none !important;
-    padding: 0.75rem 0 !important;
-    flex: 1;
-    font-size: 1.18rem;
-    font-weight: 500;
+    flex: 1 !important;
+    border: none !important;
+    padding: 0.65rem 0.85rem !important;
   }
 
+  /* Circular Chevron Toggle Button */
   .eq-dropdown-toggle-btn {
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    color: var(--eq-charcoal);
-    cursor: pointer;
-    transition: transform var(--transition-standard);
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgba(27, 58, 75, 0.04) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    color: var(--eq-navy) !important;
+    cursor: pointer !important;
+    margin-right: 4px !important;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease !important;
+    touch-action: manipulation !important;
   }
 
-  .eq-nav-item--has-dropdown.is-expanded .eq-dropdown-toggle-btn svg {
-    transform: rotate(180deg);
-    color: var(--eq-gold-dark);
+  .eq-dropdown-toggle-btn:active {
+    background-color: rgba(201, 150, 47, 0.18) !important;
   }
 
+  .eq-nav-item--has-dropdown.is-expanded .eq-dropdown-toggle-btn {
+    transform: rotate(180deg) !important;
+    background-color: rgba(201, 150, 47, 0.14) !important;
+    color: var(--eq-gold-dark) !important;
+  }
+
+  /* Subcategories Panel (Minimal Accordion, Clean Indentation) */
   .eq-megamenu {
-    display: none;
-    position: static;
-    transform: none;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    width: 100%;
-    max-width: 100%;
-    box-shadow: none;
-    border: none;
-    border-radius: 0;
-    background: transparent;
-    padding: 0.35rem 0 0.75rem 0.85rem;
-    border-left: 2px solid var(--eq-gold);
-    margin: 0.25rem 0 0.5rem 0.25rem;
+    display: none !important;
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: rgba(27, 58, 75, 0.02) !important;
+    border-radius: 8px !important;
+    padding: 0.6rem 0.65rem 0.75rem !important;
+    margin: 0.25rem 0 0.45rem 0 !important;
+    border-left: 2px solid var(--eq-gold) !important;
   }
 
   .eq-nav-item--has-dropdown.is-expanded .eq-megamenu {
-    display: block;
-    animation: eq-fade-in 0.25s ease-out;
+    display: block !important;
+    animation: eq-fade-in 0.24s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
-  .eq-megamenu__grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
+  /* Clean Vertical Stacking: Override all desktop multi-column grids */
+  .eq-megamenu__grid,
+  .eq-megamenu__grid--2col {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+    width: 100% !important;
+    gap: 0.75rem !important;
   }
 
+  .eq-megamenu__col {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* Minimal Category Sub-Heading (No awkward lines) */
   .eq-megamenu__heading {
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    color: var(--eq-navy);
-    font-weight: 600;
-    margin-bottom: 0.35rem;
-    padding-bottom: 0.25rem;
-    border-bottom: 1px dashed var(--eq-line);
+    font-family: var(--font-body) !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    color: var(--eq-gold-dark) !important;
+    font-weight: 600 !important;
+    margin: 0.25rem 0 0.25rem 0.4rem !important;
+    padding-bottom: 0 !important;
+    border: none !important;
   }
 
   .eq-megamenu__list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.12rem !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .eq-megamenu__list li {
+    width: 100% !important;
   }
 
   .eq-megamenu__list a {
-    font-size: 0.98rem !important;
+    font-family: var(--font-body) !important;
+    font-size: 0.93rem !important;
     font-weight: 400 !important;
-    color: var(--eq-charcoal-soft) !important;
-    padding: 0.35rem 0 !important;
-    border-bottom: none !important;
+    color: #4b5563 !important;
+    padding: 0.45rem 0.65rem !important;
+    border: none !important;
+    border-radius: 6px !important;
+    background: transparent !important;
+    transition: all 0.2s ease !important;
   }
 
-  .eq-megamenu__list a:hover {
-    color: var(--eq-gold-dark) !important;
-    padding-left: 4px !important;
+  .eq-megamenu__list a:hover,
+  .eq-megamenu__list a:active {
+    background-color: rgba(201, 150, 47, 0.1) !important;
+    color: var(--eq-navy) !important;
+    padding-left: 0.85rem !important;
   }
 
   .eq-megamenu__view-all {
     font-weight: 600 !important;
     color: var(--eq-gold-dark) !important;
-    margin-top: 0.25rem;
+    margin-top: 0.2rem !important;
   }
 
+  /* Mobile Nested Subcategories (Women > Saree > Subcategories) */
+  .eq-submenu-nested {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    border-radius: 6px !important;
+    margin-bottom: 0.35rem !important;
+  }
+
+  .eq-nested-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0.38rem 0.55rem !important;
+    border-radius: 6px !important;
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+    background: transparent !important;
+    transition: background-color 0.2s ease !important;
+  }
+
+  .eq-nested-header:hover {
+    background-color: rgba(201, 150, 47, 0.08) !important;
+  }
+
+  .eq-nested-title {
+    font-family: var(--font-body) !important;
+    font-size: 0.93rem !important;
+    font-weight: 500 !important;
+    color: var(--eq-charcoal) !important;
+    text-decoration: none !important;
+    flex: 1 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+  }
+
+  .eq-nested-toggle-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 28px !important;
+    height: 28px !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 50% !important;
+    background: rgba(27, 58, 75, 0.05) !important;
+    color: var(--eq-charcoal-soft) !important;
+    cursor: pointer !important;
+    transition: transform 0.22s ease, background-color 0.2s ease, color 0.2s ease !important;
+  }
+
+  .eq-nested-toggle-btn svg {
+    pointer-events: none !important;
+    transition: transform 0.22s ease !important;
+  }
+
+  .eq-submenu-nested.is-expanded > .eq-nested-header .eq-nested-toggle-btn {
+    background-color: rgba(201, 150, 47, 0.16) !important;
+    color: var(--eq-gold-dark) !important;
+  }
+
+  .eq-submenu-nested.is-expanded > .eq-nested-header .eq-nested-toggle-btn svg {
+    transform: rotate(180deg) !important;
+  }
+
+  .eq-nested-list {
+    display: none !important;
+    flex-direction: column !important;
+    gap: 0.12rem !important;
+    list-style: none !important;
+    padding: 0.2rem 0 0.35rem 0.85rem !important;
+    margin: 0.15rem 0 0.3rem 0.6rem !important;
+    border-left: 2px solid rgba(201, 150, 47, 0.35) !important;
+  }
+
+  .eq-submenu-nested.is-expanded > .eq-nested-list {
+    display: flex !important;
+    animation: eq-fade-in 0.2s ease !important;
+  }
+
+  /* Hide bulky desktop visual image cards inside mobile accordion */
   .eq-megamenu__feature {
     display: none !important;
   }
 
-  /* Safe Body Scroll Lock when Mobile Navigation Drawer is Open */
+  /* Mobile Drawer Minimal Footer with Quick Actions */
+  .eq-drawer-footer {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    margin-top: auto !important;
+    padding-top: 1.5rem !important;
+    border-top: 1px solid rgba(27, 58, 75, 0.08) !important;
+    width: 100% !important;
+  }
+
+  .eq-drawer-actions {
+    display: flex !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+  }
+
+  .eq-drawer-action-btn {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.45rem !important;
+    padding: 0.6rem 0.5rem !important;
+    font-family: var(--font-body) !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    border-radius: 8px !important;
+    background-color: rgba(27, 58, 75, 0.05) !important;
+    color: var(--eq-navy) !important;
+    border: none !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    transition: background-color 0.2s ease !important;
+  }
+
+  .eq-drawer-action-btn:hover,
+  .eq-drawer-action-btn:active {
+    background-color: rgba(201, 150, 47, 0.16) !important;
+    color: var(--eq-navy) !important;
+  }
+
+  .eq-drawer-tagline {
+    margin: 0 !important;
+    font-family: var(--font-body) !important;
+    font-size: 0.72rem !important;
+    color: var(--eq-charcoal-soft) !important;
+    text-align: center !important;
+    letter-spacing: 0.03em !important;
+    opacity: 0.85 !important;
+  }
+
+  /* Safe Scroll & Touch Lock when Drawer is Open */
   html.eq-drawer-open,
   body.eq-drawer-open {
     overflow: hidden !important;
+    height: 100% !important;
     touch-action: none !important;
+    overscroll-behavior: contain !important;
   }
 
-  html.eq-drawer-open .eq-navbar__links,
-  body.eq-drawer-open .eq-navbar__links {
-    touch-action: pan-y !important;
+  /* When drawer is open on mobile: remove navbar backdrop-filter, border, and shadow so no containing block or clash occurs */
+  body.eq-drawer-open .eq-navbar,
+  .eq-navbar.has-drawer-open {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    border-bottom-color: transparent !important;
+  }
+
+  /* Smoothly hide navbar action icons (Search, Account, Cart) when drawer is open to eliminate visual conflict */
+  body.eq-drawer-open .eq-navbar__icons {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+    transition: opacity 0.2s ease, visibility 0.2s ease !important;
   }
 
   /* Hero Section on Mobile: Reduced height, full-width photo, subtle bottom gradient, compact side/bottom text overlay */
@@ -4639,6 +5015,94 @@ p {
 .eq-cat-pill__count {
   font-size: 0.72rem;
   opacity: 0.75;
+}
+
+/* Nested Subcategory Filter Pills (e.g. Women > Saree > Jamdani, Tantuj, etc.) */
+.eq-cat-nested-pills-wrap {
+  margin-top: 0.85rem;
+  padding: 0.65rem 0.95rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(218, 165, 32, 0.28);
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  animation: eqFadeInSub 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 3px 12px rgba(27, 58, 75, 0.04);
+}
+
+.eq-cat-nested-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--eq-gold-dark);
+  margin-right: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.eq-cat-subpill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.32rem 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--eq-charcoal);
+  background-color: var(--eq-white);
+  border: 1px solid var(--eq-line);
+  border-radius: var(--radius-pill);
+  transition: all var(--transition-standard);
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.eq-cat-subpill:hover {
+  border-color: var(--eq-gold);
+  color: var(--eq-gold-dark);
+  background-color: var(--eq-cream-soft);
+  transform: translateY(-1px);
+}
+
+.eq-cat-subpill.is-active {
+  background-color: var(--eq-gold);
+  border-color: var(--eq-gold);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(184, 134, 11, 0.28);
+}
+
+@keyframes eqFadeInSub {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .eq-cat-nested-pills-wrap {
+    display: flex;
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    border-radius: var(--radius-sm);
+    scrollbar-width: none;
+  }
+  .eq-cat-nested-pills-wrap::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* 3. Catalog Controls Toolbar */

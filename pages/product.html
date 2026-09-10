@@ -283,14 +283,61 @@
         catLabel.textContent = `NOUS TELOS • ${cat}${sub ? ' • ' + sub : ''}`;
       }
 
-      // Breadcrumb
-      const bcCat = document.querySelector("#bc-category a");
-      if (bcCat) {
-        bcCat.textContent = product.categoryLabel || (product.category.charAt(0).toUpperCase() + product.category.slice(1));
-        bcCat.href = `${product.category}.html`;
+      // Dynamic Breadcrumb following the new hierarchy: Women > Saree > Subcategory > Product
+      const bcList = document.querySelector("#eq-breadcrumb-list");
+      if (bcList) {
+        let bcHtml = `<li><a href="../index.html" style="color: inherit; text-decoration: none;">Home</a></li>`;
+        
+        if (product.category === "women") {
+          bcHtml += `<li style="color: var(--eq-line-dark);">&rsaquo;</li>`;
+          bcHtml += `<li><a href="women.html" style="color: inherit; text-decoration: none;">Women</a></li>`;
+          
+          const isSaree = ["jamdani", "tantuj", "half-silk", "full-silk"].includes(product.subCategory) || (product.categoryLabel && product.categoryLabel.toLowerCase().includes("saree"));
+          
+          if (isSaree) {
+            bcHtml += `<li style="color: var(--eq-line-dark);">&rsaquo;</li>`;
+            bcHtml += `<li><a href="saree.html" style="color: inherit; text-decoration: none;">Saree</a></li>`;
+            
+            const subNames = {
+              "jamdani": { label: "Jamdani", url: "saree-jamdani.html" },
+              "tantuj": { label: "Tantuj & Tangail", url: "saree-tantuj.html" },
+              "half-silk": { label: "Half Silk", url: "saree-half-silk.html" },
+              "full-silk": { label: "Pure Silk", url: "saree-full-silk.html" }
+            };
+            if (product.subCategory && subNames[product.subCategory]) {
+              bcHtml += `<li style="color: var(--eq-line-dark);">&rsaquo;</li>`;
+              bcHtml += `<li><a href="${subNames[product.subCategory].url}" style="color: inherit; text-decoration: none;">${subNames[product.subCategory].label}</a></li>`;
+            }
+          } else if (product.subCategory === "three-piece") {
+            bcHtml += `<li style="color: var(--eq-line-dark);">&rsaquo;</li>`;
+            bcHtml += `<li><a href="three-piece.html" style="color: inherit; text-decoration: none;">Three Piece</a></li>`;
+          } else if (product.subCategory === "two-piece") {
+            bcHtml += `<li style="color: var(--eq-line-dark);">&rsaquo;</li>`;
+            bcHtml += `<li><a href="two-piece.html" style="color: inherit; text-decoration: none;">Two Piece</a></li>`;
+          }
+        } else if (product.category === "home-decor") {
+          bcHtml += `<li style="color: var(--eq-line-dark);">&rsaquo;</li>`;
+          bcHtml += `<li><a href="home-decor.html" style="color: inherit; text-decoration: none;">Home Decor</a></li>`;
+          if (product.subCategory === "kantha") {
+            bcHtml += `<li style="color: var(--eq-line-dark);">&rsaquo;</li>`;
+            bcHtml += `<li><a href="home-decor-kantha.html" style="color: inherit; text-decoration: none;">Nakshi Kantha</a></li>`;
+          } else if (product.subCategory === "bedsheet") {
+            bcHtml += `<li style="color: var(--eq-line-dark);">&rsaquo;</li>`;
+            bcHtml += `<li><a href="home-decor-bedsheet.html" style="color: inherit; text-decoration: none;">Bedsheet Sets</a></li>`;
+          } else if (product.subCategory === "cushion-cover") {
+            bcHtml += `<li style="color: var(--eq-line-dark);">&rsaquo;</li>`;
+            bcHtml += `<li><a href="home-decor-cushion.html" style="color: inherit; text-decoration: none;">Cushion Cover</a></li>`;
+          }
+        } else {
+          bcHtml += `<li style="color: var(--eq-line-dark);">&rsaquo;</li>`;
+          const catName = product.category ? (product.category.charAt(0).toUpperCase() + product.category.slice(1)) : "Collection";
+          bcHtml += `<li><a href="${product.category}.html" style="color: inherit; text-decoration: none;">${catName}</a></li>`;
+        }
+        
+        bcHtml += `<li style="color: var(--eq-line-dark);">&rsaquo;</li>`;
+        bcHtml += `<li style="color: var(--eq-charcoal); font-weight: 500;" aria-current="page">${product.name}</li>`;
+        bcList.innerHTML = bcHtml;
       }
-      const bcProd = document.querySelector("#bc-product");
-      if (bcProd) bcProd.textContent = product.name;
 
       // Images
       const mainImg = document.querySelector("#main-product-img");

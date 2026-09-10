@@ -19,7 +19,7 @@
       name: "Crimson Heirloom Jamdani",
       category: "women",
       subCategory: "jamdani",
-      categoryLabel: "Saree Atelier",
+      categoryLabel: "Saree",
       subLabel: "Jamdani",
       price: 18500,
       oldPrice: 22000,
@@ -41,7 +41,7 @@
       name: "Midnight Indigo Tantuj Drape",
       category: "women",
       subCategory: "tantuj",
-      categoryLabel: "Saree Atelier",
+      categoryLabel: "Saree",
       subLabel: "Tantuj & Tangail",
       price: 7800,
       oldPrice: null,
@@ -63,7 +63,7 @@
       name: "Royal Champagne Half Silk",
       category: "women",
       subCategory: "half-silk",
-      categoryLabel: "Saree Atelier",
+      categoryLabel: "Saree",
       subLabel: "Half Silk",
       price: 12400,
       oldPrice: 14500,
@@ -85,7 +85,7 @@
       name: "Emerald Rajshahi Pure Silk",
       category: "women",
       subCategory: "full-silk",
-      categoryLabel: "Saree Atelier",
+      categoryLabel: "Saree",
       subLabel: "Pure Silk",
       price: 24500,
       oldPrice: 28000,
@@ -107,7 +107,7 @@
       name: "Onyx Zari Border Jamdani",
       category: "women",
       subCategory: "jamdani",
-      categoryLabel: "Saree Atelier",
+      categoryLabel: "Saree",
       subLabel: "Jamdani",
       price: 21000,
       oldPrice: 25000,
@@ -129,7 +129,7 @@
       name: "Mustard Gold Heritage Tant",
       category: "women",
       subCategory: "tantuj",
-      categoryLabel: "Saree Atelier",
+      categoryLabel: "Saree",
       subLabel: "Tantuj & Tangail",
       price: 6500,
       oldPrice: 7200,
@@ -770,17 +770,35 @@
       desc: "Artisanal sarees woven on heritage wooden looms, alongside impeccably tailored three-piece and modern co-ord ensembles.",
       subCategories: [
         { key: "all", label: "All Women" },
-        { key: "saree", label: "Saree Atelier" },
-        { key: "jamdani", label: "Jamdani Weaves" },
-        { key: "tantuj", label: "Tantuj & Tangail" },
-        { key: "half-silk", label: "Half Silk" },
-        { key: "full-silk", label: "Pure Silk" },
-        { key: "three-piece", label: "Three Piece" },
-        { key: "two-piece", label: "Two Piece" }
+        { 
+          key: "saree", 
+          label: "Saree",
+          nested: [
+            { key: "all", label: "All Sarees" },
+            { key: "jamdani", label: "Jamdani" },
+            { key: "tantuj", label: "Tantuj & Tangail" },
+            { key: "half-silk", label: "Half Silk" },
+            { key: "full-silk", label: "Pure Silk" }
+          ]
+        },
+        { 
+          key: "three-piece", 
+          label: "Three Piece",
+          nested: [
+            { key: "all", label: "All Three-Piece" }
+          ]
+        },
+        { 
+          key: "two-piece", 
+          label: "Two Piece",
+          nested: [
+            { key: "all", label: "All Two-Piece" }
+          ]
+        }
       ]
     },
     "saree": {
-      title: "Saree Atelier",
+      title: "Saree",
       eyebrow: "HERITAGE HANDLOOMS",
       desc: "Centuries of weaving mastery from Tangail, Narayanganj and Rajshahi. Handloom Jamdani, pure silks, and everyday festive drapes.",
       subCategories: [
@@ -860,6 +878,7 @@
   const state = {
     activeCategory: "women",
     activeSubCategory: "all",
+    activeNestedSubCategory: "all",
     priceMax: 30000,
     selectedFabrics: new Set(),
     selectedColors: new Set(),
@@ -928,7 +947,17 @@
     }
 
     if (sub) {
-      state.activeSubCategory = sub;
+      if (state.activeCategory === "women" && ["jamdani", "tantuj", "half-silk", "full-silk"].includes(sub)) {
+        state.activeSubCategory = "saree";
+        state.activeNestedSubCategory = sub;
+      } else {
+        state.activeSubCategory = sub;
+      }
+    }
+
+    const type = params.get("type");
+    if (type) {
+      state.activeNestedSubCategory = type;
     }
   }
 
@@ -965,7 +994,29 @@
 
     // Dynamic Title based on SubCategory if active
     let displayTitle = meta.title;
-    if (state.activeSubCategory && state.activeSubCategory !== "all") {
+    let displayEyebrow = meta.eyebrow;
+    let displayDesc = meta.desc;
+
+    if (state.activeCategory === "women") {
+      if (state.activeSubCategory === "saree") {
+        displayEyebrow = "HERITAGE HANDLOOMS";
+        if (state.activeNestedSubCategory && state.activeNestedSubCategory !== "all") {
+          const sareeSubMeta = CATEGORY_META["saree"].subCategories.find(s => s.key === state.activeNestedSubCategory);
+          displayTitle = sareeSubMeta ? `${sareeSubMeta.label} — Saree` : "Saree";
+        } else {
+          displayTitle = "Saree — Women's Collection";
+        }
+        displayDesc = CATEGORY_META["saree"].desc;
+      } else if (state.activeSubCategory === "three-piece") {
+        displayTitle = "Three Piece Sets — Women's Collection";
+        displayEyebrow = CATEGORY_META["three-piece"].eyebrow;
+        displayDesc = CATEGORY_META["three-piece"].desc;
+      } else if (state.activeSubCategory === "two-piece") {
+        displayTitle = "Two Piece Ensembles — Women's Collection";
+        displayEyebrow = CATEGORY_META["two-piece"].eyebrow;
+        displayDesc = CATEGORY_META["two-piece"].desc;
+      }
+    } else if (state.activeSubCategory && state.activeSubCategory !== "all") {
       const activeSubObj = meta.subCategories ? meta.subCategories.find(s => s.key === state.activeSubCategory) : null;
       if (activeSubObj) {
         displayTitle = `${activeSubObj.label} — ${meta.title}`;
@@ -973,31 +1024,75 @@
     }
 
     if (titleEl) titleEl.textContent = displayTitle;
-    if (eyebrowEl) eyebrowEl.textContent = meta.eyebrow;
-    if (descEl) descEl.textContent = meta.desc;
-    if (breadcrumbCurrent) {
-      if (state.activeSubCategory && state.activeSubCategory !== "all") {
-        const activeSubObj = meta.subCategories ? meta.subCategories.find(s => s.key === state.activeSubCategory) : null;
-        breadcrumbCurrent.textContent = activeSubObj ? activeSubObj.label : meta.title;
-      } else {
-        breadcrumbCurrent.textContent = meta.title;
-      }
-    }
+    if (eyebrowEl) eyebrowEl.textContent = displayEyebrow;
+    if (descEl) descEl.textContent = displayDesc;
 
-    if (breadcrumbParent) {
-      if (state.activeCategory === "saree" || state.activeCategory === "three-piece" || state.activeCategory === "two-piece") {
-        breadcrumbParent.innerHTML = `<a href="women.html">Women</a> › `;
-      } else if (state.activeCategory === "home-decor" && state.activeSubCategory !== "all") {
-        breadcrumbParent.innerHTML = `<a href="home-decor.html">Home Decor</a> › `;
+    // Robust Breadcrumb Trail following Women > Saree > Subcategories hierarchy
+    const breadcrumbList = document.querySelector(".eq-breadcrumbs ol");
+    if (breadcrumbList) {
+      let bHtml = `<li><a href="../index.html">Home</a></li>`;
+      if (state.activeCategory === "saree") {
+        bHtml += `<li><a href="women.html">Women</a></li>`;
+        if (state.activeSubCategory && state.activeSubCategory !== "all") {
+          bHtml += `<li><a href="saree.html">Saree</a></li>`;
+          const activeSubObj = meta.subCategories ? meta.subCategories.find(s => s.key === state.activeSubCategory) : null;
+          bHtml += `<li aria-current="page" id="breadcrumb-current">${activeSubObj ? activeSubObj.label : "Saree"}</li>`;
+        } else {
+          bHtml += `<li aria-current="page" id="breadcrumb-current">${meta.title}</li>`;
+        }
+      } else if (state.activeCategory === "three-piece") {
+        bHtml += `<li><a href="women.html">Women</a></li>`;
+        bHtml += `<li aria-current="page" id="breadcrumb-current">Three Piece Sets</li>`;
+      } else if (state.activeCategory === "two-piece") {
+        bHtml += `<li><a href="women.html">Women</a></li>`;
+        bHtml += `<li aria-current="page" id="breadcrumb-current">Two Piece Ensembles</li>`;
+      } else if (state.activeCategory === "women") {
+        if (state.activeSubCategory === "saree") {
+          bHtml += `<li><a href="women.html">Women</a></li>`;
+          if (state.activeNestedSubCategory && state.activeNestedSubCategory !== "all") {
+            bHtml += `<li><a href="javascript:void(0)" class="eq-breadcrumb-saree-link">Saree</a></li>`;
+            const sareeSubMeta = CATEGORY_META["saree"].subCategories.find(s => s.key === state.activeNestedSubCategory);
+            bHtml += `<li aria-current="page" id="breadcrumb-current">${sareeSubMeta ? sareeSubMeta.label : "Saree"}</li>`;
+          } else {
+            bHtml += `<li aria-current="page" id="breadcrumb-current">Saree</li>`;
+          }
+        } else if (state.activeSubCategory === "three-piece") {
+          bHtml += `<li><a href="women.html">Women</a></li>`;
+          bHtml += `<li aria-current="page" id="breadcrumb-current">Three Piece Sets</li>`;
+        } else if (state.activeSubCategory === "two-piece") {
+          bHtml += `<li><a href="women.html">Women</a></li>`;
+          bHtml += `<li aria-current="page" id="breadcrumb-current">Two Piece Ensembles</li>`;
+        } else {
+          bHtml += `<li aria-current="page" id="breadcrumb-current">${meta.title}</li>`;
+        }
+      } else if (state.activeCategory === "home-decor") {
+        if (state.activeSubCategory && state.activeSubCategory !== "all") {
+          bHtml += `<li><a href="home-decor.html">Home Decor</a></li>`;
+          const activeSubObj = meta.subCategories ? meta.subCategories.find(s => s.key === state.activeSubCategory) : null;
+          bHtml += `<li aria-current="page" id="breadcrumb-current">${activeSubObj ? activeSubObj.label : "Home Decor"}</li>`;
+        } else {
+          bHtml += `<li aria-current="page" id="breadcrumb-current">${meta.title}</li>`;
+        }
       } else {
-        breadcrumbParent.innerHTML = "";
+        bHtml += `<li aria-current="page" id="breadcrumb-current">${meta.title}</li>`;
+      }
+      breadcrumbList.innerHTML = bHtml;
+
+      const bcSareeLink = breadcrumbList.querySelector(".eq-breadcrumb-saree-link");
+      if (bcSareeLink) {
+        bcSareeLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          state.activeNestedSubCategory = "all";
+          state.currentPage = 1;
+          renderAll();
+        });
       }
     }
 
     // Update document title
     document.title = `${displayTitle} — Earthquick by Nous Telos`;
 
-    // Render Subcategory Filter Pills
+    // Render Subcategory Filter Pills (Primary Row)
     const pillsContainer = document.querySelector("#cat-pills-container");
     if (pillsContainer) {
       pillsContainer.innerHTML = "";
@@ -1009,11 +1104,58 @@
           pill.textContent = sub.label;
           pill.addEventListener("click", () => {
             state.activeSubCategory = sub.key;
+            state.activeNestedSubCategory = "all";
             state.currentPage = 1;
             renderAll();
           });
           pillsContainer.appendChild(pill);
         });
+      }
+    }
+
+    // Render Nested Subcategory Filter Pills (Secondary Row for Saree, etc.)
+    let nestedContainer = document.querySelector("#cat-nested-pills-container");
+    if (!nestedContainer && pillsContainer && pillsContainer.parentNode) {
+      nestedContainer = document.createElement("div");
+      nestedContainer.id = "cat-nested-pills-container";
+      nestedContainer.className = "eq-cat-nested-pills-wrap";
+      pillsContainer.parentNode.insertBefore(nestedContainer, pillsContainer.nextSibling);
+    }
+
+    if (nestedContainer) {
+      let nestedItems = null;
+      let nestedLabel = "";
+
+      if (state.activeCategory === "women" && state.activeSubCategory === "saree") {
+        const sareeSub = meta.subCategories ? meta.subCategories.find(s => s.key === "saree") : null;
+        nestedItems = (sareeSub && sareeSub.nested) ? sareeSub.nested : (CATEGORY_META["saree"] ? CATEGORY_META["saree"].subCategories : null);
+        nestedLabel = "Saree Weaves:";
+      } else if (state.activeCategory === "women") {
+        const activeSubObj = meta.subCategories ? meta.subCategories.find(s => s.key === state.activeSubCategory) : null;
+        if (activeSubObj && activeSubObj.nested && activeSubObj.nested.length > 1) {
+          nestedItems = activeSubObj.nested;
+          nestedLabel = `${activeSubObj.label} Types:`;
+        }
+      }
+
+      if (nestedItems && nestedItems.length > 1) {
+        nestedContainer.style.display = "inline-flex";
+        nestedContainer.innerHTML = `<span class="eq-cat-nested-label">${nestedLabel}</span>`;
+        nestedItems.forEach(nItem => {
+          const subPill = document.createElement("button");
+          subPill.type = "button";
+          subPill.className = `eq-cat-subpill ${state.activeNestedSubCategory === nItem.key ? "is-active" : ""}`;
+          subPill.textContent = nItem.label;
+          subPill.addEventListener("click", () => {
+            state.activeNestedSubCategory = nItem.key;
+            state.currentPage = 1;
+            renderAll();
+          });
+          nestedContainer.appendChild(subPill);
+        });
+      } else {
+        nestedContainer.style.display = "none";
+        nestedContainer.innerHTML = "";
       }
     }
   }
@@ -1037,8 +1179,21 @@
       }
 
       // 2. Subcategory Matching
-      if (state.activeSubCategory !== "all") {
-        if (item.subCategory !== state.activeSubCategory) return false;
+      if (state.activeCategory === "women") {
+        if (state.activeSubCategory === "saree") {
+          const isSaree = ["jamdani", "tantuj", "half-silk", "full-silk"].includes(item.subCategory) || (item.categoryLabel && item.categoryLabel.toLowerCase().includes("saree"));
+          if (!isSaree) return false;
+          // Check nested saree subcategory filter
+          if (state.activeNestedSubCategory && state.activeNestedSubCategory !== "all") {
+            if (item.subCategory !== state.activeNestedSubCategory) return false;
+          }
+        } else if (state.activeSubCategory !== "all") {
+          if (item.subCategory !== state.activeSubCategory) return false;
+        }
+      } else {
+        if (state.activeSubCategory !== "all") {
+          if (item.subCategory !== state.activeSubCategory) return false;
+        }
       }
 
       // 3. Price Filter
