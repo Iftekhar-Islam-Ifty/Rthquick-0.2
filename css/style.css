@@ -7901,6 +7901,1095 @@ p {
   }
 }
 
+/* =====================================================================
+   ABOUT US, VENDOR COLLECTIVE & CONTACT PAGE STYLES
+   Future Laravel Blade Template: resources/views/pages/about.blade.php
+   ===================================================================== */
+
+/* =====================================================================
+   ABOUT US, VENDOR COLLECTIVE & CONTACT PAGE STYLES
+   Compact, User-Friendly & Fully Mobile/Tablet Responsive
+   Future Laravel Blade Template: resources/views/pages/about.blade.php
+   ===================================================================== */
+
+/* Section Spacing on About Page - Compact & Scannable */
+.eq-about-page .eq-section {
+  padding: 3rem 0;
+  position: relative;
+}
+
+.eq-about-page .eq-section--deep {
+  background-color: var(--eq-cream-deep);
+}
+
+.eq-about-intro {
+  max-width: 840px;
+  margin-bottom: 1.5rem;
+}
+
+.eq-about-intro p {
+  margin-bottom: 0.75rem;
+}
+
+.eq-about-intro p:last-child {
+  margin-bottom: 0;
+}
+
+/* Philosophy Concise Lead Highlight */
+.eq-philosophy-highlight {
+  max-width: 820px;
+  margin-bottom: 1.35rem;
+  border-left: 3px solid var(--eq-gold);
+  padding: 0.35rem 0 0.35rem 1rem;
+}
+
+.eq-philosophy-lead {
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--eq-charcoal);
+  margin: 0;
+}
+
+.eq-philosophy-lead strong {
+  color: var(--eq-navy);
+  font-weight: 600;
+}
+
+/* Typography Hierarchy Scoped to About Page */
+.eq-about-page .eq-heading-xl {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--eq-navy);
+  margin-bottom: 0.5rem;
+}
+
+.eq-about-page .eq-heading-lg {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--eq-navy);
+  margin-bottom: 0.25rem;
+}
+
+.eq-about-page .eq-eyebrow {
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--eq-gold-dark);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.eq-about-page .eq-body-lg {
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--eq-charcoal);
+}
+
+.eq-about-page .eq-body-muted {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--eq-charcoal-soft);
+}
+
+/* Section Header Bar */
+.eq-about-page .eq-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--eq-line);
+}
+
+.eq-about-page .eq-section-head .eq-text-link {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--eq-gold-dark);
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: color 0.15s ease;
+}
+
+.eq-about-page .eq-section-head .eq-text-link:hover {
+  color: var(--eq-navy);
+}
+
+/* Hero Banner & Quick Anchor Navigation Pills */
+.eq-about-hero {
+  background-color: var(--eq-cream-deep);
+  border-bottom: 1px solid var(--eq-line);
+  padding: 2.5rem 0 1.75rem;
+  text-align: center;
+}
+
+.eq-about-hero__lead {
+  max-width: 680px;
+  margin: 0.6rem auto 1.25rem;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--eq-charcoal-soft);
+}
+
+.eq-about-pill-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.eq-about-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.95rem;
+  background-color: #ffffff;
+  border: 1px solid var(--eq-line);
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--eq-charcoal);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.eq-about-pill:hover,
+.eq-about-pill:focus-visible {
+  background-color: var(--eq-navy);
+  color: #ffffff;
+  border-color: var(--eq-navy);
+  transform: translateY(-1px);
+}
+
+.eq-about-pill svg {
+  color: var(--eq-gold-dark);
+  flex-shrink: 0;
+}
+
+.eq-about-pill:hover svg {
+  color: #ffffff;
+}
+
+/* Story Highlights & Pillars (Section 1) */
+.eq-story-card {
+  background-color: #ffffff;
+  border: 1px solid var(--eq-line);
+  border-radius: 10px;
+  padding: 1.35rem 1.25rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.eq-story-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--eq-gold);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.eq-story-card__icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 8px;
+  background-color: rgba(200, 169, 107, 0.15);
+  color: var(--eq-gold-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+}
+
+.eq-story-card__title {
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: var(--eq-navy);
+  margin-bottom: 0.35rem;
+}
+
+.eq-story-card__desc {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--eq-charcoal-soft);
+  margin-bottom: 0;
+}
+
+/* Brand Ecosystem & Maker Collective Cards (Section 2) */
+.eq-vendor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.eq-vendor-card {
+  background-color: #ffffff;
+  border: 1px solid var(--eq-line);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+}
+
+.eq-vendor-card:hover {
+  border-color: var(--eq-gold);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
+}
+
+.eq-vendor-card__header {
+  padding: 0.85rem 1.15rem 0.65rem;
+  border-bottom: 1px solid var(--eq-line);
+  background-color: var(--eq-cream);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.eq-vendor-card__badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.65rem;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  color: var(--eq-navy);
+  border: 1px solid var(--eq-line);
+  white-space: nowrap;
+}
+
+.eq-vendor-card__badge--featured {
+  background-color: var(--eq-gold);
+  color: #ffffff;
+  border-color: var(--eq-gold);
+}
+
+.eq-vendor-card__badge--open {
+  background-color: #2b7a78;
+  color: #ffffff;
+  border-color: #2b7a78;
+}
+
+.eq-vendor-card__body {
+  padding: 1.15rem 1.15rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.eq-vendor-card__name {
+  font-family: var(--font-display);
+  font-size: 1.22rem;
+  font-weight: 600;
+  color: var(--eq-navy);
+  margin-bottom: 0.2rem;
+}
+
+.eq-vendor-card__specialty {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--eq-gold-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.55rem;
+}
+
+.eq-vendor-card__story {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--eq-charcoal-soft);
+  margin-bottom: 0.75rem;
+  flex: 1;
+}
+
+.eq-vendor-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.eq-vendor-card__tag {
+  font-size: 0.74rem;
+  background-color: var(--eq-cream-deep);
+  color: var(--eq-charcoal);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.eq-vendor-card__footer {
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--eq-line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+/* Vendor Invitation Callout Banner */
+.eq-vendor-invite-box {
+  background: linear-gradient(135deg, var(--eq-navy) 0%, #172a3d 100%);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 1.5rem 1.75rem;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.eq-vendor-invite-box h3 {
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+  margin-bottom: 0.35rem;
+}
+
+.eq-vendor-invite-box p {
+  color: #e2e8f0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  max-width: 650px;
+  margin-bottom: 0;
+}
+
+#btn-inquire-vendor {
+  background-color: var(--eq-gold);
+  color: #ffffff;
+  border: 1px solid var(--eq-gold);
+  white-space: nowrap;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.86rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#btn-inquire-vendor:hover {
+  background-color: var(--eq-gold-dark);
+  border-color: var(--eq-gold-dark);
+  color: #ffffff;
+}
+
+/* Contact & Support Section (Section 3) */
+.eq-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.eq-contact-info-card {
+  background-color: #ffffff;
+  border: 1px solid var(--eq-line);
+  border-radius: 10px;
+  padding: 1.5rem 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.eq-contact-info-heading {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--eq-navy);
+  margin-bottom: 0.35rem;
+}
+
+.eq-contact-info-desc {
+  font-size: 0.88rem;
+  color: var(--eq-charcoal-soft);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.eq-contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-bottom: 1.15rem;
+}
+
+.eq-contact-info-item:last-child {
+  margin-bottom: 0;
+}
+
+.eq-contact-info-icon {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 8px;
+  background-color: var(--eq-cream-deep);
+  color: var(--eq-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eq-contact-info-title {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--eq-gold-dark);
+  margin-bottom: 0.2rem;
+}
+
+.eq-contact-info-val {
+  font-size: 0.88rem;
+  color: var(--eq-charcoal);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.eq-contact-info-val a {
+  color: var(--eq-charcoal);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.eq-contact-info-val a:hover {
+  color: var(--eq-gold-dark);
+}
+
+/* Contact Form Card */
+.eq-contact-form-card {
+  background-color: #ffffff;
+  border: 1px solid var(--eq-line);
+  border-radius: 10px;
+  padding: 1.5rem 1.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+}
+
+.eq-contact-form-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--eq-navy);
+  margin-bottom: 0.35rem;
+}
+
+.eq-contact-form-desc {
+  font-size: 0.88rem;
+  color: var(--eq-charcoal-soft);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.eq-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.eq-form-group {
+  margin-bottom: 0.85rem;
+}
+
+.eq-form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--eq-charcoal);
+  margin-bottom: 0.3rem;
+}
+
+.eq-form-input,
+.eq-form-select,
+.eq-form-textarea {
+  width: 100%;
+  padding: 0.55rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.88rem;
+  color: var(--eq-charcoal);
+  background-color: #ffffff;
+  border: 1px solid var(--eq-line);
+  border-radius: 6px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.eq-form-input:focus,
+.eq-form-select:focus,
+.eq-form-textarea:focus {
+  border-color: var(--eq-navy);
+  box-shadow: 0 0 0 3px rgba(18, 30, 49, 0.08);
+}
+
+.eq-form-textarea {
+  resize: vertical;
+  min-height: 85px;
+}
+
+#btn-submit-contact {
+  width: 100%;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.92rem;
+  border-radius: 6px;
+  font-weight: 500;
+  background-color: var(--eq-navy);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+#btn-submit-contact:hover {
+  background-color: var(--eq-charcoal);
+  transform: translateY(-1px);
+}
+
+/* Help & FAQ Section (Section 4) */
+.eq-faq-container {
+  max-width: 860px;
+  margin: 0;
+}
+
+.eq-faq-item {
+  background-color: #ffffff;
+  border: 1px solid var(--eq-line);
+  border-radius: 8px;
+  margin-bottom: 0.65rem;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.eq-faq-item:hover {
+  border-color: #cbd5e1;
+}
+
+.eq-faq-question {
+  width: 100%;
+  padding: 0.85rem 1.15rem;
+  text-align: left;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--eq-navy);
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.eq-faq-question svg {
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+  color: var(--eq-gold-dark);
+}
+
+.eq-faq-item.is-open .eq-faq-question svg {
+  transform: rotate(180deg);
+}
+
+.eq-faq-answer {
+  padding: 0 1.15rem 0.85rem;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--eq-charcoal-soft);
+  display: none;
+}
+
+.eq-faq-answer p {
+  margin-bottom: 0.5rem;
+}
+
+.eq-faq-answer p:last-child {
+  margin-bottom: 0;
+}
+
+.eq-faq-item.is-open .eq-faq-answer {
+  display: block;
+}
+
+/* Category Shortcuts Grid (Section 5) */
+.eq-shop-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.eq-shop-shortcut-card {
+  background-color: #ffffff;
+  border: 1px solid var(--eq-line);
+  border-radius: 8px;
+  padding: 0.95rem 0.75rem;
+  text-align: center;
+  text-decoration: none;
+  color: var(--eq-charcoal);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.eq-shop-shortcut-card:hover {
+  border-color: var(--eq-gold);
+  background-color: var(--eq-cream);
+  transform: translateY(-2px);
+  color: var(--eq-navy);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.eq-shop-shortcut-card strong {
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  color: var(--eq-navy);
+}
+
+.eq-shop-shortcut-card span {
+  font-size: 0.74rem;
+  color: var(--eq-gold-dark);
+  font-weight: 500;
+}
+
+/* =====================================================================
+   TABLET RESPONSIVE ADJUSTMENTS (max-width: 991px)
+   ===================================================================== */
+@media (max-width: 991px) {
+  .eq-about-page .eq-section {
+    padding: 2rem 0;
+  }
+
+  .eq-about-page .eq-heading-xl {
+    font-size: 1.85rem;
+  }
+
+  .eq-about-page .eq-heading-lg {
+    font-size: 1.5rem;
+  }
+
+  .eq-about-page .eq-body-lg {
+    font-size: 0.94rem;
+  }
+
+  .eq-about-page .eq-section-head {
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  .eq-about-hero {
+    padding: 1.75rem 0 1.35rem;
+  }
+
+  .eq-about-hero__lead {
+    font-size: 0.92rem;
+    margin: 0.5rem auto 1rem;
+  }
+
+  .eq-about-pill {
+    padding: 0.35rem 0.8rem;
+    font-size: 0.78rem;
+  }
+
+  .eq-story-card {
+    padding: 1.15rem 1rem;
+  }
+
+  .eq-story-card__title {
+    font-size: 1.08rem;
+  }
+
+  .eq-vendor-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .eq-vendor-card__body {
+    padding: 1rem;
+  }
+
+  .eq-vendor-invite-box {
+    padding: 1.25rem 1.35rem;
+    margin-top: 1.25rem;
+  }
+
+  .eq-vendor-invite-box h3 {
+    font-size: 1.2rem;
+  }
+
+  .eq-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .eq-contact-info-card,
+  .eq-contact-form-card {
+    padding: 1.35rem 1.25rem;
+  }
+
+  .eq-shop-shortcuts {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.65rem;
+    margin-top: 0.85rem;
+  }
+}
+
+/* =====================================================================
+   MOBILE RESPONSIVE ADJUSTMENTS (max-width: 768px)
+   Compact, tight layout to minimize scrolling and keep alignment crisp
+   ===================================================================== */
+@media (max-width: 768px) {
+  .eq-about-page .eq-section {
+    padding: 1.35rem 0;
+  }
+
+  .eq-about-intro {
+    margin-bottom: 0.85rem;
+  }
+
+  .eq-philosophy-highlight {
+    margin-bottom: 0.75rem;
+    padding: 0.15rem 0 0.15rem 0.65rem;
+    border-left-width: 2.5px;
+  }
+
+  .eq-philosophy-lead {
+    font-size: 0.84rem;
+    line-height: 1.4;
+  }
+
+  .eq-about-page .eq-heading-xl {
+    font-size: 1.45rem;
+    line-height: 1.25;
+  }
+
+  .eq-about-page .eq-heading-lg {
+    font-size: 1.25rem;
+    line-height: 1.28;
+  }
+
+  .eq-about-page .eq-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.2rem;
+  }
+
+  .eq-about-page .eq-body-lg {
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .eq-about-page .eq-body-muted {
+    font-size: 0.84rem;
+    line-height: 1.4;
+  }
+
+  .eq-about-page .eq-section-head {
+    margin-bottom: 0.85rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .eq-about-page .eq-section-head .eq-text-link {
+    font-size: 0.82rem;
+  }
+
+  .eq-about-hero {
+    padding: 1.25rem 0 1rem;
+  }
+
+  .eq-about-hero__lead {
+    font-size: 0.86rem;
+    line-height: 1.45;
+    margin: 0.35rem auto 0.85rem;
+  }
+
+  .eq-about-pill-nav {
+    gap: 0.35rem;
+  }
+
+  .eq-about-pill {
+    padding: 0.3rem 0.65rem;
+    font-size: 0.74rem;
+    gap: 0.3rem;
+  }
+
+  .eq-about-pill svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .eq-story-card {
+    padding: 0.95rem 0.85rem;
+    border-radius: 8px;
+  }
+
+  .eq-story-card__icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+  }
+
+  .eq-story-card__icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .eq-story-card__title {
+    font-size: 1.02rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .eq-story-card__desc {
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+
+  .eq-vendor-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .eq-vendor-card {
+    border-radius: 8px;
+  }
+
+  .eq-vendor-card__header {
+    padding: 0.65rem 0.85rem 0.5rem;
+  }
+
+  .eq-vendor-card__body {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .eq-vendor-card__name {
+    font-size: 1.05rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .eq-vendor-card__specialty {
+    font-size: 0.7rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .eq-vendor-card__story {
+    font-size: 0.82rem;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+  }
+
+  .eq-vendor-card__tags {
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .eq-vendor-card__tag {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.35rem;
+  }
+
+  .eq-vendor-card__footer {
+    padding-top: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .eq-vendor-invite-box {
+    padding: 0.95rem 0.85rem;
+    margin-top: 0.85rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    border-radius: 8px;
+  }
+
+  .eq-vendor-invite-box h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .eq-vendor-invite-box p {
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+
+  #btn-inquire-vendor {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 0.55rem 1rem;
+    font-size: 0.84rem;
+  }
+
+  .eq-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .eq-contact-info-card,
+  .eq-contact-form-card {
+    padding: 1rem 0.85rem;
+    border-radius: 8px;
+  }
+
+  .eq-contact-info-heading,
+  .eq-contact-form-title {
+    font-size: 1.08rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .eq-contact-info-desc,
+  .eq-contact-form-desc {
+    font-size: 0.82rem;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+  }
+
+  .eq-contact-info-item {
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .eq-contact-info-icon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 6px;
+  }
+
+  .eq-contact-info-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .eq-contact-info-title {
+    font-size: 0.7rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .eq-contact-info-val {
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
+
+  .eq-form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .eq-form-group {
+    margin-bottom: 0.65rem;
+  }
+
+  .eq-form-group label {
+    font-size: 0.78rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .eq-form-input,
+  .eq-form-select,
+  .eq-form-textarea {
+    padding: 0.48rem 0.75rem;
+    font-size: 0.84rem;
+  }
+
+  .eq-form-textarea {
+    min-height: 70px;
+  }
+
+  #btn-submit-contact {
+    padding: 0.58rem 1rem;
+    font-size: 0.88rem;
+  }
+
+  .eq-faq-item {
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+  }
+
+  .eq-faq-question {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.84rem;
+    line-height: 1.35;
+    gap: 0.5rem;
+  }
+
+  .eq-faq-question svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .eq-faq-answer {
+    padding: 0 0.85rem 0.65rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .eq-shop-shortcuts {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-top: 0.65rem;
+  }
+
+  .eq-shop-shortcut-card {
+    padding: 0.65rem 0.5rem;
+    border-radius: 6px;
+    gap: 0.15rem;
+  }
+
+  .eq-shop-shortcut-card strong {
+    font-size: 0.86rem;
+  }
+
+  .eq-shop-shortcut-card span {
+    font-size: 0.68rem;
+  }
+}
+
+/* Small mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  .eq-about-page .eq-section {
+    padding: 1.15rem 0;
+  }
+
+  .eq-about-page .eq-heading-xl {
+    font-size: 1.35rem;
+  }
+
+  .eq-about-hero {
+    padding: 1rem 0 0.85rem;
+  }
+
+  .eq-about-hero__lead {
+    font-size: 0.82rem;
+  }
+}
+
+
 
 
 
