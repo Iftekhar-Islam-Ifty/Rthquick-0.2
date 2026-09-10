@@ -1115,18 +1115,23 @@
     </section>
     <section class="eq-final-cta eq-reveal" id="newsletter-section">
       <div class="eq-container">
-        <svg class="eq-final-cta__mark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
-          <circle cx="20" cy="20" r="16"></circle>
-          <path d="M12 20a8 8 0 0 1 16 0"></path>
-        </svg>
-        <span class="eq-eyebrow">JOIN THE HOUSE OF EARTHQUICK</span>
-        <h2 class="eq-heading-lg" style="margin: 0 auto;">Be first to see what's next.</h2>
-        <p class="eq-body-lg">Sign up for early access to new drops, restocks, and the stories behind the makers we work with.</p>
+        <div class="eq-newsletter-card">
+          <span class="eq-eyebrow eq-newsletter-eyebrow">JOIN THE HOUSE OF EARTHQUICK</span>
+          <h2 class="eq-heading-lg eq-newsletter-title">Be first to see what's next.</h2>
+          <p class="eq-body-lg eq-newsletter-desc">Sign up for early access to new drops, restocks, and the stories behind the makers we work with.</p>
 
-        <form class="eq-newsletter" id="eq-newsletter-form" data-newsletter-form novalidate>
-          <input type="email" id="eq-newsletter-email" required placeholder="e.g. iftekharislamifty@gmail.com" aria-label="Email address" autocomplete="email" />
-          <button type="submit" class="eq-btn eq-btn--primary" id="eq-newsletter-submit">Subscribe</button>
-        </form>
+          <form class="eq-newsletter" id="eq-newsletter-form" data-newsletter-form novalidate>
+            <div class="eq-newsletter-field">
+              <svg class="eq-newsletter-input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+              <input type="email" id="eq-newsletter-email" required placeholder="Enter your email address" aria-label="Email address" autocomplete="email" />
+            </div>
+            <button type="submit" class="eq-btn eq-btn--primary eq-newsletter-submit" id="eq-newsletter-submit">Subscribe</button>
+          </form>
+          <p class="eq-newsletter-guarantee">No spam, ever. Unsubscribe with one click anytime.</p>
+        </div>
       </div>
     </section>
 

@@ -1354,6 +1354,36 @@
         clearBtn.addEventListener("click", resetAllFilters);
         activeFiltersEl.appendChild(clearBtn);
       }
+
+      // Calculate active filter count for mobile trigger badge
+      let activeFilterCount = 0;
+      if (state.activeSubCategory !== "all") activeFilterCount++;
+      if (state.priceMax < 30000) activeFilterCount++;
+      activeFilterCount += state.selectedFabrics.size;
+      activeFilterCount += state.selectedColors.size;
+      if (state.inStockOnly) activeFilterCount++;
+
+      // Update mobile filter trigger badge
+      const mobileFilterTrigger = document.querySelector("#mobile-filter-trigger");
+      if (mobileFilterTrigger) {
+        let badge = mobileFilterTrigger.querySelector(".eq-mobile-filter-badge");
+        if (activeFilterCount > 0) {
+          if (!badge) {
+            badge = document.createElement("span");
+            badge.className = "eq-mobile-filter-badge";
+            mobileFilterTrigger.appendChild(badge);
+          }
+          badge.textContent = activeFilterCount;
+        } else if (badge) {
+          badge.remove();
+        }
+      }
+
+      // Update mobile drawer apply button label with current filtered count
+      const applyBtn = document.querySelector("#filter-footer-apply");
+      if (applyBtn) {
+        applyBtn.textContent = `Show ${filtered.length} Product${filtered.length === 1 ? "" : "s"}`;
+      }
     }
 
     // Render Products or Empty State
@@ -1520,21 +1550,60 @@
     const mobileTrigger = document.querySelector("#mobile-filter-trigger");
     const sidebar = document.querySelector("#filter-sidebar");
     const backdrop = document.querySelector("#filter-backdrop");
-    const closeSidebarBtn = document.querySelector("#filter-sidebar-close");
+
+    if (sidebar) {
+      // Ensure close button exists in sidebar header for mobile drawer
+      const header = sidebar.querySelector(".eq-filter-sidebar__header");
+      if (header && !header.querySelector("#filter-sidebar-close")) {
+        const closeBtn = document.createElement("button");
+        closeBtn.type = "button";
+        closeBtn.className = "eq-filter-sidebar__close";
+        closeBtn.id = "filter-sidebar-close";
+        closeBtn.setAttribute("aria-label", "Close filters");
+        closeBtn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+        header.appendChild(closeBtn);
+      }
+
+      // Ensure footer exists in sidebar for mobile drawer apply/reset actions
+      if (!sidebar.querySelector(".eq-filter-sidebar__footer")) {
+        const footer = document.createElement("div");
+        footer.className = "eq-filter-sidebar__footer";
+        footer.id = "filter-sidebar-footer";
+        footer.innerHTML = `
+          <button type="button" class="eq-filter-sidebar__footer-reset" id="filter-footer-reset">Reset All</button>
+          <button type="button" class="eq-filter-sidebar__footer-apply" id="filter-footer-apply">Show Products</button>
+        `;
+        sidebar.appendChild(footer);
+
+        const footerReset = footer.querySelector("#filter-footer-reset");
+        const footerApply = footer.querySelector("#filter-footer-apply");
+        if (footerReset) footerReset.addEventListener("click", resetAllFilters);
+        if (footerApply) footerApply.addEventListener("click", () => closeDrawer());
+      }
+    }
 
     const openDrawer = () => {
       if (sidebar) sidebar.classList.add("is-open");
       if (backdrop) backdrop.classList.add("is-open");
+      document.body.style.overflow = "hidden";
     };
 
     const closeDrawer = () => {
       if (sidebar) sidebar.classList.remove("is-open");
       if (backdrop) backdrop.classList.remove("is-open");
+      document.body.style.overflow = "";
     };
 
     if (mobileTrigger) mobileTrigger.addEventListener("click", openDrawer);
     if (backdrop) backdrop.addEventListener("click", closeDrawer);
-    if (closeSidebarBtn) closeSidebarBtn.addEventListener("click", closeDrawer);
+
+    if (sidebar) {
+      sidebar.addEventListener("click", (e) => {
+        if (e.target.closest("#filter-sidebar-close")) {
+          closeDrawer();
+        }
+      });
+    }
 
     // 9. Reset All in Sidebar
     const resetSidebarBtn = document.querySelector("#filter-sidebar-reset");

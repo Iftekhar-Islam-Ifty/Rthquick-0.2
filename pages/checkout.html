@@ -80,6 +80,49 @@
       <!-- LEFT COLUMN: CUSTOMER DETAILS, DELIVERY & PAYMENT -->
       <form class="eq-checkout-form" id="checkout-order-form" novalidate>
         
+        <!-- MOBILE COLLAPSIBLE ORDER SUMMARY (< 992px) -->
+        <div class="eq-mobile-summary-banner d-block d-lg-none" id="mobile-summary-banner">
+          <button type="button" class="eq-mobile-summary-toggle" id="btn-toggle-mobile-summary" aria-expanded="false" aria-controls="mobile-summary-dropdown">
+            <span class="eq-mobile-summary-toggle__left">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              <span>Order Summary (<span id="mobile-summary-count">0</span>)</span>
+              <svg class="eq-mobile-summary-toggle__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m6 9 6 6 6-6"></path>
+              </svg>
+            </span>
+            <span class="eq-mobile-summary-toggle__right">
+              <span class="eq-mobile-summary-toggle__total order-total-display">৳0</span>
+            </span>
+          </button>
+          <div class="eq-mobile-summary-collapse" id="mobile-summary-dropdown" style="display: none;">
+            <div class="eq-mobile-summary-items" id="mobile-summary-items-list">
+              <!-- Dynamically populated via JS -->
+            </div>
+            <div class="eq-mobile-summary-breakdown">
+              <div class="eq-price-row">
+                <span>Subtotal</span>
+                <span id="mobile-price-subtotal">৳0</span>
+              </div>
+              <div class="eq-price-row">
+                <span>Estimated Shipping</span>
+                <span id="mobile-price-shipping">৳60</span>
+              </div>
+              <div class="eq-price-row eq-price-row--discount" id="mobile-row-discount" style="display: none;">
+                <span>Discount (Promo)</span>
+                <span id="mobile-price-discount">-৳0</span>
+              </div>
+              <div class="eq-price-row eq-price-row--total" style="margin-top: 0.25rem;">
+                <span>Total Due</span>
+                <span class="eq-total-amount" id="mobile-price-grand-total">৳0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- CARD 1: CONTACT & CUSTOMER INFORMATION -->
         <div class="eq-checkout-card">
           <div class="eq-checkout-card__header">
@@ -308,7 +351,7 @@
         </div>
 
         <!-- Place Order Button (Desktop) -->
-        <button type="button" class="eq-btn-place-order" id="btn-submit-order-desktop">
+        <button type="button" class="eq-btn-place-order d-none d-lg-flex" id="btn-submit-order-desktop">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
@@ -459,6 +502,17 @@
       const btnCoupon = document.querySelector("#btn-apply-coupon");
       const couponMsg = document.querySelector("#coupon-message");
 
+      // Mobile Collapsible Order Summary Elements (< 992px)
+      const mobileSummaryToggle = document.querySelector("#btn-toggle-mobile-summary");
+      const mobileSummaryDropdown = document.querySelector("#mobile-summary-dropdown");
+      const mobileSummaryCount = document.querySelector("#mobile-summary-count");
+      const mobileItemsContainer = document.querySelector("#mobile-summary-items-list");
+      const mobileSubtotalEl = document.querySelector("#mobile-price-subtotal");
+      const mobileShippingEl = document.querySelector("#mobile-price-shipping");
+      const mobileDiscountRow = document.querySelector("#mobile-row-discount");
+      const mobileDiscountEl = document.querySelector("#mobile-price-discount");
+      const mobileGrandTotalEl = document.querySelector("#mobile-price-grand-total");
+
       // State
       let appliedDiscount = 0;
       let appliedCouponCode = "";
@@ -517,14 +571,15 @@
         }
 
         emptyStateEl.style.display = "none";
-        activeViewEl.style.display = "grid";
+        activeViewEl.style.display = "";
         successViewEl.style.display = "none";
 
         // Render Summary Items
         const totalCount = items.reduce((sum, it) => sum + (it.qty || 1), 0);
         itemsCountBadge.textContent = `${totalCount} item${totalCount !== 1 ? 's' : ''}`;
+        if (mobileSummaryCount) mobileSummaryCount.textContent = totalCount;
 
-        itemsContainer.innerHTML = items.map((item, idx) => {
+        const renderedItemsHtml = items.map((item, idx) => {
           let imgSrc = item.image || "images/hero/hero-main.jpg";
           if (!imgSrc.startsWith("../") && !imgSrc.startsWith("http") && !imgSrc.startsWith("/")) {
             imgSrc = "../" + imgSrc;
@@ -541,6 +596,11 @@
             </div>
           `;
         }).join("");
+
+        itemsContainer.innerHTML = renderedItemsHtml;
+        if (mobileItemsContainer) {
+          mobileItemsContainer.innerHTML = renderedItemsHtml;
+        }
 
         // Calculate Prices
         const subtotal = items.reduce((sum, it) => sum + ((it.price || 0) * (it.qty || 1)), 0);
@@ -583,6 +643,19 @@
 
         grandTotalEl.textContent = formatTaka(grandTotal);
         totalDisplays.forEach(el => el.textContent = formatTaka(grandTotal));
+
+        // Sync Mobile Summary Panel
+        if (mobileSubtotalEl) mobileSubtotalEl.textContent = formatTaka(subtotal);
+        if (mobileShippingEl) mobileShippingEl.textContent = shipping === 0 ? "FREE" : formatTaka(shipping);
+        if (mobileDiscountRow && mobileDiscountEl) {
+          if (appliedDiscount > 0) {
+            mobileDiscountRow.style.display = "flex";
+            mobileDiscountEl.textContent = `-${formatTaka(appliedDiscount)}`;
+          } else {
+            mobileDiscountRow.style.display = "none";
+          }
+        }
+        if (mobileGrandTotalEl) mobileGrandTotalEl.textContent = formatTaka(grandTotal);
       }
 
       // 2. Shipping radio interaction
@@ -663,6 +736,15 @@
       if (btnSubmitDesktop) {
         btnSubmitDesktop.addEventListener("click", () => {
           formEl.requestSubmit();
+        });
+      }
+
+      // 5b. Mobile Order Summary Toggle (< 992px)
+      if (mobileSummaryToggle && mobileSummaryDropdown) {
+        mobileSummaryToggle.addEventListener("click", () => {
+          const isExpanded = mobileSummaryToggle.getAttribute("aria-expanded") === "true";
+          mobileSummaryToggle.setAttribute("aria-expanded", String(!isExpanded));
+          mobileSummaryDropdown.style.display = isExpanded ? "none" : "block";
         });
       }
 
