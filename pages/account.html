@@ -50,11 +50,12 @@
   <main class="eq-container" id="main-content">
     <div class="eq-account-layout">
       
-      <!-- SIDEBAR NAVIGATION -->
+      <!-- SIDEBAR NAVIGATION: 2 Responsive Info Boxes on Mobile, Single Sidebar on Desktop -->
       <aside class="eq-account-sidebar">
+        <!-- Box 1: User Profile Header Info Box -->
         <div class="eq-account-user-badge">
           <div class="eq-account-avatar" id="sidebar-user-avatar">I</div>
-          <div style="min-width: 0;">
+          <div style="min-width: 0; flex: 1;">
             <div style="font-weight: 600; color: var(--eq-charcoal); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" id="sidebar-user-name">
               Iftekhar Islam Ifty
             </div>
@@ -62,47 +63,64 @@
               017931***87
             </div>
           </div>
-        </div>
-
-        <ul class="eq-account-nav">
-          <li>
-            <button type="button" class="eq-account-nav-btn is-active" data-tab="orders" id="tab-btn-orders">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-              </svg>
-              <span>My Orders</span>
-            </button>
-          </li>
-          <li>
-            <button type="button" class="eq-account-nav-btn" data-tab="profile" id="tab-btn-profile">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-              <span>Profile Information</span>
-            </button>
-          </li>
-          <li>
-            <button type="button" class="eq-account-nav-btn" data-tab="address" id="tab-btn-address">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-              <span>Delivery Address</span>
-            </button>
-          </li>
-          <li>
-            <button type="button" class="eq-account-nav-btn eq-account-nav-btn--logout" id="btn-account-logout">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <div class="eq-account-badge-actions">
+            <span class="eq-account-status-pill">Active</span>
+            <button type="button" class="eq-account-mobile-logout-btn" id="btn-account-logout-mobile" title="Sign Out">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                 <polyline points="16 17 21 12 16 7"></polyline>
                 <line x1="21" y1="12" x2="9" y2="12"></line>
               </svg>
-              <span>Sign Out</span>
+              <span>Logout</span>
             </button>
-          </li>
-        </ul>
+          </div>
+        </div>
+
+        <!-- Box 2: Navigation Tabs Box (Displays all 3 switch items simultaneously on mobile) -->
+        <div class="eq-account-nav-box">
+          <ul class="eq-account-nav">
+            <li class="eq-account-nav-item">
+              <button type="button" class="eq-account-nav-btn is-active" data-tab="orders" id="tab-btn-orders">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+                <span class="eq-nav-label-desktop">My Orders</span>
+                <span class="eq-nav-label-mobile">Orders</span>
+              </button>
+            </li>
+            <li class="eq-account-nav-item">
+              <button type="button" class="eq-account-nav-btn" data-tab="profile" id="tab-btn-profile">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span class="eq-nav-label-desktop">Profile Information</span>
+                <span class="eq-nav-label-mobile">Profile</span>
+              </button>
+            </li>
+            <li class="eq-account-nav-item">
+              <button type="button" class="eq-account-nav-btn" data-tab="address" id="tab-btn-address">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span class="eq-nav-label-desktop">Delivery Address</span>
+                <span class="eq-nav-label-mobile">Location</span>
+              </button>
+            </li>
+            <li class="eq-account-nav-item eq-account-nav-item--logout-desktop">
+              <button type="button" class="eq-account-nav-btn eq-account-nav-btn--logout" id="btn-account-logout">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                  <polyline points="16 17 21 12 16 7"></polyline>
+                  <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                <span>Sign Out</span>
+              </button>
+            </li>
+          </ul>
+        </div>
       </aside>
 
       <!-- CONTENT PANELS -->
@@ -256,17 +274,17 @@
         });
       });
 
-      // 3. Logout action
-      const logoutBtn = document.querySelector("#btn-account-logout");
-      if (logoutBtn) {
-        logoutBtn.addEventListener("click", () => {
+      // 3. Logout action (supports desktop and mobile logout buttons)
+      const logoutBtns = document.querySelectorAll("#btn-account-logout, #btn-account-logout-mobile");
+      logoutBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
           localStorage.removeItem("earthquick_auth_user");
           if (window.Toast) window.Toast.show("Logged out successfully.");
           setTimeout(() => {
             window.location.href = "login.html";
           }, 350);
         });
-      }
+      });
 
       // 4. Render Orders List
       function renderOrders() {
@@ -319,41 +337,88 @@
 
         container.innerHTML = orders.map(ord => {
           const itemsList = (ord.items || []).map(it => `
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; font-size: 0.88rem; border-bottom: 1px solid rgba(42, 38, 34, 0.05);">
-              <div style="display: flex; align-items: center; gap: 0.75rem;">
-                <span style="font-weight: 500; color: var(--eq-charcoal);">${it.name}</span>
-                <span style="color: var(--eq-charcoal-soft); font-size: 0.8rem;">&times; ${it.qty || 1}</span>
+            <div class="eq-order-item-row">
+              <div class="eq-order-item-info">
+                <div class="eq-order-item-thumb">
+                  <img src="${it.image || '../images/saree/saree-1.jpg'}" alt="${it.name || 'Product'}" onerror="this.src='../images/saree/saree-1.jpg'" />
+                </div>
+                <div class="eq-order-item-meta">
+                  <div class="eq-order-item-name">${it.name || 'Artisan Handloom Product'}</div>
+                  <div class="eq-order-item-sub">Qty: ${it.qty || 1} &bull; Standard Artisan Cut</div>
+                </div>
               </div>
-              <span style="font-weight: 500;">৳${Number((it.price || 0) * (it.qty || 1)).toLocaleString("en-IN")}</span>
+              <div class="eq-order-item-price">৳${Number((it.price || 0) * (it.qty || 1)).toLocaleString("en-IN")}</div>
             </div>
           `).join("");
 
-          const statusColor = ord.status === "Delivered" ? "#27ae60" : "var(--eq-gold-dark)";
-          const statusBg = ord.status === "Delivered" ? "rgba(39, 174, 96, 0.12)" : "rgba(201, 150, 47, 0.12)";
+          const isDelivered = ord.status === "Delivered";
+          const statusColor = isDelivered ? "#27ae60" : "var(--eq-gold-dark)";
+          const statusBg = isDelivered ? "rgba(39, 174, 96, 0.12)" : "rgba(201, 150, 47, 0.12)";
+          const trackingId = "RTH-" + (String(ord.id || "0000").replace(/[^a-zA-Z0-9]/g, '').slice(-6) || "928341");
 
           return `
-            <div class="eq-order-receipt-card" style="margin-bottom: 1.5rem; background: var(--eq-white); border: 1px solid var(--eq-line);">
+            <div class="eq-order-receipt-card">
               <div class="eq-receipt-header">
                 <div>
-                  <div class="eq-receipt-id" style="font-size: 1.05rem;">Order #${ord.id}</div>
-                  <div style="font-size: 0.8rem; color: var(--eq-charcoal-soft);">Placed on: ${ord.date} &bull; Delivery: ${ord.customer?.city || "Chattogram"}</div>
+                  <div class="eq-receipt-id" style="font-size: 1.02rem; font-weight: 600; color: var(--eq-charcoal);">Order #${ord.id}</div>
+                  <div style="font-size: 0.78rem; color: var(--eq-charcoal-soft); margin-top: 2px;">Placed: ${ord.date || 'Recent'} &bull; Dest: ${ord.customer?.city || "Chattogram"}</div>
                 </div>
-                <span class="eq-receipt-badge" style="background-color: ${statusBg}; color: ${statusColor};">
+                <span class="eq-receipt-badge" style="background-color: ${statusBg}; color: ${statusColor}; font-size: 0.76rem; padding: 0.25rem 0.65rem; border-radius: 999px; font-weight: 600;">
                   ${ord.status || "Processing"}
                 </span>
               </div>
 
-              <div style="margin: 0.75rem 0 1rem;">
+              <!-- Live Parcel Tracking Progress -->
+              <div class="eq-order-tracking-box">
+                <div class="eq-tracking-header">
+                  <div class="eq-tracking-title">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="1" y="3" width="15" height="13"></rect>
+                      <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                      <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                      <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                    </svg>
+                    <span>Parcel Tracking</span>
+                  </div>
+                  <span class="eq-tracking-courier">Tracking ID: <strong>${trackingId}</strong> &bull; Steadfast Express</span>
+                </div>
+                
+                <div class="eq-tracking-stepper">
+                  <div class="eq-tracking-step is-complete">
+                    <div class="eq-step-dot"></div>
+                    <div class="eq-step-label">Confirmed</div>
+                  </div>
+                  <div class="eq-tracking-line ${isDelivered ? 'is-complete' : ''}"></div>
+                  <div class="eq-tracking-step ${isDelivered ? 'is-complete' : 'is-active'}">
+                    <div class="eq-step-dot"></div>
+                    <div class="eq-step-label">Processing</div>
+                  </div>
+                  <div class="eq-tracking-line ${isDelivered ? 'is-complete' : ''}"></div>
+                  <div class="eq-tracking-step ${isDelivered ? 'is-complete' : ''}">
+                    <div class="eq-step-dot"></div>
+                    <div class="eq-step-label">In Transit</div>
+                  </div>
+                  <div class="eq-tracking-line ${isDelivered ? 'is-complete' : ''}"></div>
+                  <div class="eq-tracking-step ${isDelivered ? 'is-complete' : ''}">
+                    <div class="eq-step-dot"></div>
+                    <div class="eq-step-label">Delivered</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Order Items List -->
+              <div style="margin: 0.5rem 0 0.85rem; width: 100%; min-width: 0;">
                 ${itemsList}
               </div>
 
-              <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.75rem; border-top: 1px solid var(--eq-line); font-size: 0.95rem;">
-                <span style="color: var(--eq-charcoal-soft); font-size: 0.86rem;">
-                  Payment: <strong>${ord.paymentMethod === 'cod' ? 'Cash on Delivery' : 'bKash / Card'}</strong>
-                </span>
-                <span style="font-weight: 600; color: var(--eq-charcoal);">
-                  Total: <span style="color: var(--eq-gold-dark); font-size: 1.1rem;">৳${Number(ord.pricing?.grandTotal || 0).toLocaleString("en-IN")}</span>
-                </span>
+              <!-- Order Total & Payment Summary -->
+              <div class="eq-order-receipt-footer">
+                <div class="eq-order-receipt-pay">
+                  Payment: <strong>${ord.paymentMethod === 'cod' ? 'Cash on Delivery' : 'bKash / Online'}</strong>
+                </div>
+                <div class="eq-order-receipt-total">
+                  Total: <span>৳${Number(ord.pricing?.grandTotal || 0).toLocaleString("en-IN")}</span>
+                </div>
               </div>
             </div>
           `;
