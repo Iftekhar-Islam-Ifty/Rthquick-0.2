@@ -1552,13 +1552,19 @@
     }
 
     const openDrawer = () => {
-      if (sidebar) sidebar.classList.add("is-open");
+      if (sidebar) {
+        sidebar.classList.add("is-open");
+        sidebar.setAttribute("aria-hidden", "false");
+      }
       if (backdrop) backdrop.classList.add("is-open");
       document.body.style.overflow = "hidden";
     };
 
     const closeDrawer = () => {
-      if (sidebar) sidebar.classList.remove("is-open");
+      if (sidebar) {
+        sidebar.classList.remove("is-open");
+        sidebar.setAttribute("aria-hidden", "true");
+      }
       if (backdrop) backdrop.classList.remove("is-open");
       document.body.style.overflow = "";
     };
@@ -1567,12 +1573,20 @@
     if (backdrop) backdrop.addEventListener("click", closeDrawer);
 
     if (sidebar) {
+      sidebar.setAttribute("aria-hidden", "true");
       sidebar.addEventListener("click", (e) => {
         if (e.target.closest("#filter-sidebar-close")) {
           closeDrawer();
         }
       });
     }
+
+    // Keyboard accessibility: Escape key to close filter drawer
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && sidebar && sidebar.classList.contains("is-open")) {
+        closeDrawer();
+      }
+    });
 
     // 9. Reset All in Sidebar
     const resetSidebarBtn = document.querySelector("#filter-sidebar-reset");

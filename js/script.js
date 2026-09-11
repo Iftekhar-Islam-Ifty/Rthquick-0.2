@@ -450,6 +450,7 @@ const EarthquickCart = {
     drawer.className = "eq-cart-drawer";
     drawer.setAttribute("role", "dialog");
     drawer.setAttribute("aria-modal", "true");
+    drawer.setAttribute("aria-hidden", "true");
     drawer.setAttribute("aria-label", "Shopping Bag");
     drawer.innerHTML = `
       <div class="eq-cart-drawer__header">
@@ -615,6 +616,7 @@ const EarthquickCart = {
     this.buildDrawerDOM();
     this.renderDrawer();
     this.drawerEl.classList.add("is-open");
+    this.drawerEl.setAttribute("aria-hidden", "false");
     this.backdropEl.classList.add("is-open");
     document.body.style.overflow = "hidden";
     const closeBtn = this.drawerEl.querySelector("#eq-btn-close-cart");
@@ -624,7 +626,10 @@ const EarthquickCart = {
   },
 
   closeDrawer() {
-    if (this.drawerEl) this.drawerEl.classList.remove("is-open");
+    if (this.drawerEl) {
+      this.drawerEl.classList.remove("is-open");
+      this.drawerEl.setAttribute("aria-hidden", "true");
+    }
     if (this.backdropEl) this.backdropEl.classList.remove("is-open");
     document.body.style.overflow = "";
     if (this.lastActiveElement && typeof this.lastActiveElement.focus === "function") {

@@ -133,18 +133,18 @@
           <div class="eq-form-grid">
             <div class="eq-form-group eq-form-group--full">
               <label for="cust-name" class="eq-form-label">Full Name <span class="req">*</span></label>
-              <input type="text" id="cust-name" name="name" class="eq-form-input" placeholder="e.g. Iftekhar Islam Ifty" required />
+              <input type="text" id="cust-name" name="name" class="eq-form-input" placeholder="e.g. Iftekhar Islam Ifty" autocomplete="name" required />
             </div>
 
             <div class="eq-form-group">
               <label for="cust-phone" class="eq-form-label">Mobile Phone Number <span class="req">*</span></label>
-              <input type="tel" id="cust-phone" name="phone" class="eq-form-input" placeholder="e.g. 017931***87" required />
+              <input type="tel" id="cust-phone" name="phone" class="eq-form-input" placeholder="e.g. 017931***87" autocomplete="tel" required />
               <small style="font-size: 0.76rem; color: var(--eq-charcoal-soft); margin-top: 2px;">We'll call this number to confirm your order.</small>
             </div>
 
             <div class="eq-form-group">
               <label for="cust-email" class="eq-form-label">Email Address <span style="color: var(--eq-charcoal-soft); font-weight: normal;">(Optional)</span></label>
-              <input type="email" id="cust-email" name="email" class="eq-form-input" placeholder="e.g. iftekharislamifty@gmail.com" />
+              <input type="email" id="cust-email" name="email" class="eq-form-input" placeholder="e.g. iftekharislamifty@gmail.com" autocomplete="email" />
               <small style="font-size: 0.76rem; color: var(--eq-charcoal-soft); margin-top: 2px;">Order invoice & tracking link will be sent here.</small>
             </div>
           </div>
@@ -193,7 +193,7 @@
           <div class="eq-form-grid">
             <div class="eq-form-group">
               <label for="cust-city" class="eq-form-label">District / City <span class="req">*</span></label>
-              <select id="cust-city" name="city" class="eq-form-select" required>
+              <select id="cust-city" name="city" class="eq-form-select" autocomplete="address-level1" required>
                 <option value="Chattogram" selected>Chattogram (Chittagong)</option>
                 <option value="Dhaka">Dhaka</option>
                 <option value="Sylhet">Sylhet</option>
@@ -213,12 +213,12 @@
 
             <div class="eq-form-group">
               <label for="cust-area" class="eq-form-label">Area / Thana <span class="req">*</span></label>
-              <input type="text" id="cust-area" name="area" class="eq-form-input" placeholder="e.g. GEC, Nasirabad, Agrabad, Panchlaish" required />
+              <input type="text" id="cust-area" name="area" class="eq-form-input" placeholder="e.g. GEC, Nasirabad, Agrabad, Panchlaish" autocomplete="address-level2" required />
             </div>
 
             <div class="eq-form-group eq-form-group--full">
               <label for="cust-address" class="eq-form-label">Full Street Address / House / Road <span class="req">*</span></label>
-              <textarea id="cust-address" name="address" class="eq-form-textarea" placeholder="e.g. Holding 45, Road 2, O.R. Nizam Road, Flat 4A" required></textarea>
+              <textarea id="cust-address" name="address" class="eq-form-textarea" placeholder="e.g. Holding 45, Road 2, O.R. Nizam Road, Flat 4A" autocomplete="street-address" required></textarea>
             </div>
 
             <div class="eq-form-group eq-form-group--full">
