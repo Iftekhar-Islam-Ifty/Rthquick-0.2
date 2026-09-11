@@ -3,6 +3,7 @@
      Future Laravel Blade Partial: resources/views/partials/navbar.blade.php
      Changes made here will automatically update across all pages!
      ===================================================================== -->
+<a href="#main-content" class="eq-skip-link">Skip to main content</a>
 <header class="eq-navbar" id="eq-main-navbar">
   <div class="eq-navbar__inner">
     <!-- Brand Logo -->
@@ -14,9 +15,9 @@
     <nav id="eq-nav-menu" aria-label="Primary Navigation">
       <ul class="eq-navbar__links" id="eq-nav-links">
         <!-- Mobile Drawer Pinned Header with Brand Logo -->
-        <li class="eq-drawer-header" aria-hidden="true">
+        <li class="eq-drawer-header">
           <a href="{{BASE}}index.html" class="eq-drawer-logo" aria-label="Earthquick Home">
-            <img src="{{BASE}}images/logo/earthquick-logo.png?v=3" alt="Earthquick — Crafted for the Modern You" />
+            <img src="{{BASE}}images/logo/earthquick-logo.png?v=3" alt="Earthquick — Crafted for the Modern You" width="130" height="28" decoding="async" />
           </a>
           <button type="button" class="eq-drawer-close-btn" id="eq-drawer-close" aria-label="Close navigation menu">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -153,7 +154,7 @@
         <li><a href="{{BASE}}pages/about.html" id="nav-link-about">About Us</a></li>
 
         <!-- Mobile Drawer Minimal Footer with Quick Actions -->
-        <li class="eq-drawer-footer" aria-hidden="true">
+        <li class="eq-drawer-footer">
           <div class="eq-drawer-actions">
             <a href="{{BASE}}pages/account.html" class="eq-drawer-action-btn" id="drawer-btn-account">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

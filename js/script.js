@@ -99,9 +99,11 @@ function initNavbar() {
     document.body.appendChild(backdrop);
   }
   const drawerCloseBtn = document.getElementById("eq-drawer-close") || navbar.querySelector(".eq-drawer-close-btn");
+  let mobileNavLastFocused = null;
 
   const openMobileNav = () => {
     if (!links || !toggle) return;
+    mobileNavLastFocused = document.activeElement;
     links.classList.add("is-open");
     toggle.classList.add("is-open");
     toggle.setAttribute("aria-expanded", "true");
@@ -111,6 +113,9 @@ function initNavbar() {
     }
     document.documentElement.classList.add("eq-drawer-open");
     document.body.classList.add("eq-drawer-open");
+    if (drawerCloseBtn) {
+      setTimeout(() => drawerCloseBtn.focus(), 100);
+    }
   };
 
   const closeMobileNav = () => {
@@ -124,6 +129,9 @@ function initNavbar() {
     }
     document.documentElement.classList.remove("eq-drawer-open");
     document.body.classList.remove("eq-drawer-open");
+    if (mobileNavLastFocused && typeof mobileNavLastFocused.focus === "function") {
+      mobileNavLastFocused.focus();
+    }
   };
 
   const toggleMobileNav = (e) => {
@@ -268,10 +276,12 @@ function initSearchModal() {
   const modal = document.querySelector("#eq-search-modal");
   const closeButton = document.querySelector("#eq-search-close");
   const searchInput = document.querySelector("#eq-search-input");
+  let searchLastFocused = null;
 
   if (!modal) return;
 
   const openSearch = () => {
+    searchLastFocused = document.activeElement;
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
@@ -284,6 +294,9 @@ function initSearchModal() {
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+    if (searchLastFocused && typeof searchLastFocused.focus === "function") {
+      searchLastFocused.focus();
+    }
   };
 
   openButtons.forEach((btn) => btn.addEventListener("click", openSearch));
@@ -345,10 +358,10 @@ const EarthquickCart = {
     this.updateBadges();
   },
 
-  addItem(product, qty = 1, size = "Standard", color = "") {
+  addItem(product, qty = 1, size = "Standard") {
     const items = this.getItems();
     const existingIndex = items.findIndex(
-      (item) => item.id === product.id && item.size === size && item.color === (color || product.colorName || "")
+      (item) => item.id === product.id && item.size === size
     );
 
     if (existingIndex > -1) {
@@ -360,7 +373,6 @@ const EarthquickCart = {
         price: Number(product.price) || 0,
         image: product.image,
         size: size,
-        color: color || product.colorName || "",
         qty: qty
       });
     }
@@ -437,6 +449,7 @@ const EarthquickCart = {
     drawer.id = "eq-cart-drawer";
     drawer.className = "eq-cart-drawer";
     drawer.setAttribute("role", "dialog");
+    drawer.setAttribute("aria-modal", "true");
     drawer.setAttribute("aria-label", "Shopping Bag");
     drawer.innerHTML = `
       <div class="eq-cart-drawer__header">
@@ -574,7 +587,7 @@ const EarthquickCart = {
             <div class="eq-cart-item__info">
               <div>
                 <h4 class="eq-cart-item__title">${item.name}</h4>
-                <div class="eq-cart-item__variant">${item.size}${item.color ? " • " + item.color : ""}</div>
+                <div class="eq-cart-item__variant">${item.size}</div>
                 <div class="eq-cart-item__price">${this.formatMoney(item.price)}</div>
               </div>
               <div class="eq-cart-item__bottom">
@@ -598,17 +611,25 @@ const EarthquickCart = {
   },
 
   openDrawer() {
+    this.lastActiveElement = document.activeElement;
     this.buildDrawerDOM();
     this.renderDrawer();
     this.drawerEl.classList.add("is-open");
     this.backdropEl.classList.add("is-open");
     document.body.style.overflow = "hidden";
+    const closeBtn = this.drawerEl.querySelector("#eq-btn-close-cart");
+    if (closeBtn) {
+      setTimeout(() => closeBtn.focus(), 120);
+    }
   },
 
   closeDrawer() {
     if (this.drawerEl) this.drawerEl.classList.remove("is-open");
     if (this.backdropEl) this.backdropEl.classList.remove("is-open");
     document.body.style.overflow = "";
+    if (this.lastActiveElement && typeof this.lastActiveElement.focus === "function") {
+      this.lastActiveElement.focus();
+    }
   },
 
   init() {
@@ -652,8 +673,7 @@ const EarthquickCart = {
           id: "prod-" + Math.abs(name.split("").reduce((a, b) => ((a << 5) - a) + b.charCodeAt(0), 0)),
           name: name,
           price: price,
-          image: img,
-          colorName: "Curated"
+          image: img
         });
       });
     });
@@ -958,6 +978,7 @@ function initQuickViewModal() {
   const backdrop = document.querySelector("#eq-quickview-backdrop");
   const closeBtn = document.querySelector("#eq-quickview-close");
   const body = document.querySelector("#eq-quickview-body");
+  let quickviewLastFocused = null;
 
   if (!modal || !body) return;
 
@@ -965,6 +986,9 @@ function initQuickViewModal() {
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+    if (quickviewLastFocused && typeof quickviewLastFocused.focus === "function") {
+      quickviewLastFocused.focus();
+    }
   };
 
   if (backdrop) backdrop.addEventListener("click", closeModal);
@@ -1048,9 +1072,13 @@ function initQuickViewModal() {
       });
     }
 
+    quickviewLastFocused = document.activeElement;
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    if (closeBtn) {
+      setTimeout(() => closeBtn.focus(), 120);
+    }
   };
 }
 

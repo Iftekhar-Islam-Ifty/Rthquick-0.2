@@ -881,7 +881,6 @@
     activeNestedSubCategory: "all",
     priceMax: 30000,
     selectedFabrics: new Set(),
-    selectedColors: new Set(),
     inStockOnly: false,
     sortBy: "featured",
     gridColumns: 3,
@@ -1208,12 +1207,7 @@
         if (!hasMatch) return false;
       }
 
-      // 5. Color Filter
-      if (state.selectedColors.size > 0) {
-        if (!state.selectedColors.has(item.color)) return false;
-      }
-
-      // 6. Stock Filter
+      // 5. Stock Filter
       if (state.inStockOnly && !item.inStock) return false;
 
       return true;
@@ -1328,15 +1322,6 @@
         });
       });
 
-      state.selectedColors.forEach(color => {
-        hasFilters = true;
-        createActiveChip(activeFiltersEl, `Color: ${color}`, () => {
-          state.selectedColors.delete(color);
-          updateColorSwatchUI();
-          renderAll();
-        });
-      });
-
       if (state.inStockOnly) {
         hasFilters = true;
         createActiveChip(activeFiltersEl, "In Stock Only", () => {
@@ -1360,7 +1345,6 @@
       if (state.activeSubCategory !== "all") activeFilterCount++;
       if (state.priceMax < 30000) activeFilterCount++;
       activeFilterCount += state.selectedFabrics.size;
-      activeFilterCount += state.selectedColors.size;
       if (state.inStockOnly) activeFilterCount++;
 
       // Update mobile filter trigger badge
@@ -1496,22 +1480,7 @@
       });
     });
 
-    // 4. Color Swatches
-    document.querySelectorAll(".eq-swatch-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const color = btn.getAttribute("data-color");
-        if (state.selectedColors.has(color)) {
-          state.selectedColors.delete(color);
-          btn.classList.remove("is-active");
-        } else {
-          state.selectedColors.add(color);
-          btn.classList.add("is-active");
-        }
-        renderProducts();
-      });
-    });
-
-    // 5. In Stock Checkbox
+    // 4. In Stock Checkbox
     const inStockCheckbox = document.querySelector("#filter-in-stock");
     if (inStockCheckbox) {
       inStockCheckbox.addEventListener("change", (e) => {
@@ -1614,13 +1583,11 @@
     state.activeSubCategory = "all";
     state.priceMax = 30000;
     state.selectedFabrics.clear();
-    state.selectedColors.clear();
     state.inStockOnly = false;
     state.sortBy = "featured";
 
     updatePriceSliderUI(30000);
     updateCheckboxUI();
-    updateColorSwatchUI();
 
     const sortSelect = document.querySelector("#catalog-sort-select");
     if (sortSelect) sortSelect.value = "featured";
@@ -1641,13 +1608,6 @@
     });
     const inStockCb = document.querySelector("#filter-in-stock");
     if (inStockCb) inStockCb.checked = state.inStockOnly;
-  }
-
-  function updateColorSwatchUI() {
-    document.querySelectorAll(".eq-swatch-btn").forEach(btn => {
-      const color = btn.getAttribute("data-color");
-      btn.classList.toggle("is-active", state.selectedColors.has(color));
-    });
   }
 
   function renderAll() {

@@ -44,78 +44,69 @@
   <!-- ===================================================================
        PRODUCT DETAIL SECTION
        =================================================================== -->
-  <main id="main-content" style="padding: 2.5rem 0 4rem;">
+  <main id="main-content" class="eq-product-main">
     <div class="eq-container">
       <div class="eq-product-detail" id="product-detail-container">
         
-        <!-- LEFT: GALLERY -->
-        <div class="eq-product-gallery">
-          <div class="eq-product-gallery__main" id="gallery-main-wrap">
-            <img id="main-product-img" src="../images/saree/saree-01.jpg" alt="Product Image" />
-            <span class="eq-product-card__badge" id="product-badge" style="position: absolute; top: 16px; left: 16px; margin: 0;">Handloom</span>
+        <!-- TOP SECTION / HERO: GALLERY + PRIMARY INFO (SIDE-BY-SIDE ON MOBILE & DESKTOP) -->
+        <div class="eq-product-hero">
+          <!-- LEFT: GALLERY -->
+          <div class="eq-product-gallery">
+            <div class="eq-product-gallery__main" id="gallery-main-wrap">
+              <img id="main-product-img" src="../images/saree/saree-01.jpg" alt="Product Image" />
+              <span class="eq-product-card__badge" id="product-badge">Handloom</span>
+            </div>
+
+            <!-- Thumbnails Strip -->
+            <div class="eq-product-gallery__thumbs" id="gallery-thumbs">
+              <button type="button" class="is-active" data-src="../images/saree/saree-01.jpg">
+                <img id="thumb-1" src="../images/saree/saree-01.jpg" alt="View 1" />
+              </button>
+              <button type="button" data-src="../images/saree/saree-01-alt.jpg">
+                <img id="thumb-2" src="../images/saree/saree-01-alt.jpg" alt="View 2" />
+              </button>
+            </div>
           </div>
 
-          <!-- Thumbnails Strip -->
-          <div class="eq-product-gallery__thumbs" id="gallery-thumbs">
-            <button type="button" class="is-active" data-src="../images/saree/saree-01.jpg">
-              <img id="thumb-1" src="../images/saree/saree-01.jpg" alt="View 1" />
-            </button>
-            <button type="button" data-src="../images/saree/saree-01-alt.jpg">
-              <img id="thumb-2" src="../images/saree/saree-01-alt.jpg" alt="View 2" />
-            </button>
+          <!-- RIGHT: PRIMARY INFO (SITS BESIDE THE PICTURE) -->
+          <div class="eq-product-header">
+            <div class="eq-product-info__category" id="product-category-label">NOUS TELOS • SAREE ATELIER</div>
+            <h1 id="product-name">Crimson Heirloom Jamdani</h1>
+
+            <!-- Reviews rating summary -->
+            <div class="eq-product-rating-row" id="product-rating-row">
+              <div class="eq-rating-stars" id="rating-stars">★★★★★</div>
+              <span class="eq-rating-text" id="product-rating-text">4.9 (48 customer reviews)</span>
+            </div>
+
+            <!-- Price row -->
+            <div class="eq-product-info__price" id="product-price-row">
+              <span id="product-price">৳18,500</span>
+              <span id="product-old-price">৳22,000</span>
+              <span id="product-discount-tag">SAVE 16%</span>
+            </div>
+
+            <!-- Stock & Urgency Notice -->
+            <div class="eq-stock-notice" id="stock-notice">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span id="stock-text">In Stock — Ready to ship from Dhaka atelier (3 left)</span>
+            </div>
+
+            <!-- Size / Dimensions Option -->
+            <div class="eq-product-info__row eq-size-row" id="product-size-row">
+              <span class="eq-product-info__label">Size / Fit:</span>
+              <div class="eq-size-options" id="size-options">
+                <button type="button" class="is-active" data-size="Standard / Free Size">Free Size (5.5m)</button>
+                <button type="button" data-size="Custom Stitched">Custom Blouse</button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- RIGHT: PRODUCT INFO -->
-        <div class="eq-product-info">
-          <div class="eq-product-info__category" id="product-category-label">NOUS TELOS • SAREE ATELIER</div>
-          <h1 id="product-name" style="margin-bottom: 0.5rem; color: var(--eq-charcoal);">Crimson Heirloom Jamdani</h1>
-
-          <!-- Reviews rating summary -->
-          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
-            <div style="display: flex; gap: 2px; color: #f59e0b;" id="rating-stars">
-              ★★★★★
-            </div>
-            <span style="font-size: 0.85rem; color: var(--eq-charcoal-soft);" id="product-rating-text">4.9 (48 customer reviews)</span>
-          </div>
-
-          <!-- Price row -->
-          <div class="eq-product-info__price" style="display: flex; align-items: baseline; gap: 0.85rem;">
-            <span id="product-price" style="font-family: var(--font-display); font-size: 1.85rem; font-weight: 700; color: var(--eq-teal-dark);">৳18,500</span>
-            <span id="product-old-price" style="font-size: 1.15rem; color: #9ca3af; text-decoration: line-through;">৳22,000</span>
-            <span id="product-discount-tag" style="background-color: #fee2e2; color: #b91c1c; font-size: 0.76rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);">SAVE 16%</span>
-          </div>
-
-          <!-- Short Description -->
-          <p class="eq-product-info__desc" id="product-description" style="line-height: 1.7; color: var(--eq-charcoal-soft); margin-top: 1.25rem;">
-            Intricately hand-woven by master heritage artisans using traditional motifs. Made from breathable, pure combed threads offering timeless elegance and effortless drape for celebratory and festive gatherings.
-          </p>
-
-          <!-- Color Option -->
-          <div class="eq-product-info__row">
-            <span class="eq-product-info__label">Selected Color: <strong id="selected-color-name" style="color: var(--eq-charcoal);">Crimson</strong></span>
-            <div style="display: flex; gap: 0.65rem; margin-top: 0.45rem;" id="color-options-wrap">
-              <button type="button" class="color-swatch is-active" style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--eq-charcoal); background-color: #8b0000; cursor: pointer;" title="Crimson"></button>
-            </div>
-          </div>
-
-          <!-- Size / Dimensions Option -->
-          <div class="eq-product-info__row">
-            <span class="eq-product-info__label">Size / Fit:</span>
-            <div class="eq-size-options" id="size-options">
-              <button type="button" class="is-active" data-size="Standard / Free Size">Free Size (5.5m + Blouse)</button>
-              <button type="button" data-size="Custom Stitched">Custom Blouse (৳1,200)</button>
-            </div>
-          </div>
-
-          <!-- Stock & Urgency Notice -->
-          <div style="margin-top: 1.25rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #15803d;" id="stock-notice">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            <span id="stock-text">In Stock — Ready to ship from Dhaka atelier (3 left)</span>
-          </div>
-
+        <!-- FULL-WIDTH BODY SECTION: ACTIONS, DESCRIPTION, ASSURANCES -->
+        <div class="eq-product-body">
           <!-- Quantity and Action Buttons -->
           <div class="eq-product-actions" id="product-actions-bar">
             <!-- Qty Stepper -->
@@ -127,7 +118,7 @@
 
             <!-- Add to Cart -->
             <button type="button" class="eq-btn eq-btn--primary" id="btn-add-to-cart">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px; flex-shrink: 0;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
                 <line x1="3" y1="6" x2="21" y2="6"></line>
                 <path d="M16 10a4 4 0 0 1-8 0"></path>
@@ -140,6 +131,11 @@
               Buy Now
             </button>
           </div>
+
+          <!-- Short Description -->
+          <p class="eq-product-info__desc" id="product-description">
+            Intricately hand-woven by master heritage artisans using traditional motifs. Made from breathable, pure combed threads offering timeless elegance and effortless drape for celebratory and festive gatherings.
+          </p>
 
           <!-- Highlights & Assurance Metadata -->
           <div class="eq-product-meta-list">
@@ -166,8 +162,8 @@
               <span><strong>Easy Returns:</strong> 7-day doorstep exchange for sizing or quality assurance.</span>
             </div>
           </div>
-
         </div>
+
       </div>
 
       <!-- ===============================================================
@@ -396,10 +392,7 @@
         ratingText.textContent = `${product.rating} (${Math.floor(product.rating * 10 + 3)} reviews)`;
       }
 
-      // Fabric & Color
-      const colorNameEl = document.querySelector("#selected-color-name");
-      if (colorNameEl) colorNameEl.textContent = product.colorName || "Artisan Weave";
-
+      // Fabric
       const fabricDescEl = document.querySelector("#tab-fabric-desc");
       if (fabricDescEl && product.fabric) {
         fabricDescEl.innerHTML = `<strong>Material:</strong> 100% Genuine ${product.fabric}.<br>Hand-spun threads woven on heritage looms to ensure superior hand-feel, rich drape, and lifelong weave integrity.`;
@@ -468,9 +461,8 @@
             id: product.id,
             name: product.name,
             price: product.price,
-            image: product.image,
-            colorName: product.colorName || ""
-          }, currentQty, selectedSize, product.colorName || "");
+            image: product.image
+          }, currentQty, selectedSize, "");
         }
       };
 
@@ -504,7 +496,7 @@
                   <a href="product.html?id=${rel.id}" class="eq-product-card__link" aria-label="View ${rel.name}">
                     <img src="../${rel.image}?v=3" alt="${rel.name}" loading="lazy" />
                   </a>
-                  <button type="button" class="eq-product-card__quick-add" onclick="event.preventDefault(); if (window.EarthquickCart) { EarthquickCart.addItem({id:'${rel.id}', name:'${rel.name.replace(/'/g, "\\'")}', price:${relPrice}, image:'${rel.image}', colorName:'${rel.colorName || ''}'}); }">
+                  <button type="button" class="eq-product-card__quick-add" onclick="event.preventDefault(); if (window.EarthquickCart) { EarthquickCart.addItem({id:'${rel.id}', name:'${rel.name.replace(/'/g, "\\'")}', price:${relPrice}, image:'${rel.image}'}); }">
                     Quick Add
                   </button>
                 </div>
